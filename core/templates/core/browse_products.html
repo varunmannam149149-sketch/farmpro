@@ -1,0 +1,1751 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dhanya Marketplace | Fresh From Producers</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: .25s ease;
+        }
+
+        .nav-link:hover {
+            color: #1A2E22;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 2px;
+            background: #1A2E22;
+            transition: .25s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .product-card {
+            transition: all .3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow:
+                0 20px 50px
+                rgba(26, 46, 34, .10);
+        }
+
+        .product-image {
+            transition: transform .5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .soft-grid {
+            background-image:
+                linear-gradient(
+                    rgba(26,46,34,.035) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(26,46,34,.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 35px 35px;
+        }
+
+    </style>zz
+
+</head>
+
+
+<body class="bg-[#F7F8F4] text-[#1A2E22]">
+
+
+<!-- ========================================================= -->
+<!-- NAVBAR -->
+<!-- ========================================================= -->
+
+<header class="fixed top-0 left-0 right-0 z-50">
+
+    <nav class="bg-[#F7F8F4]/95
+               backdrop-blur
+               border-b
+               border-black/5">
+
+        <div class="max-w-[1450px]
+                    mx-auto
+                    px-5 lg:px-10">
+
+            <div class="h-[76px]
+                        flex
+                        items-center
+                        justify-between">
+
+
+                <!-- LOGO -->
+
+                <a href="{% url 'home' %}" class="flex items-center gap-3 shrink-0">
+    <div class="flex items-center justify-center">
+        <img src="{% static 'core/images/logo.png' %}" alt="Dhanya Logo" class="w-10 h-10 object-contain">
+    </div>
+    <div>
+        <div class="serif text-2xl font-semibold">Dhanya</div>
+        <div class="hidden sm:block text-[9px] uppercase tracking-[3px] text-gray-500">
+            Farm • Market • Community
+        </div>
+    </div>
+</a>
+
+
+                <!-- DESKTOP NAV -->
+
+                <div class="hidden lg:flex
+                            items-center
+                            gap-8
+                            text-sm
+                            font-medium">
+
+                    <a href="{% url 'home' %}"
+                       class="nav-link">
+
+                        Home
+
+                    </a>
+
+
+                    <a href="{% url 'browse_products' %}"
+                       class="nav-link font-semibold">
+
+                        Products
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#categories"
+                       class="nav-link">
+
+                        Categories
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#how-it-works"
+                       class="nav-link">
+
+                        How It Works
+
+                    </a>
+
+
+                    <a href="{% url 'about' %}"
+                       class="nav-link">
+
+                        About
+
+                    </a>
+
+
+                    <a href="{% url 'contact' %}"
+                       class="nav-link">
+
+                        Contact
+
+                    </a>
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <div class="hidden md:flex
+                            items-center gap-2">
+
+                    {% if request.user.is_authenticated %}
+
+                        <a href="{% url 'my_orders' %}"
+                           title="My Orders"
+                           class="w-10 h-10
+                                  rounded-full
+                                  hover:bg-black/5
+                                  flex items-center
+                                  justify-center">
+
+                            <i data-lucide="shopping-bag"
+                               class="w-5 h-5"></i>
+
+                        </a>
+
+
+                        <a href="{% url 'profile' %}"
+                           title="Profile"
+                           class="w-10 h-10
+                                  rounded-full
+                                  hover:bg-black/5
+                                  flex items-center
+                                  justify-center">
+
+                            <i data-lucide="user"
+                               class="w-5 h-5"></i>
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{% url 'login' %}"
+                           class="bg-[#1A2E22]
+                                  text-white
+                                  px-5 py-2.5
+                                  rounded-full
+                                  text-sm
+                                  font-semibold">
+
+                            Login
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- MOBILE BUTTON -->
+
+                <button id="menuBtn"
+                        type="button"
+                        class="lg:hidden
+                               w-10 h-10
+                               bg-[#1A2E22]
+                               text-white
+                               rounded-full
+                               flex items-center
+                               justify-center">
+
+                    <i data-lucide="menu"
+                       id="menuIcon"
+                       class="w-5 h-5"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- MOBILE MENU -->
+
+            <div id="mobileMenu"
+                 class="hidden lg:hidden">
+
+                <div class="pb-5 pt-2 space-y-1">
+
+                    <a href="{% url 'home' %}"
+                       class="block p-3 rounded-xl hover:bg-black/5">
+
+                        Home
+
+                    </a>
+
+
+                    <a href="{% url 'browse_products' %}"
+                       class="block p-3 rounded-xl
+                              bg-[#1A2E22] text-white">
+
+                        Products
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#categories"
+                       class="block p-3 rounded-xl hover:bg-black/5">
+
+                        Categories
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#how-it-works"
+                       class="block p-3 rounded-xl hover:bg-black/5">
+
+                        How It Works
+
+                    </a>
+
+
+                    <a href="{% url 'about' %}"
+                       class="block p-3 rounded-xl hover:bg-black/5">
+
+                        About
+
+                    </a>
+
+
+                    <a href="{% url 'contact' %}"
+                       class="block p-3 rounded-xl hover:bg-black/5">
+
+                        Contact
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<section class="soft-grid
+                pt-32
+                pb-16
+                lg:pt-40
+                lg:pb-20">
+
+    <div class="max-w-[1450px]
+                mx-auto
+                px-5 lg:px-10">
+
+
+        <div class="max-w-4xl
+                    mx-auto
+                    text-center">
+
+
+            <div class="inline-flex
+                        items-center
+                        gap-2
+                        px-4 py-2
+                        rounded-full
+                        bg-[#E7E8E1]
+                        text-xs
+                        uppercase
+                        tracking-[2px]
+                        font-semibold">
+
+                <i data-lucide="store"
+                   class="w-4 h-4"></i>
+
+                Dhanya Marketplace
+
+            </div>
+
+
+            <h1 class="serif
+                       text-5xl
+                       md:text-6xl
+                       lg:text-7xl
+                       leading-[1.05]
+                       mt-7">
+
+                Fresh products.
+
+                <span class="text-[#6B806C]">
+
+                    Direct connections.
+
+                </span>
+
+            </h1>
+
+
+            <p class="max-w-2xl
+                      mx-auto
+                      text-gray-500
+                      leading-8
+                      mt-6">
+
+                Discover agricultural products directly from
+                producers across the Dhanya marketplace.
+
+            </p>
+
+
+            <!-- SEARCH -->
+
+            <form method="GET"
+                  class="max-w-3xl
+                         mx-auto
+                         mt-9">
+
+                <div class="bg-white
+                            border
+                            border-black/10
+                            rounded-full
+                            p-2
+                            flex
+                            items-center
+                            shadow-sm">
+
+                    <i data-lucide="search"
+                       class="w-5 h-5
+                              text-gray-400
+                              ml-4
+                              shrink-0"></i>
+
+
+                    <input type="text"
+                           name="search"
+                           value="{{ search_query|default:'' }}"
+                           placeholder="Search rice, vegetables, fruits..."
+                           class="flex-1
+                                  bg-transparent
+                                  outline-none
+                                  px-4
+                                  py-3
+                                  text-sm">
+
+
+                    <button type="submit"
+                            class="bg-[#1A2E22]
+                                   text-white
+                                   px-6 py-3
+                                   rounded-full
+                                   text-sm
+                                   font-semibold">
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- MARKETPLACE -->
+<!-- ========================================================= -->
+
+<section class="pb-24">
+
+    <div class="max-w-[1450px]
+                mx-auto
+                px-5 lg:px-10">
+
+
+        <div class="grid
+                    lg:grid-cols-[260px_1fr]
+                    gap-8">
+
+
+            <!-- ================================================= -->
+            <!-- FILTER SIDEBAR -->
+            <!-- ================================================= -->
+
+            <aside>
+
+                <div class="bg-white
+                            border
+                            border-black/5
+                            rounded-[28px]
+                            p-6
+                            lg:sticky
+                            lg:top-28">
+
+
+                    <div class="flex
+                                items-center
+                                justify-between">
+
+                        <h3 class="font-semibold">
+
+                            Filters
+
+                        </h3>
+
+                        <i data-lucide="sliders-horizontal"
+                           class="w-5 h-5
+                                  text-gray-400"></i>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="mt-7">
+
+                        <label class="text-xs
+                                      uppercase
+                                      tracking-[2px]
+                                      text-gray-500
+                                      font-semibold">
+
+                            Category
+
+                        </label>
+
+
+                        <select name="category"
+                                id="categoryFilter"
+                                class="w-full
+                                       mt-3
+                                       px-4 py-3
+                                       rounded-xl
+                                       border
+                                       border-black/10
+                                       bg-[#FAFBF8]
+                                       outline-none
+                                       text-sm">
+
+                            <option value="">
+
+                                All Categories
+
+                            </option>
+
+
+                            {% for item in categories %}
+
+                                <option value="{{ item }}"
+                                    {% if selected_category == item %}
+                                        selected
+                                    {% endif %}>
+
+                                    {{ item }}
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="mt-6">
+
+                        <label class="text-xs
+                                      uppercase
+                                      tracking-[2px]
+                                      text-gray-500
+                                      font-semibold">
+
+                            Location
+
+                        </label>
+
+
+                        <input type="text"
+                               id="locationFilter"
+                               value="{{ selected_location|default:'' }}"
+                               placeholder="Enter location"
+                               class="w-full
+                                      mt-3
+                                      px-4 py-3
+                                      rounded-xl
+                                      border
+                                      border-black/10
+                                      bg-[#FAFBF8]
+                                      outline-none
+                                      text-sm">
+
+                    </div>
+
+
+                    <!-- APPLY -->
+
+                    <button type="button"
+                            onclick="applyFilters()"
+                            class="w-full
+                                   mt-6
+                                   bg-[#1A2E22]
+                                   text-white
+                                   py-3.5
+                                   rounded-full
+                                   font-semibold
+                                   text-sm">
+
+                        Apply Filters
+
+                    </button>
+
+
+                    <a href="{% url 'browse_products' %}"
+                       class="block
+                              text-center
+                              text-sm
+                              text-gray-500
+                              mt-4
+                              hover:text-[#1A2E22]">
+
+                        Clear filters
+
+                    </a>
+
+                </div>
+
+            </aside>
+
+
+
+            <!-- ================================================= -->
+            <!-- PRODUCTS -->
+            <!-- ================================================= -->
+
+            <main>
+
+
+                <!-- TOP BAR -->
+
+                <div class="flex
+                            flex-col
+                            sm:flex-row
+                            sm:items-center
+                            sm:justify-between
+                            gap-4
+                            mb-7">
+
+                    <div>
+
+                        <p class="text-xs
+                                  uppercase
+                                  tracking-[2px]
+                                  text-gray-500">
+
+                            Dhanya Marketplace
+
+                        </p>
+
+
+                        <h2 class="serif
+                                   text-3xl
+                                   mt-1">
+
+                            Explore products
+
+                        </h2>
+
+                    </div>
+
+
+                    <div class="flex
+                                items-center
+                                gap-2
+                                text-sm
+                                text-gray-500">
+
+                        <span>
+
+                            {{ products|length }}
+
+                        </span>
+
+                        products available
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ================================================= -->
+                <!-- PRODUCT GRID -->
+                <!-- ================================================= -->
+
+                {% if products %}
+
+                    <div class="grid
+                                sm:grid-cols-2
+                                xl:grid-cols-3
+                                gap-5">
+
+
+                        {% for product in products %}
+
+
+                            <!-- PRODUCT CARD -->
+
+                            <article class="product-card
+                                            bg-white
+                                            border
+                                            border-black/5
+                                            rounded-[28px]
+                                            overflow-hidden">
+
+
+                                <!-- ================================================= -->
+                                <!-- PRODUCT IMAGE -->
+                                <!-- ================================================= -->
+
+                                <div class="relative
+                                            aspect-[4/3]
+                                            bg-[#E7E8E1]
+                                            overflow-hidden">
+
+
+                                    {% if product.image %}
+
+                                        <img src="{{ product.image.url }}"
+                                             alt="{{ product.name }}"
+                                             class="product-image
+                                                    w-full
+                                                    h-full
+                                                    object-cover"
+                                             loading="lazy">
+
+                                    {% else %}
+
+                                        <div class="w-full
+                                                    h-full
+                                                    flex
+                                                    flex-col
+                                                    items-center
+                                                    justify-center
+                                                    text-[#9AA196]">
+
+                                            <i data-lucide="image-off"
+                                               class="w-16 h-16"></i>
+
+                                            <p class="text-xs
+                                                      mt-3
+                                                      font-medium">
+
+                                                No image available
+
+                                            </p>
+
+                                        </div>
+
+                                    {% endif %}
+
+
+                                    <!-- CATEGORY -->
+
+                                    <div class="absolute
+                                                top-4
+                                                left-4
+                                                bg-white/90
+                                                backdrop-blur
+                                                px-3
+                                                py-1.5
+                                                rounded-full
+                                                text-[11px]
+                                                font-semibold">
+
+                                        {{ product.category }}
+
+                                    </div>
+
+
+                                    <!-- STOCK -->
+
+                                    <div class="absolute
+                                                top-4
+                                                right-4
+                                                bg-[#1A2E22]
+                                                text-white
+                                                px-3
+                                                py-1.5
+                                                rounded-full
+                                                text-[11px]
+                                                font-semibold">
+
+                                        In Stock
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- ================================================= -->
+                                <!-- PRODUCT CONTENT -->
+                                <!-- ================================================= -->
+
+                                <div class="p-6">
+
+
+                                    <!-- NAME + PRICE -->
+
+                                    <div class="flex
+                                                items-start
+                                                justify-between
+                                                gap-3">
+
+
+                                        <h3 class="serif
+                                                   text-2xl
+                                                   leading-tight">
+
+                                            {{ product.name }}
+
+                                        </h3>
+
+
+                                        <div class="text-right
+                                                    shrink-0">
+
+                                            <p class="text-xl
+                                                      font-bold">
+
+                                                ₹{{ product.price }}
+
+                                            </p>
+
+
+                                            <p class="text-[11px]
+                                                      text-gray-400">
+
+                                                / {{ product.unit }}
+
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <!-- PRODUCER -->
+
+                                    <div class="flex
+                                                items-center
+                                                gap-2
+                                                mt-5
+                                                text-sm
+                                                text-gray-500">
+
+
+                                        <div class="w-8
+                                                    h-8
+                                                    rounded-full
+                                                    bg-[#E7E8E1]
+                                                    flex
+                                                    items-center
+                                                    justify-center">
+
+                                            <i data-lucide="user"
+                                               class="w-4 h-4"></i>
+
+                                        </div>
+
+
+                                        <span>
+
+                                            {{ product.producer.full_name|default:"Dhanya Producer" }}
+
+                                        </span>
+
+                                    </div>
+
+
+
+                                    <!-- LOCATION -->
+
+                                    <div class="flex
+                                                items-center
+                                                gap-2
+                                                mt-3
+                                                text-sm
+                                                text-gray-500">
+
+                                        <i data-lucide="map-pin"
+                                           class="w-4 h-4"></i>
+
+                                        {{ product.location }}
+
+                                    </div>
+
+
+
+                                    <!-- QUANTITY -->
+
+                                    <div class="flex
+                                                items-center
+                                                justify-between
+                                                mt-5
+                                                pt-5
+                                                border-t
+                                                border-black/5">
+
+
+                                        <div>
+
+                                            <p class="text-xs
+                                                      text-gray-400">
+
+                                                Available
+
+                                            </p>
+
+
+                                            <p class="font-semibold
+                                                      mt-1">
+
+                                                {{ product.quantity }}
+
+                                                {{ product.unit }}
+
+                                            </p>
+
+                                        </div>
+
+
+
+                                        <!-- ORDER -->
+
+                                        {% if request.user.is_authenticated %}
+
+                                            {% if request.user.user_type == "consumer" or request.user.user_type == "market" %}
+
+                                                <a href="{% url 'place_order' product.id %}"
+                                                   class="inline-flex
+                                                          items-center
+                                                          gap-2
+                                                          bg-[#1A2E22]
+                                                          text-white
+                                                          px-5
+                                                          py-3
+                                                          rounded-full
+                                                          text-sm
+                                                          font-semibold
+                                                          hover:bg-[#243D2E]
+                                                          transition">
+
+                                                    View & Order
+
+                                                    <i data-lucide="arrow-right"
+                                                       class="w-4 h-4"></i>
+
+                                                </a>
+
+                                            {% else %}
+
+                                                <span class="text-xs
+                                                             text-gray-400
+                                                             text-right">
+
+                                                    Producers cannot
+                                                    order products
+
+                                                </span>
+
+                                            {% endif %}
+
+                                        {% else %}
+
+                                            <a href="{% url 'login' %}"
+                                               class="inline-flex
+                                                      items-center
+                                                      gap-2
+                                                      bg-[#1A2E22]
+                                                      text-white
+                                                      px-5
+                                                      py-3
+                                                      rounded-full
+                                                      text-sm
+                                                      font-semibold
+                                                      hover:bg-[#243D2E]
+                                                      transition">
+
+                                                Login to Order
+
+                                                <i data-lucide="arrow-right"
+                                                   class="w-4 h-4"></i>
+
+                                            </a>
+
+                                        {% endif %}
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+
+                        {% endfor %}
+
+                    </div>
+
+
+                {% else %}
+
+
+                    <!-- ================================================= -->
+                    <!-- EMPTY STATE -->
+                    <!-- ================================================= -->
+
+                    <div class="bg-white
+                                border
+                                border-black/5
+                                rounded-[35px]
+                                py-20
+                                px-6
+                                text-center">
+
+
+                        <div class="w-20
+                                    h-20
+                                    rounded-full
+                                    bg-[#E7E8E1]
+                                    mx-auto
+                                    flex
+                                    items-center
+                                    justify-center">
+
+                            <i data-lucide="package-search"
+                               class="w-9 h-9"></i>
+
+                        </div>
+
+
+                        <h3 class="serif
+                                   text-3xl
+                                   mt-6">
+
+                            No products found.
+
+                        </h3>
+
+
+                        <p class="text-gray-500
+                                  max-w-md
+                                  mx-auto
+                                  leading-7
+                                  mt-3">
+
+                            We couldn't find products matching
+                            your current search or filters.
+
+                        </p>
+
+
+                        <a href="{% url 'browse_products' %}"
+                           class="inline-flex
+                                  items-center
+                                  gap-2
+                                  mt-7
+                                  bg-[#1A2E22]
+                                  text-white
+                                  px-6
+                                  py-3
+                                  rounded-full
+                                  text-sm
+                                  font-semibold">
+
+                            View all products
+
+                            <i data-lucide="arrow-right"
+                               class="w-4 h-4"></i>
+
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </main>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- TRUST SECTION -->
+<!-- ========================================================= -->
+
+<section class="py-20
+                lg:py-24
+                bg-white">
+
+    <div class="max-w-[1200px]
+                mx-auto
+                px-5
+                lg:px-10">
+
+
+        <div class="text-center
+                    max-w-2xl
+                    mx-auto">
+
+            <p class="text-xs
+                      uppercase
+                      tracking-[3px]
+                      text-gray-500
+                      font-semibold">
+
+                Why Dhanya
+
+            </p>
+
+
+            <h2 class="serif
+                       text-4xl
+                       md:text-5xl
+                       mt-4">
+
+                A marketplace built
+                around trust.
+
+            </h2>
+
+        </div>
+
+
+
+        <div class="grid
+                    md:grid-cols-3
+                    gap-5
+                    mt-12">
+
+
+            <!-- TRUST 1 -->
+
+            <div class="text-center
+                        p-7">
+
+                <div class="w-14
+                            h-14
+                            rounded-full
+                            bg-[#E7E8E1]
+                            mx-auto
+                            flex
+                            items-center
+                            justify-center">
+
+                    <i data-lucide="shield-check"
+                       class="w-6 h-6"></i>
+
+                </div>
+
+
+                <h3 class="font-semibold
+                           text-lg
+                           mt-5">
+
+                    Trusted producers
+
+                </h3>
+
+
+                <p class="text-sm
+                          text-gray-500
+                          leading-6
+                          mt-2">
+
+                    Connect with producers
+                    through the Dhanya platform.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- TRUST 2 -->
+
+            <div class="text-center
+                        p-7">
+
+                <div class="w-14
+                            h-14
+                            rounded-full
+                            bg-[#E7E8E1]
+                            mx-auto
+                            flex
+                            items-center
+                            justify-center">
+
+                    <i data-lucide="leaf"
+                       class="w-6 h-6"></i>
+
+                </div>
+
+
+                <h3 class="font-semibold
+                           text-lg
+                           mt-5">
+
+                    Agricultural products
+
+                </h3>
+
+
+                <p class="text-sm
+                          text-gray-500
+                          leading-6
+                          mt-2">
+
+                    Discover essential and seasonal
+                    agricultural products.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- TRUST 3 -->
+
+            <div class="text-center
+                        p-7">
+
+                <div class="w-14
+                            h-14
+                            rounded-full
+                            bg-[#E7E8E1]
+                            mx-auto
+                            flex
+                            items-center
+                            justify-center">
+
+                    <i data-lucide="package-check"
+                       class="w-6 h-6"></i>
+
+                </div>
+
+
+                <h3 class="font-semibold
+                           text-lg
+                           mt-5">
+
+                    Simple ordering
+
+                </h3>
+
+
+                <p class="text-sm
+                          text-gray-500
+                          leading-6
+                          mt-2">
+
+                    Browse, choose your quantity
+                    and place your order.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- CTA -->
+<!-- ========================================================= -->
+
+<section class="py-20
+                lg:py-28">
+
+    <div class="max-w-[1200px]
+                mx-auto
+                px-5
+                lg:px-10">
+
+
+        <div class="rounded-[35px]
+                    bg-[#1A2E22]
+                    text-white
+                    text-center
+                    p-10
+                    md:p-16">
+
+
+            <div class="w-14
+                        h-14
+                        bg-white/10
+                        rounded-full
+                        mx-auto
+                        flex
+                        items-center
+                        justify-center">
+
+                <i data-lucide="sprout"
+                   class="w-6 h-6"></i>
+
+            </div>
+
+
+            <h2 class="serif
+                       text-4xl
+                       md:text-5xl
+                       mt-7">
+
+                From farm to
+                your next order.
+
+            </h2>
+
+
+            <p class="text-white/60
+                      max-w-xl
+                      mx-auto
+                      leading-7
+                      mt-4">
+
+                Explore the Dhanya marketplace and discover
+                what's available from our producer community.
+
+            </p>
+
+
+            <a href="{% url 'register' %}"
+               class="inline-flex
+                      items-center
+                      gap-2
+                      bg-white
+                      text-[#1A2E22]
+                      px-7
+                      py-4
+                      rounded-full
+                      font-semibold
+                      text-sm
+                      mt-8">
+
+                Join Dhanya
+
+                <i data-lucide="arrow-right"
+                   class="w-4 h-4"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="border-t
+               border-black/5
+               bg-[#F7F8F4]">
+
+
+    <div class="max-w-[1450px]
+                mx-auto
+                px-5
+                lg:px-10
+                py-12">
+
+
+        <div class="grid
+                    md:grid-cols-4
+                    gap-10">
+
+
+            <div class="md:col-span-2">
+
+<a href="{% url 'home' %}" 
+   class="flex items-center gap-3 shrink-0">
+
+    <!-- Dhanya Logo -->
+    <div class="flex items-center justify-center">
+        <img 
+            src="{% static 'core/images/logo.png' %}"
+            alt="Dhanya Logo"
+            class="w-10 h-10 object-contain"
+        >
+    </div>
+
+    <!-- Brand Name -->
+    <div>
+
+        <div class="serif text-2xl font-semibold">
+            Dhanya
+        </div>
+
+        <div class="hidden sm:block text-[9px] 
+                    uppercase tracking-[3px] text-gray-500">
+            Farm • Market • Community
+        </div>
+
+    </div>
+
+</a>
+
+                <p class="text-sm
+                          text-gray-500
+                          leading-7
+                          max-w-md
+                          mt-5">
+
+                    Connecting farms, markets and communities
+                    through a better agricultural marketplace.
+
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h4 class="font-semibold">
+
+                    Explore
+
+                </h4>
+
+
+                <div class="space-y-3
+                            text-sm
+                            text-gray-500
+                            mt-5">
+
+
+                    <a href="{% url 'home' %}"
+                       class="block hover:text-[#1A2E22]">
+
+                        Home
+
+                    </a>
+
+
+                    <a href="{% url 'browse_products' %}"
+                       class="block hover:text-[#1A2E22]">
+
+                        Products
+
+                    </a>
+
+
+                    <a href="{% url 'about' %}"
+                       class="block hover:text-[#1A2E22]">
+
+                        About
+
+                    </a>
+
+
+                    <a href="{% url 'contact' %}"
+                       class="block hover:text-[#1A2E22]">
+
+                        Contact
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div>
+
+                <h4 class="font-semibold">
+
+                    Account
+
+                </h4>
+
+
+                <div class="space-y-3
+                            text-sm
+                            text-gray-500
+                            mt-5">
+
+
+                    {% if request.user.is_authenticated %}
+
+                        <a href="{% url 'profile' %}"
+                           class="block hover:text-[#1A2E22]">
+
+                            Profile
+
+                        </a>
+
+
+                        <a href="{% url 'my_orders' %}"
+                           class="block hover:text-[#1A2E22]">
+
+                            My Orders
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{% url 'login' %}"
+                           class="block hover:text-[#1A2E22]">
+
+                            Login
+
+                        </a>
+
+
+                        <a href="{% url 'register' %}"
+                           class="block hover:text-[#1A2E22]">
+
+                            Register
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+       <div class="border-t border-white/10">
+
+        <div
+            class="max-w-[1450px] mx-auto px-5 lg:px-10 py-7 flex flex-col lg:flex-row justify-between gap-5">
+
+            <p class="text-xs text-white/30">
+                © 2026 Dhanya. All rights reserved.
+            </p>
+
+           <div class="flex gap-3">
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/profile.php?id=61593881797144" target="_blank" rel="noopener noreferrer" title="Facebook"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+    </a>
+
+    <!-- Mail -->
+    <a href="mailto:dhanyasub25@gmail.com" title="Send Email"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#EA4335] hover:border-[#EA4335] transition duration-200 group">
+        <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@DhanyaSSV" target="_blank" rel="noopener noreferrer" title="YouTube"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FF0000] hover:border-[#FF0000] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/dhanya_products/" target="_blank" rel="noopener noreferrer" title="Instagram"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#E4405F] hover:border-[#E4405F] transition duration-200 group">
+        <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+        </svg>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="home.html" target="_blank" rel="noopener noreferrer" title="LinkedIn"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+    </a>
+
+</div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+    lucide.createIcons();
+
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    const menuBtn =
+        document.getElementById("menuBtn");
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+    const menuIcon =
+        document.getElementById("menuIcon");
+
+
+    if (menuBtn && mobileMenu) {
+
+        menuBtn.addEventListener(
+            "click",
+            function () {
+
+                mobileMenu.classList.toggle("hidden");
+
+
+                if (
+                    mobileMenu.classList.contains("hidden")
+                ) {
+
+                    menuIcon.setAttribute(
+                        "data-lucide",
+                        "menu"
+                    );
+
+                } else {
+
+                    menuIcon.setAttribute(
+                        "data-lucide",
+                        "x"
+                    );
+
+                }
+
+
+                lucide.createIcons();
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================================
+       FILTERS
+    ========================================================= */
+
+    function applyFilters() {
+
+        const category =
+            document.getElementById(
+                "categoryFilter"
+            ).value;
+
+
+        const location =
+            document.getElementById(
+                "locationFilter"
+            ).value;
+
+
+        const url =
+            new URL(
+                window.location.href
+            );
+
+
+        if (category) {
+
+            url.searchParams.set(
+                "category",
+                category
+            );
+
+        } else {
+
+            url.searchParams.delete(
+                "category"
+            );
+
+        }
+
+
+        if (location) {
+
+            url.searchParams.set(
+                "location",
+                location
+            );
+
+        } else {
+
+            url.searchParams.delete(
+                "location"
+            );
+
+        }
+
+
+        window.location.href =
+            url.toString();
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,3735 @@
+
+
+```html
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dhanya | From Producers to Your Door</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #F5F3EF;
+            color: #1A2E22;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+        /* NAV */
+
+        .navbar {
+            background: rgba(245, 243, 239, 0.94);
+            backdrop-filter: blur(15px);
+        }
+
+        /* HERO */
+
+        .hero-overlay {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(15, 35, 22, .82),
+                    rgba(15, 35, 22, .45),
+                    rgba(15, 35, 22, .12)
+                );
+        }
+
+        /* BUTTON */
+
+        .btn-primary {
+            transition: .3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.18);
+        }
+
+        .btn-secondary {
+            transition: .3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #1A2E22;
+            color: white;
+        }
+
+        /* CATEGORY */
+
+        .category-card {
+            transition: .35s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 20px 40px rgba(26,46,34,.12);
+        }
+
+        .category-card img {
+            transition: .5s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.06);
+        }
+
+        /* PRODUCT */
+
+        .product-card {
+            transition: .3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* NAV LINK */
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 1px;
+            background: #1A2E22;
+            transition: .3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* MOBILE MENU */
+
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease;
+        }
+
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+
+        /* FADE */
+
+        .fade {
+            animation: fadeUp .9s ease forwards;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================================= -->
+<!-- NAVIGATION -->
+<!-- ========================================================= -->
+
+<!-- ========================================================= -->
+<!-- FARM PRO NAVIGATION -->
+<!-- ========================================================= -->
+
+<header class="fixed top-0 left-0 right-0 z-50">
+
+    <nav class="navbar border-b border-black/5">
+
+        <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+            <div class="h-[76px] flex items-center justify-between">
+
+
+                <!-- ================================================= -->
+                <!-- LOGO -->
+                <!-- ================================================= -->
+
+                <a href="{% url 'home' %}" 
+   class="flex items-center gap-3 shrink-0">
+
+    <!-- Dhanya Logo -->
+    <div class="flex items-center justify-center">
+        <img 
+            src="{% static 'core/images/logo.png' %}"
+            alt="Dhanya Logo"
+            class="w-10 h-10 object-contain"
+        >
+    </div>
+
+    <!-- Brand Name -->
+    <div>
+
+        <div class="serif text-2xl font-semibold">
+            Dhanya
+        </div>
+
+        <div class="hidden sm:block text-[9px] 
+                    uppercase tracking-[3px] text-gray-500">
+            Farm • Market • Community
+        </div>
+
+    </div>
+
+</a>
+
+                <!-- ================================================= -->
+                <!-- DESKTOP NAVIGATION -->
+                <!-- ================================================= -->
+
+                <div
+                    class="hidden lg:flex items-center gap-8
+                           text-sm font-medium">
+
+
+                    <!-- HOME -->
+
+                    <a href="{% url 'home' %}"
+                       class="nav-link">
+
+                        Home
+
+                    </a>
+
+
+                    <!-- PRODUCTS -->
+
+                    <a href="{% url 'browse_products' %}"
+                       class="nav-link">
+
+                        Products
+
+                    </a>
+                    
+
+                    <!-- CATEGORIES -->
+
+                    <a href="#categories"
+                       class="nav-link">
+
+                        Categories
+
+                    </a>
+
+
+                    <!-- HOW IT WORKS -->
+
+                    <a href="#how-it-works"
+                       class="nav-link">
+
+                        How It Works
+
+                    </a>
+
+
+                    <!-- ABOUT -->
+
+                    <a href="about"
+                       class="nav-link">
+
+                        About
+
+                    </a>
+
+                    <a href="{% url 'contact' %}"
+                       class="nav-link">
+
+                        Contact
+
+                    </a>
+                    
+                </div>
+
+
+
+                <!-- ================================================= -->
+                <!-- RIGHT SIDE -->
+                <!-- ================================================= -->
+
+                <div class="hidden md:flex items-center gap-2">
+
+
+                    <!-- SEARCH -->
+
+                    <a href="{% url 'browse_products' %}"
+                       title="Search Products"
+                       class="w-10 h-10 rounded-full
+                              hover:bg-black/5
+                              flex items-center justify-center
+                              transition">
+
+                        <i data-lucide="search"
+                           class="w-5 h-5"></i>
+
+                    </a>
+
+
+
+                    <!-- ORDERS -->
+
+                    <a href="{% url 'my_orders' %}"
+                       title="My Orders"
+                       class="w-10 h-10 rounded-full
+                              hover:bg-black/5
+                              flex items-center justify-center
+                              transition">
+
+                        <i data-lucide="shopping-bag"
+                           class="w-5 h-5"></i>
+
+                    </a>
+
+
+
+                    <!-- PROFILE / LOGIN -->
+
+                    {% if request.user.is_authenticated %}
+
+    <!-- DASHBOARD -->
+
+    {% if request.user.user_type == "producer" %}
+
+        <a href="{% url 'producer_dashboard' %}"
+           title="Producer Dashboard"
+           class="ml-2 bg-[#1A2E22] text-white
+                  px-5 py-2.5 rounded-full
+                  text-sm font-semibold
+                  hover:bg-[#243D2E]
+                  transition">
+
+            Dashboard
+
+        </a>
+
+    {% elif request.user.user_type == "market" %}
+
+        <a href="{% url 'market_dashboard' %}"
+           title="Market Dashboard"
+           class="ml-2 bg-[#1A2E22] text-white
+                  px-5 py-2.5 rounded-full
+                  text-sm font-semibold
+                  hover:bg-[#243D2E]
+                  transition">
+
+            Dashboard
+
+        </a>
+
+    {% elif request.user.user_type == "consumer" %}
+
+        <a href="{% url 'consumer_dashboard' %}"
+           title="Consumer Dashboard"
+           class="ml-2 bg-[#1A2E22] text-white
+                  px-5 py-2.5 rounded-full
+                  text-sm font-semibold
+                  hover:bg-[#243D2E]
+                  transition">
+
+            Dashboard
+
+        </a>
+
+    {% endif %}
+
+
+    <!-- PROFILE -->
+
+    <a href="{% url 'profile' %}"
+       title="Profile"
+       class="w-10 h-10 rounded-full
+              hover:bg-black/5
+              flex items-center justify-center
+              transition">
+
+        <i data-lucide="user"
+           class="w-5 h-5"></i>
+
+    </a>
+
+
+{% else %}
+
+    <!-- LOGIN -->
+
+    <a href="{% url 'login' %}"
+       class="ml-2 bg-[#1A2E22] text-white
+              px-5 py-2.5 rounded-full
+              text-sm font-semibold
+              hover:bg-[#243D2E]
+              transition">
+
+        Login
+
+    </a>
+
+{% endif %}
+
+                </div>
+
+
+
+                <!-- ================================================= -->
+                <!-- MOBILE MENU BUTTON -->
+                <!-- ================================================= -->
+
+                <button
+                    id="menuBtn"
+                    type="button"
+                    class="lg:hidden w-10 h-10
+                           bg-[#1A2E22] text-white
+                           rounded-full
+                           flex items-center justify-center">
+
+                    <i data-lucide="menu"
+                       id="menuIcon"
+                       class="w-5 h-5"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- MOBILE MENU -->
+            <!-- ================================================= -->
+
+            <div id="mobileMenu"
+                 class="mobile-menu lg:hidden">
+
+                <div class="pb-5 pt-2 space-y-1">
+
+
+                    <!-- HOME -->
+
+                    <a href="{% url 'home' %}"
+                       class="block p-3 rounded-xl
+                              hover:bg-black/5">
+
+                        Home
+
+                    </a>
+
+
+                    <!-- PRODUCTS -->
+
+                    <a href="{% url 'browse_products' %}"
+                       class="block p-3 rounded-xl
+                              hover:bg-black/5">
+
+                        Products
+
+                    </a>
+
+
+                    <!-- CATEGORIES -->
+
+                    <a href="#categories"
+                       class="block p-3 rounded-xl
+                              hover:bg-black/5">
+
+                        Categories
+
+                    </a>
+
+
+                    <!-- HOW IT WORKS -->
+
+                    <a href="#how-it-works"
+                       class="block p-3 rounded-xl
+                              hover:bg-black/5">
+
+                        How It Works
+
+                    </a>
+
+
+                    <!-- ABOUT -->
+
+                    <a href="#about"
+                       class="block p-3 rounded-xl
+                              hover:bg-black/5">
+
+                        About
+
+                    </a>
+
+
+                    <!-- ORDERS -->
+
+                    <a href="{% url 'my_orders' %}"
+                       class="block p-3 rounded-xl
+                              hover:bg-black/5">
+
+                        My Orders
+
+                    </a>
+
+
+                    <!-- LOGIN / PROFILE -->
+
+                    {% if request.user.is_authenticated %}
+
+    <!-- DASHBOARD -->
+
+    {% if request.user.user_type == "producer" %}
+
+        <a href="{% url 'producer_dashboard' %}"
+           class="block p-3 rounded-xl
+                  bg-[#1A2E22] text-white">
+
+            🌾 Producer Dashboard
+
+        </a>
+
+    {% elif request.user.user_type == "market" %}
+
+        <a href="{% url 'market_dashboard' %}"
+           class="block p-3 rounded-xl
+                  bg-[#1A2E22] text-white">
+
+            🏪 Market Dashboard
+
+        </a>
+
+    {% elif request.user.user_type == "consumer" %}
+
+        <a href="{% url 'consumer_dashboard' %}"
+           class="block p-3 rounded-xl
+                  bg-[#1A2E22] text-white">
+
+            🛒 Consumer Dashboard
+
+        </a>
+
+    {% endif %}
+
+
+    <!-- PROFILE -->
+
+    <a href="{% url 'profile' %}"
+       class="block p-3 rounded-xl
+              hover:bg-black/5">
+
+        My Profile
+
+    </a>
+
+{% else %}
+
+    <a href="{% url 'login' %}"
+       class="block p-3 rounded-xl
+              bg-[#1A2E22] text-white">
+
+        Login
+
+    </a>
+
+{% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<section class="relative min-h-[720px] lg:min-h-[820px] flex items-center overflow-hidden">
+
+
+    <img
+        src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=2200&q=90"
+        alt="Fresh agricultural farm"
+        class="absolute inset-0 w-full h-full object-cover">
+
+
+    <div class="absolute inset-0 hero-overlay"></div>
+
+
+    <div class="relative z-10 max-w-[1450px] mx-auto px-5 lg:px-10 w-full pt-20">
+
+
+        <div class="max-w-3xl text-white fade">
+
+
+            <div class="flex items-center gap-3 mb-6">
+
+                <span class="w-10 h-px bg-white/60"></span>
+
+                <span class="text-xs uppercase tracking-[4px] text-white/70">
+                    Welcome to Dhanya
+                </span>
+
+            </div>
+
+
+            <h1 class="serif text-5xl sm:text-6xl lg:text-8xl leading-[.95]">
+
+                Fresh from the
+
+                <span class="italic">
+                    producer.
+                </span>
+
+                <br>
+
+                Ready for you.
+
+            </h1>
+
+
+            <p class="mt-7 text-white/80 text-base lg:text-lg leading-8 max-w-xl">
+
+                Dhanya connects producers directly with markets and consumers,
+                making it easier to sell, discover and purchase the products
+                people need.
+
+            </p>
+
+
+            <div class="flex flex-wrap gap-4 mt-9">
+
+
+                <a href="{% url 'browse_products' %}"
+                    class="btn-primary bg-white text-[#1A2E22] px-7 py-4 rounded-full font-semibold text-sm flex items-center gap-2">
+
+                    Explore Products
+
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+
+                </a>
+
+
+                <a href="{% url 'register' %}"
+                    class="btn-secondary border border-white/60 text-white px-7 py-4 rounded-full font-semibold text-sm">
+
+                    Join Dhanya
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- HERO BOTTOM -->
+
+    <div class="absolute bottom-0 left-0 right-0">
+
+        <div class="max-w-[1450px] mx-auto px-5 lg:px-10 pb-6">
+
+            <div class="flex flex-wrap gap-3">
+
+                <div
+                    class="bg-white/15 backdrop-blur-md border border-white/20 text-white rounded-full px-5 py-3 text-sm">
+
+                    🌱 Direct from Producers
+
+                </div>
+
+                <div
+                    class="bg-white/15 backdrop-blur-md border border-white/20 text-white rounded-full px-5 py-3 text-sm">
+
+                    🛒 For Markets & Consumers
+
+                </div>
+
+                <div
+                    class="bg-white/15 backdrop-blur-md border border-white/20 text-white rounded-full px-5 py-3 text-sm">
+
+                    📦 Simple Ordering
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================================
+     Dhanya CATEGORIES
+========================================================= -->
+
+<section class="py-24 lg:py-32 bg-[#F7F7F2]">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+        <!-- SECTION HEADER -->
+
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
+
+            <div class="max-w-2xl">
+
+                <div class="flex items-center gap-3 mb-5">
+
+                    <span class="w-10 h-px bg-[#6B8068]"></span>
+
+                    <span class="text-xs uppercase tracking-[4px] text-[#6B8068] font-semibold">
+                        Explore Dhanya
+                    </span>
+
+                </div>
+
+                <h2 class="serif text-4xl sm:text-5xl lg:text-6xl text-[#1A2E22] leading-tight">
+
+                    Everything you need,
+
+                    <span class="italic">
+                        straight from the source.
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+            <p class="text-[#667067] max-w-md leading-7">
+
+                Discover essential crops, seasonal produce and fresh flowers
+                supplied by producers and made available through Dhanya.
+
+            </p>
+
+        </div>
+
+
+        <!-- CATEGORY GRID -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+
+            <!-- ESSENTIAL CROPS -->
+
+            <a href="{% url 'browse_products' %}?category=Essential%20Crops"
+                class="group relative h-[430px] rounded-[28px] overflow-hidden">
+
+                <img
+                    src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=1000&q=85"
+                    alt="Essential crops"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-0 left-0 right-0 p-7 text-white">
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-[3px] text-white/70 mb-2">
+                                01
+                            </p>
+
+                            <h3 class="serif text-3xl">
+                                Essential Crops
+                            </h3>
+
+                            <p class="text-sm text-white/70 mt-2">
+                                Rice · Wheat · Dals
+                            </p>
+
+                        </div>
+
+                        <span
+                            class="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center transition group-hover:bg-white group-hover:text-[#1A2E22]">
+
+                            <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- SEASONAL CROPS -->
+
+            <a href="{% url 'browse_products' %}?category=Seasonal%20Crops"
+                class="group relative h-[430px] rounded-[28px] overflow-hidden">
+
+                <img
+                    src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=85"
+                    alt="Seasonal vegetables"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-0 left-0 right-0 p-7 text-white">
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-[3px] text-white/70 mb-2">
+                                02
+                            </p>
+
+                            <h3 class="serif text-3xl">
+                                Seasonal Crops
+                            </h3>
+
+                            <p class="text-sm text-white/70 mt-2">
+                                Fresh · Local · Seasonal
+                            </p>
+
+                        </div>
+
+                        <span
+                            class="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center transition group-hover:bg-white group-hover:text-[#1A2E22]">
+
+                            <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- FLOWERS -->
+
+            <a href="{% url 'browse_products' %}?category=Flowers"
+                class="group relative h-[430px] rounded-[28px] overflow-hidden">
+
+                <img
+                    src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=85"
+                    alt="Fresh flowers"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-0 left-0 right-0 p-7 text-white">
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-[3px] text-white/70 mb-2">
+                                03
+                            </p>
+
+                            <h3 class="serif text-3xl">
+                                Fresh Flowers
+                            </h3>
+
+                            <p class="text-sm text-white/70 mt-2">
+                                Fresh · Beautiful · Local
+                            </p>
+
+                        </div>
+
+                        <span
+                            class="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/30 flex items-center justify-center transition group-hover:bg-white group-hover:text-[#1A2E22]">
+
+                            <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- MARKETPLACE -->
+
+            <a href="{% url 'browse_products' %}"
+                class="group relative h-[430px] rounded-[28px] overflow-hidden bg-[#1A2E22]">
+
+                <div class="absolute inset-0 p-8 flex flex-col justify-between">
+
+                    <div>
+
+                        <span
+                            class="inline-flex w-12 h-12 rounded-full bg-white/10 border border-white/20 items-center justify-center text-white">
+
+                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="text-white">
+
+                        <p class="text-xs uppercase tracking-[3px] text-white/50 mb-3">
+                            04
+                        </p>
+
+                        <h3 class="serif text-4xl leading-tight">
+
+                            Dhanya
+
+                            <span class="italic">
+                                Marketplace
+                            </span>
+
+                        </h3>
+
+                        <p class="text-white/60 text-sm leading-6 mt-4 max-w-xs">
+
+                            Browse available products, compare options
+                            and place your order directly through Dhanya.
+
+                        </p>
+
+
+                        <div class="mt-7 inline-flex items-center gap-2 text-sm font-semibold">
+
+                            Explore Marketplace
+
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 transition group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- INTRO -->
+<!-- ========================================================= -->
+
+<section class="py-24">
+
+    <div class="max-w-4xl mx-auto px-5 text-center">
+
+        <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-5">
+            One connected marketplace
+        </p>
+
+        <h2 class="serif text-4xl sm:text-5xl lg:text-6xl leading-tight">
+
+            Where producers meet the people who
+
+            <span class="italic">
+                need their products.
+            </span>
+
+        </h2>
+
+        <p class="mt-7 text-gray-600 leading-8 max-w-2xl mx-auto">
+
+            From fresh vegetables and fruits to grains, dairy and other
+            agricultural products, Dhanya creates a simple connection
+            between production and demand.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- CATEGORIES -->
+<!-- ========================================================= -->
+
+<section id="categories" class="pb-28">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12">
+
+            <div>
+
+                <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-4">
+                    Explore
+                </p>
+
+                <h2 class="serif text-4xl lg:text-5xl">
+                    What are you looking for?
+                </h2>
+
+            </div>
+
+
+            <a href="{% url 'browse_products' %}"
+                class="mt-5 sm:mt-0 text-sm font-semibold flex items-center gap-2">
+
+                View Marketplace
+
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+            </a>
+
+        </div>
+
+
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+
+
+            <!-- FRUITS & VEGETABLES -->
+
+            <a href="{% url 'browse_products' %}?category=Fruits%20and%20Vegetables"
+                class="category-card bg-white rounded-3xl p-4 border border-black/5">
+
+                <div class="aspect-square rounded-2xl overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=900&q=85"
+                        class="w-full h-full object-cover"
+                        alt="Fruits and vegetables">
+
+                </div>
+
+                <h3 class="serif text-xl mt-5">
+                    Fruits & Vegetables
+                </h3>
+
+                <p class="text-xs text-gray-500 mt-1">
+                    Fresh produce
+                </p>
+
+            </a>
+
+
+            <!-- GRAINS -->
+
+            <a href="{% url 'browse_products' %}?category=Grains%20and%20Pulses"
+                class="category-card bg-white rounded-3xl p-4 border border-black/5">
+
+                <div class="aspect-square rounded-2xl overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=900&q=85"
+                        class="w-full h-full object-cover"
+                        alt="Rice and grains">
+
+                </div>
+
+                <h3 class="serif text-xl mt-5">
+                    Grains & Pulses
+                </h3>
+
+                <p class="text-xs text-gray-500 mt-1">
+                    Rice, wheat, lentils & more
+                </p>
+
+            </a>
+
+
+            <!-- DAIRY -->
+
+            <a href="{% url 'browse_products' %}?category=Dairy%20Products"
+                class="category-card bg-white rounded-3xl p-4 border border-black/5">
+
+                <div class="aspect-square rounded-2xl overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=900&q=85"
+                        class="w-full h-full object-cover"
+                        alt="Dairy products">
+
+                </div>
+
+                <h3 class="serif text-xl mt-5">
+                    Dairy Products
+                </h3>
+
+                <p class="text-xs text-gray-500 mt-1">
+                    Milk, butter, yogurt & more
+                </p>
+
+            </a>
+
+
+            <!-- POULTRY -->
+
+            <a href="{% url 'browse_products' %}?category=Poultry%20and%20Meat"
+                class="category-card bg-white rounded-3xl p-4 border border-black/5">
+
+                <div class="aspect-square rounded-2xl overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=900&q=85"
+                        class="w-full h-full object-cover"
+                        alt="Poultry products">
+
+                </div>
+
+                <h3 class="serif text-xl mt-5">
+                    Poultry & Meat
+                </h3>
+
+                <p class="text-xs text-gray-500 mt-1">
+                    Protein for every need
+                </p>
+
+            </a>
+
+
+            <!-- SWEETENERS -->
+
+            <a href="{% url 'browse_products' %}?category=Natural%20Sweeteners"
+                class="category-card bg-white rounded-3xl p-4 border border-black/5">
+
+                <div class="aspect-square rounded-2xl overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1471943038886-87c772c31367?auto=format&fit=crop&w=900&q=85"
+                        class="w-full h-full object-cover"
+                        alt="Natural honey">
+
+                </div>
+
+                <h3 class="serif text-xl mt-5">
+                    Natural Sweeteners
+                </h3>
+
+                <p class="text-xs text-gray-500 mt-1">
+                    Honey, jaggery & more
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================================
+     FEATURED PRODUCTS
+========================================================= -->
+
+<section class="py-24 lg:py-32 bg-white">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+        <!-- SECTION HEADER -->
+
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
+
+            <div class="max-w-2xl">
+
+                <div class="flex items-center gap-3 mb-5">
+
+                    <span class="w-10 h-px bg-[#6B8068]"></span>
+
+                    <span class="text-xs uppercase tracking-[4px] text-[#6B8068] font-semibold">
+                        Featured Products
+                    </span>
+
+                </div>
+
+                <h2 class="serif text-4xl sm:text-5xl lg:text-6xl text-[#1A2E22] leading-tight">
+
+                    Fresh picks from
+
+                    <span class="italic">
+                        Dhanya.
+                    </span>
+
+                </h2>
+
+                <p class="mt-5 text-[#667067] leading-7 max-w-xl">
+
+                    Explore products currently available from producers
+                    across the Dhanya marketplace.
+
+                </p>
+
+            </div>
+
+
+            <a href="{% url 'browse_products' %}"
+                class="inline-flex items-center gap-2 text-sm font-semibold text-[#1A2E22] border-b border-[#1A2E22]/30 pb-2 hover:border-[#1A2E22] transition">
+
+                View all products
+
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- PRODUCTS -->
+
+        {% if products %}
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            {% for product in products %}
+
+            <div class="group">
+
+
+                <!-- PRODUCT IMAGE -->
+
+                <a href="{% url 'place_order' product.id %}"
+    class="relative block aspect-[4/5] rounded-[26px] overflow-hidden bg-[#EEF0EA]">
+
+                    {% if product.image %}
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
+                    {% else %}
+
+                    <div class="w-full h-full flex items-center justify-center">
+
+                        <i data-lucide="leaf"
+                            class="w-16 h-16 text-[#9AA596]">
+                        </i>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="absolute top-4 left-4">
+
+                        <span
+                            class="bg-white/90 backdrop-blur-md text-[#1A2E22] px-4 py-2 rounded-full text-xs font-semibold">
+
+                            {{ product.category }}
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- ARROW -->
+
+                    <div
+                        class="absolute bottom-4 right-4 w-11 h-11 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-[#1A2E22] opacity-0 translate-y-2 transition duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+
+                        <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+
+                    </div>
+
+                </a>
+
+
+                <!-- PRODUCT INFORMATION -->
+
+                <div class="pt-5">
+
+
+                    <div class="flex items-start justify-between gap-4">
+
+                        <div>
+
+                            <h3 class="text-lg font-semibold text-[#1A2E22]">
+
+                                {{ product.name }}
+
+                            </h3>
+
+                            {% if product.location %}
+
+                            <div class="flex items-center gap-1.5 mt-2 text-sm text-[#7A837A]">
+
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+
+                                {{ product.location }}
+
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="text-right">
+
+                            <p class="text-lg font-bold text-[#1A2E22]">
+
+                                ₹{{ product.price }}
+
+                            </p>
+
+                            <p class="text-xs text-[#8A928A] mt-1">
+
+                                / {{ product.unit }}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- STOCK -->
+
+                    <div class="flex items-center justify-between mt-5 pt-4 border-t border-[#E6E8E2]">
+
+                        <span class="flex items-center gap-2 text-xs text-[#667067]">
+
+                            <span class="w-2 h-2 rounded-full bg-[#6B8068]"></span>
+
+                            Available
+
+                        </span>
+
+
+                        <a href="{% url 'place_order' product.id %}"
+    class="text-xs font-semibold text-[#1A2E22] hover:underline">
+
+    View product →
+
+</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- VIEW ALL -->
+
+        <div class="flex justify-center mt-14">
+
+            <a href="{% url 'browse_products' %}"
+                class="inline-flex items-center gap-3 bg-[#1A2E22] text-white px-7 py-4 rounded-full font-semibold text-sm hover:bg-[#294635] transition">
+
+                Explore Marketplace
+
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+
+            </a>
+
+        </div>
+
+
+        {% else %}
+
+        <!-- EMPTY STATE -->
+
+        <div class="rounded-[28px] bg-[#F7F7F2] border border-[#E6E8E2] py-20 px-6 text-center">
+
+            <div class="w-16 h-16 mx-auto rounded-full bg-[#E5E9E0] flex items-center justify-center">
+
+                <i data-lucide="shopping-basket"
+                    class="w-7 h-7 text-[#6B8068]">
+                </i>
+
+            </div>
+
+            <h3 class="serif text-3xl text-[#1A2E22] mt-6">
+
+                Fresh products are coming soon.
+
+            </h3>
+
+            <p class="text-[#737B73] mt-3 max-w-md mx-auto">
+
+                Producers can add their products to Dhanya
+                and they will appear here.
+
+            </p>
+
+            <a href="{% url 'register' %}"
+                class="inline-flex items-center gap-2 mt-7 bg-[#1A2E22] text-white px-6 py-3 rounded-full text-sm font-semibold">
+
+                Become a Producer
+
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+<!-- =========================================================
+     HOW Dhanya WORKS
+========================================================= -->
+
+<section class="py-24 lg:py-32 bg-[#F7F7F2]">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+        <!-- HEADER -->
+
+        <div class="max-w-3xl mb-16">
+
+            <div class="flex items-center gap-3 mb-5">
+
+                <span class="w-10 h-px bg-[#6B8068]"></span>
+
+                <span class="text-xs uppercase tracking-[4px] text-[#6B8068] font-semibold">
+                    How Dhanya Works
+                </span>
+
+            </div>
+
+            <h2 class="serif text-4xl sm:text-5xl lg:text-6xl text-[#1A2E22] leading-tight">
+
+                From the field
+
+                <span class="italic">
+                    to your hands.
+                </span>
+
+            </h2>
+
+            <p class="mt-6 text-[#667067] text-base lg:text-lg leading-8 max-w-2xl">
+
+                Dhanya creates a simple connection between producers,
+                markets and consumers — making agricultural commerce
+                easier, clearer and more accessible.
+
+            </p>
+
+        </div>
+
+
+        <!-- WORKFLOW -->
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+
+            <!-- STEP 01 -->
+
+            <div class="relative bg-white rounded-[28px] p-8 lg:p-10 border border-[#E6E8E2]">
+
+                <div class="flex items-center justify-between mb-12">
+
+                    <span
+                        class="w-14 h-14 rounded-full bg-[#E8EEE5] flex items-center justify-center text-[#1A2E22]">
+
+                        <i data-lucide="tractor" class="w-6 h-6"></i>
+
+                    </span>
+
+                    <span class="text-sm font-semibold text-[#9AA196]">
+                        01
+                    </span>
+
+                </div>
+
+
+                <h3 class="serif text-3xl text-[#1A2E22]">
+                    Producers
+                </h3>
+
+                <p class="text-[#737B73] leading-7 mt-4">
+
+                    Farmers and producers list their available products,
+                    set quantities and prices, and reach buyers through
+                    the Dhanya marketplace.
+
+                </p>
+
+
+                <div class="mt-8 pt-6 border-t border-[#E6E8E2]">
+
+                    <div class="flex items-center gap-3 text-sm text-[#526052]">
+
+                        <span class="w-2 h-2 rounded-full bg-[#6B8068]"></span>
+
+                        List products
+
+                    </div>
+
+                    <div class="flex items-center gap-3 text-sm text-[#526052] mt-3">
+
+                        <span class="w-2 h-2 rounded-full bg-[#6B8068]"></span>
+
+                        Manage inventory
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 02 -->
+
+            <div class="relative bg-[#1A2E22] rounded-[28px] p-8 lg:p-10 text-white">
+
+                <div class="flex items-center justify-between mb-12">
+
+                    <span
+                        class="w-14 h-14 rounded-full bg-white/10 border border-white/15 flex items-center justify-center">
+
+                        <i data-lucide="store" class="w-6 h-6"></i>
+
+                    </span>
+
+                    <span class="text-sm font-semibold text-white/40">
+                        02
+                    </span>
+
+                </div>
+
+
+                <h3 class="serif text-3xl">
+                    Markets
+                </h3>
+
+                <p class="text-white/60 leading-7 mt-4">
+
+                    Local markets and shop owners can discover products,
+                    place orders and source agricultural goods according
+                    to their business needs.
+
+                </p>
+
+
+                <div class="mt-8 pt-6 border-t border-white/10">
+
+                    <div class="flex items-center gap-3 text-sm text-white/70">
+
+                        <span class="w-2 h-2 rounded-full bg-white/60"></span>
+
+                        Discover products
+
+                    </div>
+
+                    <div class="flex items-center gap-3 text-sm text-white/70 mt-3">
+
+                        <span class="w-2 h-2 rounded-full bg-white/60"></span>
+
+                        Place orders
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STEP 03 -->
+
+            <div class="relative bg-white rounded-[28px] p-8 lg:p-10 border border-[#E6E8E2]">
+
+                <div class="flex items-center justify-between mb-12">
+
+                    <span
+                        class="w-14 h-14 rounded-full bg-[#E8EEE5] flex items-center justify-center text-[#1A2E22]">
+
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+
+                    </span>
+
+                    <span class="text-sm font-semibold text-[#9AA196]">
+                        03
+                    </span>
+
+                </div>
+
+
+                <h3 class="serif text-3xl text-[#1A2E22]">
+                    Consumers
+                </h3>
+
+                <p class="text-[#737B73] leading-7 mt-4">
+
+                    Consumers can browse available products, discover
+                    what they need and purchase directly through the
+                    Dhanya marketplace.
+
+                </p>
+
+
+                <div class="mt-8 pt-6 border-t border-[#E6E8E2]">
+
+                    <div class="flex items-center gap-3 text-sm text-[#526052]">
+
+                        <span class="w-2 h-2 rounded-full bg-[#6B8068]"></span>
+
+                        Browse products
+
+                    </div>
+
+                    <div class="flex items-center gap-3 text-sm text-[#526052] mt-3">
+
+                        <span class="w-2 h-2 rounded-full bg-[#6B8068]"></span>
+
+                        Purchase easily
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FLOW INDICATOR -->
+
+        <div class="hidden lg:flex items-center justify-center gap-5 mt-12">
+
+            <span class="text-xs uppercase tracking-[3px] text-[#7B837A]">
+                Producer
+            </span>
+
+            <i data-lucide="arrow-right" class="w-5 h-5 text-[#9AA196]"></i>
+
+            <span class="text-xs uppercase tracking-[3px] text-[#7B837A]">
+                Market
+            </span>
+
+            <i data-lucide="arrow-right" class="w-5 h-5 text-[#9AA196]"></i>
+
+            <span class="text-xs uppercase tracking-[3px] text-[#7B837A]">
+                Consumer
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- MARKETPLACE PREVIEW -->
+<!-- ========================================================= -->
+
+<section id="marketplace" class="py-28 bg-white">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+
+        <div class="flex flex-col lg:flex-row justify-between lg:items-end mb-12">
+
+            <div>
+
+                <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-4">
+                    Dhanya Marketplace
+                </p>
+
+                <h2 class="serif text-4xl lg:text-5xl">
+                    Products based on your needs.
+                </h2>
+
+            </div>
+
+
+            <p class="text-gray-500 text-sm max-w-md mt-5 lg:mt-0 leading-6">
+
+                Producers list what they have available.
+                Markets and consumers discover products and place orders
+                according to their requirements.
+
+            </p>
+
+        </div>
+
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+
+            <!-- PRODUCT 1 -->
+
+            <article class="product-card border border-black/10 rounded-3xl overflow-hidden bg-[#F5F3EF]">
+
+                <div class="aspect-[4/3] overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=900&q=85"
+                        alt="Fresh fruits"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+                <div class="p-5">
+
+                    <div class="flex justify-between items-start">
+
+                        <div>
+
+                            <p class="text-xs text-gray-500">
+                                Fruits & Vegetables
+                            </p>
+
+                            <h3 class="serif text-xl mt-1">
+                                Fresh Produce
+                            </h3>
+
+                        </div>
+
+                        <span class="text-xs bg-white px-3 py-1 rounded-full">
+                            Fresh
+                        </span>
+
+                    </div>
+
+                    <p class="text-sm text-gray-500 mt-3">
+                        Available from local producers
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 2 -->
+
+            <article class="product-card border border-black/10 rounded-3xl overflow-hidden bg-[#F5F3EF]">
+
+                <div class="aspect-[4/3] overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=900&q=85"
+                        alt="Rice"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+                <div class="p-5">
+
+                    <p class="text-xs text-gray-500">
+                        Grains & Pulses
+                    </p>
+
+                    <h3 class="serif text-xl mt-1">
+                        Rice & Grains
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-3">
+                        Source directly from producers
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 3 -->
+
+            <article class="product-card border border-black/10 rounded-3xl overflow-hidden bg-[#F5F3EF]">
+
+                <div class="aspect-[4/3] overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=900&q=85"
+                        alt="Fresh milk"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+                <div class="p-5">
+
+                    <p class="text-xs text-gray-500">
+                        Dairy Products
+                    </p>
+
+                    <h3 class="serif text-xl mt-1">
+                        Fresh Dairy
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-3">
+                        Find producers near your market
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PRODUCT 4 -->
+
+            <article class="product-card border border-black/10 rounded-3xl overflow-hidden bg-[#F5F3EF]">
+
+                <div class="aspect-[4/3] overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=900&q=85"
+                        alt="Natural honey"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+                <div class="p-5">
+
+                    <p class="text-xs text-gray-500">
+                        Natural Sweeteners
+                    </p>
+
+                    <h3 class="serif text-xl mt-1">
+                        Honey & Jaggery
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-3">
+                        Natural products from producers
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <div class="text-center mt-12">
+
+            <a href="{% url 'browse_products' %}"
+                class="btn-primary inline-flex items-center gap-2 bg-[#1A2E22] text-white px-7 py-4 rounded-full font-semibold text-sm">
+
+                Browse All Products
+
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- HOW FARM PRO WORKS -->
+<!-- ========================================================= -->
+
+<section id="how-it-works" class="py-28">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+
+        <div class="max-w-2xl mb-14">
+
+            <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-4">
+                Simple by design
+            </p>
+
+            <h2 class="serif text-4xl lg:text-5xl">
+                One platform. Three sides of agriculture.
+            </h2>
+
+        </div>
+
+
+        <div class="grid md:grid-cols-3 gap-5">
+
+
+            <!-- PRODUCER -->
+
+            <div class="bg-[#1A2E22] text-white rounded-[30px] p-8 lg:p-10">
+
+                <div
+                    class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-8">
+
+                    <i data-lucide="sprout" class="w-6 h-6"></i>
+
+                </div>
+
+                <span class="text-xs uppercase tracking-[3px] text-white/50">
+                    01
+                </span>
+
+                <h3 class="serif text-3xl mt-3">
+                    Producer
+                </h3>
+
+                <p class="text-white/60 mt-5 leading-7">
+
+                    Produce agricultural products and list what is available
+                    on Dhanya with quantity, price, location and other details.
+
+                </p>
+
+                <a href="{% url 'register' %}"
+                    class="inline-flex items-center gap-2 mt-7 text-sm">
+
+                    Start Selling
+
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- MARKET -->
+
+            <div class="bg-white border border-black/10 rounded-[30px] p-8 lg:p-10">
+
+                <div
+                    class="w-12 h-12 bg-[#F5F3EF] rounded-full flex items-center justify-center mb-8">
+
+                    <i data-lucide="store" class="w-6 h-6"></i>
+
+                </div>
+
+                <span class="text-xs uppercase tracking-[3px] text-gray-400">
+                    02
+                </span>
+
+                <h3 class="serif text-3xl mt-3">
+                    Market
+                </h3>
+
+                <p class="text-gray-500 mt-5 leading-7">
+
+                    Markets can discover products from producers and purchase
+                    the quantities they require for their business.
+
+                </p>
+
+                <a href="{% url 'register' %}"
+                    class="inline-flex items-center gap-2 mt-7 text-sm font-semibold">
+
+                    Join as Market
+
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- CONSUMER -->
+
+            <div class="bg-white border border-black/10 rounded-[30px] p-8 lg:p-10">
+
+                <div
+                    class="w-12 h-12 bg-[#F5F3EF] rounded-full flex items-center justify-center mb-8">
+
+                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+
+                </div>
+
+                <span class="text-xs uppercase tracking-[3px] text-gray-400">
+                    03
+                </span>
+
+                <h3 class="serif text-3xl mt-3">
+                    Consumer
+                </h3>
+
+                <p class="text-gray-500 mt-5 leading-7">
+
+                    Consumers can browse available products, choose what they
+                    need and place orders directly through the marketplace.
+
+                </p>
+
+                <a href="{% url 'register' %}"
+                    class="inline-flex items-center gap-2 mt-7 text-sm font-semibold">
+
+                    Shop Products
+
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     ABOUT Dhanya
+========================================================= -->
+
+<section class="py-24 lg:py-32 bg-white">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+
+            <!-- LEFT: IMAGE -->
+
+            <div class="relative">
+
+                <div class="aspect-[4/5] rounded-[32px] overflow-hidden">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=90"
+                        alt="Dhanya agricultural fields"
+                        class="w-full h-full object-cover">
+
+                </div>
+
+
+                <!-- FLOATING CARD -->
+
+                <div
+                    class="absolute -bottom-7 right-5 lg:-right-8 bg-[#1A2E22] text-white rounded-[24px] p-6 lg:p-7 w-[230px] shadow-xl">
+
+                    <p class="text-4xl font-semibold">
+                        01
+                    </p>
+
+                    <p class="text-sm text-white/60 mt-2 leading-6">
+                        Simple platform.
+                        Real agricultural connections.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT: CONTENT -->
+
+            <div class="lg:py-8">
+
+                <div class="flex items-center gap-3 mb-5">
+
+                    <span class="w-10 h-px bg-[#6B8068]"></span>
+
+                    <span class="text-xs uppercase tracking-[4px] text-[#6B8068] font-semibold">
+                        About Dhanya
+                    </span>
+
+                </div>
+
+
+                <h2 class="serif text-4xl sm:text-5xl lg:text-6xl text-[#1A2E22] leading-tight">
+
+                    Building a better way
+
+                    <span class="italic">
+                        to connect agriculture.
+                    </span>
+
+                </h2>
+
+
+                <p class="mt-7 text-[#667067] text-base lg:text-lg leading-8">
+
+                    Dhanya is a digital marketplace designed to bring
+                    producers, markets and consumers closer together.
+
+                </p>
+
+
+                <p class="mt-5 text-[#737B73] leading-7">
+
+                    Instead of relying on disconnected channels,
+                    Dhanya creates one simple place where agricultural
+                    products can be listed, discovered and ordered.
+
+                </p>
+
+
+                <!-- FEATURES -->
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
+
+
+                    <div class="flex gap-4">
+
+                        <div
+                            class="flex-shrink-0 w-11 h-11 rounded-full bg-[#E8EEE5] flex items-center justify-center text-[#1A2E22]">
+
+                            <i data-lucide="link" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold text-[#1A2E22]">
+                                Direct Connections
+                            </h3>
+
+                            <p class="text-sm text-[#7A837A] mt-1 leading-6">
+                                Connect producers with real buyers.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex gap-4">
+
+                        <div
+                            class="flex-shrink-0 w-11 h-11 rounded-full bg-[#E8EEE5] flex items-center justify-center text-[#1A2E22]">
+
+                            <i data-lucide="package-check" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold text-[#1A2E22]">
+                                Simple Ordering
+                            </h3>
+
+                            <p class="text-sm text-[#7A837A] mt-1 leading-6">
+                                Manage agricultural orders easily.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex gap-4">
+
+                        <div
+                            class="flex-shrink-0 w-11 h-11 rounded-full bg-[#E8EEE5] flex items-center justify-center text-[#1A2E22]">
+
+                            <i data-lucide="search" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold text-[#1A2E22]">
+                                Easy Discovery
+                            </h3>
+
+                            <p class="text-sm text-[#7A837A] mt-1 leading-6">
+                                Find products by category and location.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex gap-4">
+
+                        <div
+                            class="flex-shrink-0 w-11 h-11 rounded-full bg-[#E8EEE5] flex items-center justify-center text-[#1A2E22]">
+
+                            <i data-lucide="sprout" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold text-[#1A2E22]">
+                                Agriculture First
+                            </h3>
+
+                            <p class="text-sm text-[#7A837A] mt-1 leading-6">
+                                Designed around real agricultural needs.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <div class="mt-10">
+
+                    <a href="{% url 'register' %}"
+                        class="inline-flex items-center gap-3 bg-[#1A2E22] text-white px-7 py-4 rounded-full font-semibold text-sm hover:bg-[#294635] transition">
+
+                        Join the Dhanya community
+
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- WHY FARM PRO -->
+<!-- ========================================================= -->
+
+<section class="py-28 bg-[#E8E7E1]">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+
+            <div>
+
+                <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-5">
+                    Why Dhanya?
+                </p>
+
+                <h2 class="serif text-4xl sm:text-5xl lg:text-6xl leading-tight">
+
+                    Better connections create
+
+                    <span class="italic">
+                        better agriculture.
+                    </span>
+
+                </h2>
+
+                <p class="text-gray-600 leading-8 mt-7 max-w-xl">
+
+                    Dhanya is designed to make agricultural trade simpler.
+                    Producers get a place to sell. Markets get access to
+                    products they require. Consumers get more choices.
+
+                </p>
+
+            </div>
+
+
+            <div class="grid grid-cols-2 gap-4">
+
+
+                <div class="bg-white rounded-3xl p-7">
+
+                    <div class="text-3xl mb-5">
+                        🌾
+                    </div>
+
+                    <h3 class="serif text-xl">
+                        Direct Connection
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-3 leading-6">
+                        Connect producers with markets and consumers.
+                    </p>
+
+                </div>
+
+
+                <div class="bg-white rounded-3xl p-7">
+
+                    <div class="text-3xl mb-5">
+                        📦
+                    </div>
+
+                    <h3 class="serif text-xl">
+                        Simple Orders
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-3 leading-6">
+                        Make buying and selling straightforward.
+                    </p>
+
+                </div>
+
+
+                <div class="bg-white rounded-3xl p-7">
+
+                    <div class="text-3xl mb-5">
+                        📍
+                    </div>
+
+                    <h3 class="serif text-xl">
+                        Location Based
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-3 leading-6">
+                        Discover products available in relevant locations.
+                    </p>
+
+                </div>
+
+
+                <div class="bg-white rounded-3xl p-7">
+
+                    <div class="text-3xl mb-5">
+                        🤝
+                    </div>
+
+                    <h3 class="serif text-xl">
+                        Built on Trust
+                    </h3>
+
+                    <p class="text-sm text-gray-500 mt-3 leading-6">
+                        A platform designed around real agricultural needs.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+```html id="g7tq4p"
+<!-- ========================================================= -->
+<!-- FARM PRO NUMBERS -->
+<!-- ========================================================= -->
+
+<!-- ========================================================= -->
+<!-- FARM PRO NUMBERS -->
+<!-- ========================================================= -->
+
+<section class="py-24 bg-white">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+
+            <!-- PRODUCERS -->
+            <div class="text-center p-8 border border-black/10 rounded-3xl">
+
+                <p class="serif text-4xl lg:text-5xl">
+                    {{ producer_count }}+
+                </p>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Producers
+                </p>
+
+            </div>
+
+
+            <!-- PRODUCTS -->
+            <div class="text-center p-8 border border-black/10 rounded-3xl">
+
+                <p class="serif text-4xl lg:text-5xl">
+                    {{ product_count }}+
+                </p>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Products Listed
+                </p>
+
+            </div>
+
+
+            <!-- MARKETS -->
+            <div class="text-center p-8 border border-black/10 rounded-3xl">
+
+                <p class="serif text-4xl lg:text-5xl">
+                    {{ market_count }}+
+                </p>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Markets Connected
+                </p>
+
+            </div>
+
+
+            <!-- CONSUMERS -->
+            <div class="text-center p-8 border border-black/10 rounded-3xl">
+
+                <p class="serif text-4xl lg:text-5xl">
+                    {{ consumer_count }}+
+                </p>
+
+                <p class="text-sm text-gray-500 mt-2">
+                    Consumers
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- BENEFITS FOR PRODUCERS -->
+<!-- ========================================================= -->
+
+<section class="py-28">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+
+            <div class="rounded-[35px] overflow-hidden">
+
+                <img
+                    src="https://images.unsplash.com/photo-1500076656116-558758c991c1?auto=format&fit=crop&w=1400&q=85"
+                    alt="Farm producer"
+                    class="w-full h-[520px] object-cover">
+
+            </div>
+
+
+            <div>
+
+                <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-5">
+                    For Producers
+                </p>
+
+                <h2 class="serif text-4xl lg:text-6xl leading-tight">
+
+                    Produce more.
+
+                    <br>
+
+                    <span class="italic">
+                        Sell smarter.
+                    </span>
+
+                </h2>
+
+                <p class="text-gray-600 leading-8 mt-6 max-w-xl">
+
+                    Dhanya gives producers a simple digital place to
+                    showcase what they produce and connect with people
+                    looking to buy it.
+
+                </p>
+
+
+                <div class="mt-8 space-y-5">
+
+                    <div class="flex gap-4">
+
+                        <div
+                            class="w-10 h-10 rounded-full bg-[#E7E8E1] flex items-center justify-center shrink-0">
+
+                            <i data-lucide="package-plus" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold">
+                                List Your Products
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Add your products, quantity, price and location.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex gap-4">
+
+                        <div
+                            class="w-10 h-10 rounded-full bg-[#E7E8E1] flex items-center justify-center shrink-0">
+
+                            <i data-lucide="users" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold">
+                                Reach Buyers
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Connect with markets and consumers looking for products.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex gap-4">
+
+                        <div
+                            class="w-10 h-10 rounded-full bg-[#E7E8E1] flex items-center justify-center shrink-0">
+
+                            <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="font-semibold">
+                                Manage Orders
+                            </h3>
+
+                            <p class="text-sm text-gray-500 mt-1">
+                                Receive, confirm and complete your orders.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a href="{% url 'register' %}"
+                    class="inline-flex items-center gap-2 bg-[#1A2E22] text-white px-7 py-4 rounded-full text-sm font-semibold mt-9">
+
+                    Become a Producer
+
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- BENEFITS FOR BUYERS -->
+<!-- ========================================================= -->
+
+<section class="py-28 bg-[#F5F3EF]">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+
+            <div class="order-2 lg:order-1">
+
+                <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-5">
+                    For Markets & Consumers
+                </p>
+
+                <h2 class="serif text-4xl lg:text-6xl leading-tight">
+
+                    Find what you need.
+
+                    <br>
+
+                    <span class="italic">
+                        When you need it.
+                    </span>
+
+                </h2>
+
+                <p class="text-gray-600 leading-8 mt-6 max-w-xl">
+
+                    Whether you're purchasing for your family or sourcing
+                    products for your market, Dhanya helps you discover
+                    available products from producers.
+
+                </p>
+
+
+                <div class="grid sm:grid-cols-2 gap-4 mt-9">
+
+                    <div class="bg-white p-6 rounded-3xl">
+
+                        <i data-lucide="search" class="w-6 h-6 mb-5"></i>
+
+                        <h3 class="serif text-xl">
+                            Discover
+                        </h3>
+
+                        <p class="text-sm text-gray-500 mt-2 leading-6">
+                            Search products based on your requirements.
+                        </p>
+
+                    </div>
+
+
+                    <div class="bg-white p-6 rounded-3xl">
+
+                        <i data-lucide="filter" class="w-6 h-6 mb-5"></i>
+
+                        <h3 class="serif text-xl">
+                            Filter
+                        </h3>
+
+                        <p class="text-sm text-gray-500 mt-2 leading-6">
+                            Find products by category and location.
+                        </p>
+
+                    </div>
+
+
+                    <div class="bg-white p-6 rounded-3xl">
+
+                        <i data-lucide="shopping-cart" class="w-6 h-6 mb-5"></i>
+
+                        <h3 class="serif text-xl">
+                            Order
+                        </h3>
+
+                        <p class="text-sm text-gray-500 mt-2 leading-6">
+                            Place an order for the quantity you need.
+                        </p>
+
+                    </div>
+
+
+                    <div class="bg-white p-6 rounded-3xl">
+
+                        <i data-lucide="package-check" class="w-6 h-6 mb-5"></i>
+
+                        <h3 class="serif text-xl">
+                            Track
+                        </h3>
+
+                        <p class="text-sm text-gray-500 mt-2 leading-6">
+                            Manage your orders from one place.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <a href="{% url 'browse_products' %}"
+                    class="inline-flex items-center gap-2 bg-[#1A2E22] text-white px-7 py-4 rounded-full text-sm font-semibold mt-9">
+
+                    Explore Marketplace
+
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+                </a>
+
+            </div>
+
+
+            <div class="order-1 lg:order-2 rounded-[35px] overflow-hidden">
+
+                <img
+                    src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1400&q=85"
+                    alt="Fresh agricultural products"
+                    class="w-full h-[520px] object-cover">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- TESTIMONIALS -->
+<!-- ========================================================= -->
+
+<section class="py-32 bg-white">
+
+    <div class="max-w-[1200px] mx-auto px-5">
+
+
+        <div class="text-center mb-16">
+
+            <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-5">
+                Dhanya Community
+            </p>
+
+            <h2 class="serif text-4xl lg:text-6xl">
+                What our community says.
+            </h2>
+
+        </div>
+
+
+        <div class="grid md:grid-cols-3 gap-5">
+
+
+            <!-- TESTIMONIAL 1 -->
+
+            <article class="bg-[#F5F3EF] rounded-[30px] p-8">
+
+                <div class="flex gap-1 mb-7">
+
+                    ★★★★★
+
+                </div>
+
+                <p class="serif text-xl leading-8">
+
+                    "Dhanya gives me a simple way to show buyers what
+                    I have available without depending only on local contacts."
+
+                </p>
+
+
+                <div class="flex items-center gap-3 mt-8">
+
+                    <div
+                        class="w-11 h-11 rounded-full bg-[#1A2E22] text-white flex items-center justify-center">
+
+                        <i data-lucide="user" class="w-5 h-5"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p class="font-semibold text-sm">
+                            Ravi Kumar
+                        </p>
+
+                        <p class="text-xs text-gray-500">
+                            Producer
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- TESTIMONIAL 2 -->
+
+            <article class="bg-[#1A2E22] text-white rounded-[30px] p-8">
+
+                <div class="flex gap-1 mb-7 text-white/70">
+
+                    ★★★★★
+
+                </div>
+
+                <p class="serif text-xl leading-8">
+
+                    "Finding products according to our requirements is
+                    much easier when everything is available in one place."
+
+                </p>
+
+
+                <div class="flex items-center gap-3 mt-8">
+
+                    <div
+                        class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center">
+
+                        <i data-lucide="store" class="w-5 h-5"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p class="font-semibold text-sm">
+                            Priya Market
+                        </p>
+
+                        <p class="text-xs text-white/50">
+                            Market Owner
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- TESTIMONIAL 3 -->
+
+            <article class="bg-[#F5F3EF] rounded-[30px] p-8">
+
+                <div class="flex gap-1 mb-7">
+
+                    ★★★★★
+
+                </div>
+
+                <p class="serif text-xl leading-8">
+
+                    "I can browse products, choose what I need and
+                    place my order without making the process complicated."
+
+                </p>
+
+
+                <div class="flex items-center gap-3 mt-8">
+
+                    <div
+                        class="w-11 h-11 rounded-full bg-[#1A2E22] text-white flex items-center justify-center">
+
+                        <i data-lucide="user" class="w-5 h-5"></i>
+
+                    </div>
+
+                    <div>
+
+                        <p class="font-semibold text-sm">
+                            Ananya
+                        </p>
+
+                        <p class="text-xs text-gray-500">
+                            Consumer
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- OUR TEAM -->
+<!-- ========================================================= -->
+
+<!-- =========================================================
+     Dhanya TEAM
+========================================================= -->
+
+<section class="py-24 lg:py-32 bg-[#F7F7F2]">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10">
+
+        <!-- HEADER -->
+
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
+
+            <div class="max-w-3xl">
+
+                <div class="flex items-center gap-3 mb-5">
+
+                    <span class="w-10 h-px bg-[#6B8068]"></span>
+
+                    <span class="text-xs uppercase tracking-[4px] text-[#6B8068] font-semibold">
+                        Our Team
+                    </span>
+
+                </div>
+
+                <h2 class="serif text-4xl sm:text-5xl lg:text-6xl text-[#1A2E22] leading-tight">
+
+                    The people behind
+
+                    <span class="italic">
+                        Dhanya.
+                    </span>
+
+                </h2>
+
+                <p class="mt-5 text-[#667067] leading-7 max-w-2xl">
+
+                    We're building Dhanya with a simple goal:
+                    make agricultural commerce easier for everyone
+                    involved in the journey from producer to consumer.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- TEAM GRID -->
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+
+            <!-- TEAM MEMBER 01 -->
+
+            <div class="group">
+
+                <div class="aspect-[4/5] rounded-[28px] overflow-hidden bg-[#E7E8E1]">
+
+                    <!-- CHANGE THIS IMAGE PATH TO YOUR PHOTO -->
+
+                    <img
+                        src="{% static 'core/images/myimage.jpeg' %}"
+                        alt="Dhanya Founder"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
+                </div>
+
+                <div class="pt-5">
+
+                    <h3 class="text-lg font-semibold text-[#1A2E22]">
+                        Varun Mannam
+                    </h3>
+
+                    <p class="text-sm text-[#7A837A] mt-1">
+                        Founder & Developer
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TEAM MEMBER 02 -->
+
+            <div class="group">
+
+                <div class="aspect-[4/5] rounded-[28px] overflow-hidden bg-[#E7E8E1]">
+
+                    <img
+                        src="{% static 'core/images/team2.png' %}"
+                        alt="Dhanya team member"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
+                </div>
+
+                <div class="pt-5">
+
+                    <h3 class="text-lg font-semibold text-[#1A2E22]">
+                        Srihari Mannam
+                    </h3>
+
+                    <p class="text-sm text-[#7A837A] mt-1">
+                        Product & Strategy
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TEAM MEMBER 03 -->
+
+            <div class="group">
+
+                <div class="aspect-[4/5] rounded-[28px] overflow-hidden bg-[#E7E8E1]">
+
+                    <img
+                        src="{% static 'core/images/team2.png' %}"
+                        alt="Dhanya team member"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
+                </div>
+
+                <div class="pt-5">
+
+                    <h3 class="text-lg font-semibold text-[#1A2E22]">
+                        Operations Team
+                    </h3>
+
+                    <p class="text-sm text-[#7A837A] mt-1">
+                        Operations & Community
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TEAM MEMBER 04 -->
+
+            <div class="group">
+
+                <div class="aspect-[4/5] rounded-[28px] overflow-hidden bg-[#E7E8E1]">
+
+                    <img
+                        src="{% static 'core/images/myimage.jpeg' %}"
+                        alt="Dhanya team member"
+                        class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
+                </div>
+
+                <div class="pt-5">
+
+                    <h3 class="text-lg font-semibold text-[#1A2E22]">
+                        Community Team
+                    </h3>
+
+                    <p class="text-sm text-[#7A837A] mt-1">
+                        Partnerships & Growth
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- FAQ -->
+<!-- ========================================================= -->
+
+<section class="py-28 bg-[#E7E8E1]">
+
+    <div class="max-w-4xl mx-auto px-5">
+
+
+        <div class="text-center mb-14">
+
+            <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-5">
+                Frequently Asked Questions
+            </p>
+
+            <h2 class="serif text-4xl lg:text-5xl">
+                Questions, answered.
+            </h2>
+
+        </div>
+
+
+        <div class="space-y-3">
+
+
+            <details class="bg-white rounded-2xl p-6 group">
+
+                <summary class="cursor-pointer font-semibold flex justify-between">
+
+                    What is Dhanya?
+
+                    <span class="group-open:rotate-45 transition">
+                        +
+                    </span>
+
+                </summary>
+
+                <p class="text-gray-500 text-sm leading-7 mt-4">
+
+                    Dhanya is an agricultural marketplace that connects
+                    producers with markets and consumers. Producers can
+                    list products while buyers can discover and order
+                    products according to their requirements.
+
+                </p>
+
+            </details>
+
+
+            <details class="bg-white rounded-2xl p-6 group">
+
+                <summary class="cursor-pointer font-semibold flex justify-between">
+
+                    Who can use Dhanya?
+
+                    <span class="group-open:rotate-45 transition">
+                        +
+                    </span>
+
+                </summary>
+
+                <p class="text-gray-500 text-sm leading-7 mt-4">
+
+                    Dhanya supports three main types of users:
+                    Producers, Markets and Consumers.
+
+                </p>
+
+            </details>
+
+
+            <details class="bg-white rounded-2xl p-6 group">
+
+                <summary class="cursor-pointer font-semibold flex justify-between">
+
+                    What can producers sell?
+
+                    <span class="group-open:rotate-45 transition">
+                        +
+                    </span>
+
+                </summary>
+
+                <p class="text-gray-500 text-sm leading-7 mt-4">
+
+                    Producers can list agricultural products such as
+                    fruits and vegetables, grains and pulses, dairy
+                    products, poultry and meat, and natural sweeteners.
+
+                </p>
+
+            </details>
+
+
+            <details class="bg-white rounded-2xl p-6 group">
+
+                <summary class="cursor-pointer font-semibold flex justify-between">
+
+                    Can markets place orders?
+
+                    <span class="group-open:rotate-45 transition">
+                        +
+                    </span>
+
+                </summary>
+
+                <p class="text-gray-500 text-sm leading-7 mt-4">
+
+                    Yes. Markets can browse available products and
+                    place orders based on the quantity they require.
+
+                </p>
+
+            </details>
+
+
+            <details class="bg-white rounded-2xl p-6 group">
+
+                <summary class="cursor-pointer font-semibold flex justify-between">
+
+                    Can consumers buy directly?
+
+                    <span class="group-open:rotate-45 transition">
+                        +
+                    </span>
+
+                </summary>
+
+                <p class="text-gray-500 text-sm leading-7 mt-4">
+
+                    Yes. Consumers can browse the Dhanya marketplace,
+                    select available products and place orders.
+
+                </p>
+
+            </details>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- NEWSLETTER -->
+<!-- ========================================================= -->
+
+<section id="contact" class="py-28">
+
+    <div class="max-w-4xl mx-auto px-5 text-center">
+
+
+        <div
+            class="bg-white border border-black/10 rounded-[35px] p-8 sm:p-12 lg:p-16">
+
+
+            <div
+                class="w-14 h-14 bg-[#E7E8E1] rounded-full mx-auto flex items-center justify-center">
+
+                <i data-lucide="mail" class="w-6 h-6"></i>
+
+            </div>
+
+
+            <h2 class="serif text-4xl lg:text-5xl mt-7">
+                Stay connected with Dhanya.
+            </h2>
+
+
+            <p class="text-gray-500 max-w-lg mx-auto mt-4 leading-7">
+
+                Get updates about new products, producers and
+                opportunities coming to the Dhanya marketplace.
+
+            </p>
+
+
+          <!-- Display Success/Info Messages -->
+{% if messages %}
+    <div class="max-w-lg mx-auto mt-4 space-y-2">
+        {% for message in messages %}
+            <div class="p-4 text-sm text-green-800 bg-green-50 rounded-2xl border border-green-200">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- Your Subscription Form -->
+<form action="{% url 'subscribe' %}" method="POST" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto mt-8">
+    {% csrf_token %}
+    <input
+        type="email"
+        name="email"
+        required
+        placeholder="Enter your email address"
+        class="flex-1 px-5 py-4 rounded-full border border-black/10 outline-none focus:border-[#1A2E22]">
+
+    <button
+        type="submit"
+        class="bg-[#1A2E22] text-white px-7 py-4 rounded-full font-semibold text-sm transition hover:bg-[#111f17]">
+        Subscribe
+    </button>
+</form>        </div>
+
+    </div>
+
+</section>
+```
+
+
+<!-- ========================================================= -->
+<!-- PRODUCT RANGE -->
+<!-- ========================================================= -->
+
+<section class="py-28">
+
+    <div class="max-w-[1000px] mx-auto px-5 text-center">
+
+        <p class="text-xs uppercase tracking-[4px] text-gray-500 mb-5">
+            From Dhanya Producers
+        </p>
+
+        <h2 class="serif text-4xl lg:text-6xl">
+
+            From everyday essentials to
+
+            <span class="italic">
+                seasonal produce.
+            </span>
+
+        </h2>
+
+        <p class="text-gray-500 leading-8 mt-7">
+
+            Fruits and vegetables. Grains and pulses. Dairy products.
+            Poultry and meat. Natural sweeteners.
+
+            <br class="hidden sm:block">
+
+            Dhanya brings diverse agricultural products together
+            in one marketplace.
+
+        </p>
+
+
+        <a href="{% url 'browse_products' %}"
+            class="btn-primary inline-flex items-center gap-2 mt-9 bg-[#1A2E22] text-white px-7 py-4 rounded-full font-semibold text-sm">
+
+            Explore the Marketplace
+
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- ABOUT -->
+<!-- ========================================================= -->
+
+<section id="about" class="bg-[#1A2E22] text-white py-28">
+
+    <div class="max-w-5xl mx-auto px-5 text-center">
+
+        <p class="text-xs uppercase tracking-[4px] text-white/50 mb-7">
+            About Dhanya
+        </p>
+
+        <h2 class="serif text-4xl sm:text-5xl lg:text-7xl leading-tight">
+
+            Connecting what is
+
+            <span class="italic text-[#C9D0C5]">
+                produced
+            </span>
+
+            with what is
+
+            <span class="italic text-[#C9D0C5]">
+                needed.
+            </span>
+
+        </h2>
+
+        <p class="text-white/60 leading-8 max-w-2xl mx-auto mt-8">
+
+            Dhanya is an agricultural marketplace built to bring producers,
+            markets and consumers together. Our goal is simple:
+            make agricultural products easier to discover, sell and purchase.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- FINAL CTA -->
+<!-- ========================================================= -->
+
+<section class="px-5 lg:px-10 py-24">
+
+    <div class="max-w-[1450px] mx-auto">
+
+        <div
+            class="relative overflow-hidden rounded-[40px] min-h-[450px] flex items-center">
+
+
+            <img
+                src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=90"
+                class="absolute inset-0 w-full h-full object-cover"
+                alt="Agricultural landscape">
+
+
+            <div class="absolute inset-0 bg-[#14251A]/70"></div>
+
+
+            <div class="relative z-10 px-7 sm:px-14 lg:px-20 text-white max-w-3xl">
+
+                <p class="text-xs uppercase tracking-[4px] text-white/60 mb-5">
+                    Welcome to the Dhanya community
+                </p>
+
+                <h2 class="serif text-5xl lg:text-7xl leading-tight">
+
+                    Your next connection starts
+
+                    <span class="italic">
+                        here.
+                    </span>
+
+                </h2>
+
+                <div class="flex flex-wrap gap-4 mt-9">
+
+                    <a href="{% url 'browse_products' %}"
+                        class="bg-white text-[#1A2E22] px-7 py-4 rounded-full font-semibold text-sm">
+
+                        Browse Products
+
+                    </a>
+
+                    <a href="{% url 'register' %}"
+                        class="border border-white/50 px-7 py-4 rounded-full font-semibold text-sm hover:bg-white hover:text-[#1A2E22] transition">
+
+                        Create Account
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="bg-[#0A110D] text-white">
+
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10 py-20">
+
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10">
+
+
+            <!-- BRAND -->
+
+            <div class="col-span-2">
+
+                <div class="flex items-center gap-3">
+
+                    <div
+                        class="w-10 h-10 bg-white text-[#1A2E22] rounded-full flex items-center justify-center">
+
+                        <i data-lucide="sprout" class="w-5 h-5"></i>
+
+                    </div>
+
+                    <span class="serif text-2xl">
+                        Dhanya
+                    </span>
+
+                </div>
+
+                <p class="text-white/40 text-sm leading-7 mt-6 max-w-sm">
+
+                    Connecting producers with markets and consumers
+                    through a simple agricultural marketplace.
+
+                </p>
+
+            </div>
+
+
+            <!-- MARKETPLACE -->
+
+            <div>
+
+                <h4 class="font-semibold text-sm mb-5">
+                    Marketplace
+                </h4>
+
+                <ul class="space-y-3 text-sm text-white/40">
+
+                    <li>
+                        <a href="{% url 'browse_products' %}">
+                            Products
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#categories">
+                            Categories
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'browse_products' %}">
+                            Search Products
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'my_orders' %}">
+                            My Orders
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- FOR PRODUCERS -->
+
+            <div>
+
+                <h4 class="font-semibold text-sm mb-5">
+                    For Producers
+                </h4>
+
+                <ul class="space-y-3 text-sm text-white/40">
+
+                    <li>
+                        <a href="{% url 'register' %}">
+                            Start Selling
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Manage Products
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Orders
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Producer Support
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- FOR BUYERS -->
+
+            <div>
+
+                <h4 class="font-semibold text-sm mb-5">
+                    For Buyers
+                </h4>
+
+                <ul class="space-y-3 text-sm text-white/40">
+
+                    <li>
+                        <a href="{% url 'browse_products' %}">
+                            Find Products
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'register' %}">
+                            Join as Market
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'register' %}">
+                            Join as Consumer
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Buyer Support
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- COMPANY -->
+
+            <div>
+
+                <h4 class="font-semibold text-sm mb-5">
+                    Dhanya
+                </h4>
+
+                <ul class="space-y-3 text-sm text-white/40">
+
+                    <li>
+                        <a href="#about">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Privacy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            Terms
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="border-t border-white/10">
+
+        <div
+            class="max-w-[1450px] mx-auto px-5 lg:px-10 py-7 flex flex-col lg:flex-row justify-between gap-5">
+
+            <p class="text-xs text-white/30">
+                © 2026 Dhanya. All rights reserved.
+            </p>
+
+           <div class="flex gap-3">
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/profile.php?id=61593881797144" target="_blank" rel="noopener noreferrer" title="Facebook"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+    </a>
+
+    <!-- Mail -->
+    <a href="mailto:dhanyasub25@gmail.com" title="Send Email"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#EA4335] hover:border-[#EA4335] transition duration-200 group">
+        <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@DhanyaSSV" target="_blank" rel="noopener noreferrer" title="YouTube"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FF0000] hover:border-[#FF0000] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/dhanya_products/" target="_blank" rel="noopener noreferrer" title="Instagram"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#E4405F] hover:border-[#E4405F] transition duration-200 group">
+        <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+        </svg>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="home.html" target="_blank" rel="noopener noreferrer" title="LinkedIn"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+    </a>
+
+</div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+    lucide.createIcons();
+
+
+    /* MOBILE MENU */
+
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", function () {
+
+        mobileMenu.classList.toggle("open");
+
+        const icon = document.getElementById("menuIcon");
+
+        if (mobileMenu.classList.contains("open")) {
+
+            icon.setAttribute("data-lucide", "x");
+
+        } else {
+
+            icon.setAttribute("data-lucide", "menu");
+
+        }
+
+        lucide.createIcons();
+
+    });
+
+
+    /* CLOSE MOBILE MENU */
+
+    document.querySelectorAll("#mobileMenu a").forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            mobileMenu.classList.remove("open");
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
+```

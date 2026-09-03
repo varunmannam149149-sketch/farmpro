@@ -1,0 +1,790 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | Dhanya</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "DM Sans", sans-serif;
+            background: #F7F7F2;
+            color: #1A2E22;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+        .register-image {
+
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(20, 42, 30, 0.05),
+                    rgba(20, 42, 30, 0.70)
+                ),
+                url("https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1600&q=90");
+
+            background-size: cover;
+            background-position: center;
+
+        }
+
+        .input-field {
+            transition: all 0.25s ease;
+        }
+
+        .input-field:focus {
+
+            border-color: #6B8068;
+
+            box-shadow:
+                0 0 0 4px rgba(107, 128, 104, 0.10);
+
+            outline: none;
+
+        }
+
+        .register-button {
+            transition: all 0.25s ease;
+        }
+
+        .register-button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(26, 46, 34, 0.18);
+
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="min-h-screen flex items-center justify-center px-5 py-10">
+
+
+    <!-- MAIN CONTAINER -->
+
+    <div
+        class="w-full max-w-[1250px] bg-white rounded-[32px] overflow-hidden shadow-[0_25px_80px_rgba(26,46,34,0.10)] grid grid-cols-1 lg:grid-cols-2">
+
+
+        <!-- =====================================================
+             LEFT SIDE — IMAGE
+        ====================================================== -->
+
+        <div class="register-image hidden lg:flex relative min-h-[760px]">
+
+
+            <div class="absolute inset-0 p-10 flex flex-col justify-between">
+
+
+                <!-- LOGO -->
+
+                <a href="{% url 'home' %}" class="flex items-center gap-3 shrink-0">
+    <div class="flex items-center justify-center">
+        <img src="{% static 'core/images/logo.png' %}" alt="Dhanya Logo" class="w-10 h-10 object-contain">
+    </div>
+    <div>
+        <div class="serif text-2xl font-semibold">Dhanya</div>
+        <div class="hidden sm:block text-[9px] uppercase tracking-[3px] text-gray-500">
+            Farm • Market • Community
+        </div>
+    </div>
+</a>
+
+
+                <!-- MAIN MESSAGE -->
+
+                <div class="text-white max-w-md">
+
+
+                    <div class="flex items-center gap-3 mb-6">
+
+                        <span class="w-10 h-px bg-white/60"></span>
+
+                        <span
+                            class="text-xs uppercase tracking-[4px] text-white/70">
+
+                            Join Dhanya
+
+                        </span>
+
+                    </div>
+
+
+                    <h2
+                        class="serif text-5xl leading-[1.05]">
+
+                        Grow together.
+
+                        <span class="italic">
+                            Build together.
+                        </span>
+
+                    </h2>
+
+
+                    <p
+                        class="mt-6 text-white/70 leading-7 max-w-sm">
+
+                        Join a growing community connecting
+                        producers, markets and consumers
+                        through better agricultural commerce.
+
+                    </p>
+
+
+                </div>
+
+
+                <!-- BOTTOM BENEFITS -->
+
+                <div class="space-y-3">
+
+
+                    <div
+                        class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-5 py-3 text-sm text-white">
+
+                        <i
+                            data-lucide="users"
+                            class="w-4 h-4">
+                        </i>
+
+                        One connected community
+
+                    </div>
+
+
+                    <div
+                        class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-5 py-3 text-sm text-white">
+
+                        <i
+                            data-lucide="leaf"
+                            class="w-4 h-4">
+                        </i>
+
+                        Built around agriculture
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             RIGHT SIDE — REGISTER FORM
+        ====================================================== -->
+
+        <div class="flex items-center justify-center p-7 sm:p-12 lg:p-14">
+
+
+            <div class="w-full max-w-md">
+
+
+                <!-- MOBILE LOGO -->
+
+                <div class="lg:hidden mb-9">
+
+
+                    <a
+                        href="{% url 'home' %}"
+                        class="flex items-center gap-3">
+
+
+                        <div
+                            class="w-11 h-11 rounded-full bg-[#E8EEE5] flex items-center justify-center">
+
+                            <span class="text-xl">
+                                🌾
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="font-semibold text-lg">
+                                Dhanya
+                            </div>
+
+                            <div class="text-xs text-[#7A837A]">
+                                Farm · Market · Community
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <!-- HEADER -->
+
+                <div class="mb-8">
+
+
+                    <div class="flex items-center gap-3 mb-5">
+
+                        <span
+                            class="w-10 h-px bg-[#6B8068]">
+                        </span>
+
+
+                        <span
+                            class="text-xs uppercase tracking-[4px] text-[#6B8068] font-semibold">
+
+                            Create Account
+
+                        </span>
+
+                    </div>
+
+
+                    <h1
+                        class="serif text-4xl sm:text-5xl text-[#1A2E22] leading-tight">
+
+                        Join
+
+                        <span class="italic">
+                            Dhanya.
+                        </span>
+
+                    </h1>
+
+
+                    <p
+                        class="mt-4 text-[#737B73] leading-7">
+
+                        Create your account and become part
+                        of the Dhanya community.
+
+                    </p>
+
+                </div>
+
+
+                <!-- MESSAGES -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div
+                            class="mb-5 flex items-start gap-3 rounded-2xl bg-[#FFF0F0] border border-[#F4D3D3] px-4 py-4 text-sm text-[#B3261E]">
+
+                            <i
+                                data-lucide="circle-alert"
+                                class="w-5 h-5 flex-shrink-0 mt-0.5">
+                            </i>
+
+                            <span>
+                                {{ message }}
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                <!-- FORM -->
+
+                <form
+                    method="POST"
+                    class="space-y-5">
+
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+    <div class="bg-red-100 text-red-700 p-4 rounded-xl mb-5">
+        <strong>Please fix these errors:</strong>
+        {{ form.errors }}
+    </div>
+{% endif %}
+
+
+                    <!-- FULL NAME -->
+
+                    <div>
+
+                        <label
+                            for="fullname"
+                            class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+                            Full name
+
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="user"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+                            </i>
+
+
+                            <input
+                                type="text"
+                                id="full_name"
+                                name="full_name"
+                                placeholder="Enter your full name"
+                                required
+                                autocomplete="name"
+                                class="input-field w-full pl-12 pr-4 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div>
+
+                        <label
+                            for="email"
+                            class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+                            Email address
+
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="mail"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+                            </i>
+
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                required
+                                autocomplete="email"
+                                class="input-field w-full pl-12 pr-4 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div>
+
+                        <label
+                            for="village_town_city"
+                            class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+                            Village / Town / City
+
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="map-pin"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+                            </i>
+
+
+                            <input
+                                type="text"
+                                id="village_town_city"
+                                name="village_town_city"
+                                placeholder="Enter your location"
+                                required
+                                class="input-field w-full pl-12 pr-4 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+
+                        </div>
+
+                    </div>
+
+                    
+                    <!-- STATE -->
+
+<div>
+
+    <label
+        for="state"
+        class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+        State
+
+    </label>
+
+    <div class="relative">
+
+        <i
+            data-lucide="map"
+            class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+        </i>
+
+        <input
+            type="text"
+            id="state"
+            name="state"
+            placeholder="Enter your state"
+            required
+            class="input-field w-full pl-12 pr-4 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+
+    </div>
+
+</div>
+
+
+<!-- PINCODE -->
+
+<div>
+
+    <label
+        for="pincode"
+        class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+        Pincode
+
+    </label>
+
+    <div class="relative">
+
+        <i
+            data-lucide="hash"
+            class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+        </i>
+
+        <input
+            type="text"
+            id="pincode"
+            name="pincode"
+            placeholder="Enter your pincode"
+            maxlength="6"
+            required
+            class="input-field w-full pl-12 pr-4 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+
+    </div>
+
+</div>
+
+
+                    <!-- ACCOUNT TYPE -->
+
+                    <div>
+
+                        <label
+                            for="user_type"
+                            class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+                            I want to join as
+
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="users"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196] z-10">
+                            </i>
+
+
+                            <select
+                                id="user_type"
+                                name="user_type"
+                                required
+                                class="input-field w-full pl-12 pr-12 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] text-sm">
+
+                                <option value="" disabled selected>
+                                    Select account type
+                                </option>
+
+                                <option value="producer">
+                                    Producer
+                                </option>
+
+                                <option value="consumer">
+                                    Consumer
+                                </option>
+
+                                <option value="market">
+                                    Market
+                                </option>
+
+                            </select>
+
+
+                            <i
+                                data-lucide="chevron-down"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9AA196] pointer-events-none">
+                            </i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div>
+
+                        <label
+                            for="password"
+                            class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+                            Password
+
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="lock"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+                            </i>
+
+
+                            <input
+                                type="password"
+                                id="password1"
+                                name="password1"
+                                placeholder="Create a password"
+                                required
+                                autocomplete="new-password"
+                                class="input-field w-full pl-12 pr-12 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+
+
+                            <button
+                                type="button"
+                                onclick="togglePassword('password1', 'passwordIcon')"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-[#8C958B] hover:text-[#1A2E22]">
+
+                                <i
+                                    id="passwordIcon"
+                                    data-lucide="eye"
+                                    class="w-5 h-5">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div>
+
+                        <label
+                            for="confirm_password"
+                            class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+                            Confirm password
+
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="shield-check"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+                            </i>
+
+
+                            <input
+                                type="password"
+                                id="password2"
+                                name="password2"
+                                placeholder="Confirm your password"
+                                required
+                                autocomplete="new-password"
+                                class="input-field w-full pl-12 pr-12 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+
+
+                            <button
+                                type="button"
+                                onclick="togglePassword('password2', 'confirmPasswordIcon')"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-[#8C958B] hover:text-[#1A2E22]">
+
+                                <i
+                                    id="confirmPasswordIcon"
+                                    data-lucide="eye"
+                                    class="w-5 h-5">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CREATE ACCOUNT -->
+
+                    <button
+                        type="submit"
+                        class="register-button w-full bg-[#1A2E22] text-white py-4 rounded-full font-semibold text-sm flex items-center justify-center gap-3 mt-2">
+                        
+                        Create Dhanya Account
+
+                        <i
+                            data-lucide="arrow-right"
+                            class="w-4 h-4">
+                        </i>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- LOGIN -->
+
+                <div
+                    class="mt-8 pt-7 border-t border-[#E6E8E2] text-center">
+
+                    <p class="text-sm text-[#737B73]">
+
+                        Already have a Dhanya account?
+
+                        <a
+                            href="{% url 'login' %}"
+                            class="font-semibold text-[#1A2E22] hover:underline">
+
+                            Sign in
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+
+                <!-- BACK HOME -->
+
+                <div class="mt-6 text-center">
+
+                    <a
+                        href="{% url 'home' %}"
+                        class="inline-flex items-center gap-2 text-xs text-[#8A928A] hover:text-[#1A2E22] transition">
+
+                        <i
+                            data-lucide="arrow-left"
+                            class="w-3.5 h-3.5">
+                        </i>
+
+                        Back to Dhanya
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    lucide.createIcons();
+
+
+    function togglePassword(inputId, iconId) {
+
+        const password =
+            document.getElementById(inputId);
+
+        const icon =
+            document.getElementById(iconId);
+
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            icon.setAttribute(
+                "data-lucide",
+                "eye-off"
+            );
+
+        } else {
+
+            password.type = "password";
+
+            icon.setAttribute(
+                "data-lucide",
+                "eye"
+            );
+
+        }
+
+
+        lucide.createIcons();
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

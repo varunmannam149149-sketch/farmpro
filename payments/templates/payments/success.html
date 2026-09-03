@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Completed | Dhanya</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="bg-[#F7F8F4] text-[#1A2E22]">
+
+
+<!-- NAVBAR -->
+
+<header class="border-b border-black/5">
+
+    <div class="max-w-7xl
+                mx-auto
+                px-5
+                lg:px-8">
+
+        <div class="h-[76px]
+                    flex
+                    items-center
+                    justify-between">
+
+
+            <a href="{% url 'home' %}"
+               class="flex items-center gap-3">
+
+
+                <div class="w-10
+                            h-10
+                            rounded-full
+                            bg-[#1A2E22]
+                            text-white
+                            flex
+                            items-center
+                            justify-center">
+
+                    <i data-lucide="sprout"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="serif
+                                text-2xl
+                                font-semibold">
+
+                        Dhanya
+
+                    </div>
+
+
+                    <div class="text-[9px]
+                                uppercase
+                                tracking-[3px]
+                                text-gray-500">
+
+                        Farm • Market • Community
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- MAIN -->
+
+<main class="min-h-[calc(100vh-76px)]
+            flex
+            items-center
+            justify-center
+            px-5
+            py-12">
+
+
+    <div class="w-full
+                max-w-md
+                bg-white
+                rounded-[32px]
+                border
+                border-black/5
+                p-8
+                md:p-10
+                text-center
+                shadow-sm">
+
+
+        <!-- SUCCESS ICON -->
+
+        <div class="w-20
+                    h-20
+                    rounded-full
+                    bg-green-100
+                    mx-auto
+                    flex
+                    items-center
+                    justify-center">
+
+            <i data-lucide="check-circle-2"
+               class="w-10
+                      h-10
+                      text-green-600">
+            </i>
+
+        </div>
+
+
+
+        <p class="text-xs
+                  uppercase
+                  tracking-[3px]
+                  text-gray-400
+                  font-semibold
+                  mt-7">
+
+            Payment Status
+
+        </p>
+
+
+        <h1 class="serif
+                   text-4xl
+                   mt-2">
+
+            Payment Confirmed
+
+        </h1>
+
+
+        <p class="text-gray-500
+                  mt-4
+                  leading-6">
+
+            The producer has confirmed receiving
+            your payment.
+
+        </p>
+
+
+
+        <!-- DETAILS -->
+
+        <div class="mt-8
+                    bg-[#F7F8F4]
+                    rounded-2xl
+                    p-6
+                    text-left">
+
+
+            <div class="flex
+                        justify-between
+                        items-center">
+
+                <span class="text-sm
+                             text-gray-500">
+
+                    Order ID
+
+                </span>
+
+
+                <span class="font-semibold">
+
+                    #{{ order.id }}
+
+                </span>
+
+            </div>
+
+
+
+            <div class="border-t
+                        border-black/5
+                        my-4">
+            </div>
+
+
+
+            <div class="flex
+                        justify-between
+                        items-center">
+
+                <span class="text-sm
+                             text-gray-500">
+
+                    Product
+
+                </span>
+
+
+                <span class="font-semibold">
+
+                    {{ order.product.name }}
+
+                </span>
+
+            </div>
+
+
+
+            <div class="border-t
+                        border-black/5
+                        my-4">
+            </div>
+
+
+
+            <div class="flex
+                        justify-between
+                        items-center">
+
+                <span class="text-sm
+                             text-gray-500">
+
+                    Amount Paid
+
+                </span>
+
+
+                <span class="text-xl
+                             font-bold">
+
+                    ₹{{ payment.amount }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STATUS -->
+
+        <div class="mt-6
+                    inline-flex
+                    items-center
+                    gap-2
+                    px-5
+                    py-2.5
+                    rounded-full
+                    bg-green-100
+                    text-green-700
+                    text-sm
+                    font-semibold">
+
+            <i data-lucide="badge-check"
+               class="w-4 h-4">
+            </i>
+
+            Payment Received
+
+        </div>
+
+
+
+        <!-- BUTTON -->
+
+        <a href="{% url 'my_orders' %}"
+           class="mt-8
+                  w-full
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                  bg-[#1A2E22]
+                  text-white
+                  px-6
+                  py-3.5
+                  rounded-full
+                  font-semibold
+                  hover:bg-[#243D2E]
+                  transition">
+
+            <i data-lucide="shopping-bag"
+               class="w-4 h-4">
+            </i>
+
+            Back to My Orders
+
+        </a>
+
+
+    </div>
+
+</main>
+
+
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+
+</body>
+
+</html>

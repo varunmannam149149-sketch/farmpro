@@ -1,0 +1,1335 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Market Dashboard | Dhanya</title>
+
+
+    <!-- Tailwind CSS -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <!-- Lucide Icons -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+        .dashboard-card {
+            transition: all 0.25s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(26, 46, 34, 0.08);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #1A2E22;
+        }
+
+        .soft-grid {
+            background-image:
+                linear-gradient(
+                    rgba(26, 46, 34, 0.035) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(26, 46, 34, 0.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 35px 35px;
+        }
+
+        html {
+    scroll-behavior: smooth;
+}
+
+    </style>
+
+</head>
+
+
+<body class="bg-[#F7F8F4] text-[#1A2E22]">
+
+
+<!-- ========================================================= -->
+<!-- NAVBAR -->
+<!-- ========================================================= -->
+
+<header class="fixed top-0 left-0 right-0 z-50">
+
+    <nav class="bg-[#F7F8F4]/95
+               backdrop-blur
+               border-b
+               border-black/5">
+
+        <div class="max-w-[1450px]
+                    mx-auto
+                    px-5 lg:px-10">
+
+            <div class="h-[76px]
+                        flex
+                        items-center
+                        justify-between">
+
+
+                <!-- LOGO -->
+
+                <a href="{% url 'home' %}" class="flex items-center gap-3 shrink-0">
+    <div class="flex items-center justify-center">
+        <img src="{% static 'core/images/logo.png' %}" alt="Dhanya Logo" class="w-10 h-10 object-contain">
+    </div>
+    <div>
+        <div class="serif text-2xl font-semibold">Dhanya</div>
+        <div class="hidden sm:block text-[9px] uppercase tracking-[3px] text-gray-500">
+            Farm • Market • Community
+        </div>
+    </div>
+</a>
+
+
+                <!-- NAVIGATION -->
+
+                <div class="hidden lg:flex
+                            items-center
+                            gap-8
+                            text-sm
+                            font-medium">
+
+
+                    <a href="{% url 'consumer_dashboard' %}"
+                       class="text-[#1A2E22]
+                              font-semibold">
+
+                        Dashboard
+
+                    </a>
+
+
+                    <a href="{% url 'browse_products' %}"
+                       class="nav-link">
+
+                        Products
+
+                    </a>
+
+
+                    <a href="{% url 'my_orders' %}"
+                       class="nav-link">
+
+                        Orders
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#categories"
+                       class="nav-link">
+
+                        Categories
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#about"
+                       class="nav-link">
+
+                        About
+
+                    </a>
+
+
+                    <a href="{% url 'contact' %}"
+                       class="nav-link">
+
+                        Contact
+
+                    </a>
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <div class="flex items-center gap-3">
+
+
+                    <a href="{% url 'browse_products' %}"
+                       title="Browse Products"
+                       class="w-10 h-10
+                              rounded-full
+                              hover:bg-black/5
+                              flex items-center
+                              justify-center">
+
+                        <i data-lucide="search"
+                           class="w-5 h-5">
+                        </i>
+
+                    </a>
+
+
+                    <a href="{% url 'my_orders' %}"
+                       title="My Orders"
+                       class="w-10 h-10
+                              rounded-full
+                              hover:bg-black/5
+                              flex items-center
+                              justify-center">
+
+                        <i data-lucide="shopping-bag"
+                           class="w-5 h-5">
+                        </i>
+
+                    </a>
+
+
+                    <a href="{% url 'profile' %}"
+                       title="Profile"
+                       class="w-10 h-10
+                              rounded-full
+                              bg-[#E7E8E1]
+                              flex items-center
+                              justify-center">
+
+                        <i data-lucide="user"
+                           class="w-5 h-5">
+                        </i>
+
+                    </a>
+
+
+                    <a href="{% url 'logout' %}"
+                       class="hidden sm:block
+                              border
+                              border-red-200
+                              text-red-600
+                              px-4 py-2
+                              rounded-full
+                              text-sm
+                              font-semibold
+                              hover:bg-red-50">
+
+                        Logout
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+
+<!-- ========================================================= -->
+<!-- MAIN -->
+<!-- ========================================================= -->
+
+<main>
+
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<section class="soft-grid">
+
+    <div class="max-w-[1450px] mx-auto
+                px-5 lg:px-10
+                pt-12 pb-10">
+
+        <div
+            class="relative overflow-hidden
+                   rounded-[32px]
+                   bg-[#1A2E22]
+                   text-white
+                   p-8 md:p-12">
+
+
+            <!-- Decorative circle -->
+
+            <div
+                class="absolute -right-20 -top-24
+                       w-72 h-72
+                       rounded-full
+                       border-[40px]
+                       border-white/5">
+            </div>
+
+
+            <div
+                class="absolute right-20 bottom-[-100px]
+                       w-64 h-64
+                       rounded-full
+                       bg-white/5">
+            </div>
+
+
+            <div class="relative max-w-3xl">
+
+                <div
+                    class="inline-flex items-center gap-2
+                           bg-white/10
+                           px-4 py-2
+                           rounded-full
+                           text-xs font-medium
+                           mb-6">
+
+                    <span class="w-2 h-2 rounded-full
+                                 bg-green-300">
+                    </span>
+
+                    Market Account
+
+                </div>
+
+
+                <h1
+                    class="serif text-4xl md:text-6xl
+                           leading-tight">
+
+                    Welcome back,
+                    {{ request.user.full_name }} 👋
+
+                </h1>
+
+
+                <p
+                    class="mt-5
+                           text-white/70
+                           text-base md:text-lg
+                           leading-relaxed
+                           max-w-2xl">
+
+                    Source agricultural products from Dhanya
+                    producers, manage your market orders and
+                    grow your business.
+
+                </p>
+
+
+                <div
+                    class="mt-8 flex flex-wrap gap-3">
+
+                    <a href="{% url 'browse_products' %}"
+                       class="inline-flex items-center gap-2
+                              bg-white text-[#1A2E22]
+                              px-6 py-3 rounded-full
+                              font-semibold text-sm
+                              hover:bg-[#F0F3ED]
+                              transition">
+
+                        Browse Products
+
+                        <i data-lucide="arrow-right"
+                           class="w-4 h-4">
+                        </i>
+
+                    </a>
+
+
+                    <a href="{% url 'my_orders' %}"
+                       class="inline-flex items-center gap-2
+                              border border-white/20
+                              px-6 py-3 rounded-full
+                              font-semibold text-sm
+                              hover:bg-white/10
+                              transition">
+
+                        View Orders
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- METRICS -->
+<!-- ========================================================= -->
+
+<section>
+
+    <div class="max-w-[1450px] mx-auto
+                px-5 lg:px-10
+                py-8">
+
+
+        <div class="grid grid-cols-1
+                    sm:grid-cols-2
+                    xl:grid-cols-4
+                    gap-5">
+
+
+            <!-- AVAILABLE PRODUCTS -->
+
+            <div
+                class="dashboard-card
+                       bg-white
+                       rounded-[28px]
+                       p-6
+                       border border-black/5">
+
+                <div class="flex items-start
+                            justify-between">
+
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+
+                            Available Products
+
+                        </p>
+
+                        <h2
+                            class="text-4xl font-bold
+                                   mt-3">
+
+                            {{ available_products }}
+
+                        </h2>
+
+                    </div>
+
+
+                    <div
+                        class="w-12 h-12
+                               rounded-2xl
+                               bg-[#EAF1E9]
+                               flex items-center
+                               justify-center">
+
+                        <i data-lucide="wheat"
+                           class="w-6 h-6">
+                        </i>
+
+                    </div>
+
+                </div>
+
+
+                <p class="mt-5 text-xs text-gray-500">
+
+                    Products available on Dhanya
+
+                </p>
+
+            </div>
+
+
+
+            <!-- PRODUCERS -->
+
+            <div
+                class="dashboard-card
+                       bg-white
+                       rounded-[28px]
+                       p-6
+                       border border-black/5">
+
+                <div class="flex items-start
+                            justify-between">
+
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+
+                            Producers
+
+                        </p>
+
+                        <h2
+                            class="text-4xl font-bold
+                                   mt-3">
+
+                            {{ producers }}
+
+                        </h2>
+
+                    </div>
+
+
+                    <div
+                        class="w-12 h-12
+                               rounded-2xl
+                               bg-[#F1EEE4]
+                               flex items-center
+                               justify-center">
+
+                        <i data-lucide="users"
+                           class="w-6 h-6">
+                        </i>
+
+                    </div>
+
+                </div>
+
+
+                <p class="mt-5 text-xs text-gray-500">
+
+                    Active producers
+
+                </p>
+
+            </div>
+
+
+
+            <!-- MARKET ORDERS -->
+
+            <div
+                class="dashboard-card
+                       bg-white
+                       rounded-[28px]
+                       p-6
+                       border border-black/5">
+
+                <div class="flex items-start
+                            justify-between">
+
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+
+                            Market Orders
+
+                        </p>
+
+                        <h2
+                            class="text-4xl font-bold
+                                   mt-3">
+
+                            {{ market_orders }}
+
+                        </h2>
+
+                    </div>
+
+
+                    <div
+                        class="w-12 h-12
+                               rounded-2xl
+                               bg-[#E8EEF3]
+                               flex items-center
+                               justify-center">
+
+                        <i data-lucide="package"
+                           class="w-6 h-6">
+                        </i>
+
+                    </div>
+
+                </div>
+
+
+                <p class="mt-5 text-xs text-gray-500">
+
+                    Orders placed by your market
+
+                </p>
+
+            </div>
+
+
+
+            <!-- LOCATION -->
+
+            <div
+                class="dashboard-card
+                       bg-white
+                       rounded-[28px]
+                       p-6
+                       border border-black/5">
+
+                <div class="flex items-start
+                            justify-between">
+
+                    <div>
+
+                        <p class="text-sm text-gray-500">
+
+                            Location
+
+                        </p>
+
+                        <h2
+                            class="text-2xl font-bold
+                                   mt-4">
+
+                            {{ request.user.village_town_city }}
+
+                        </h2>
+
+                    </div>
+
+
+                    <div
+                        class="w-12 h-12
+                               rounded-2xl
+                               bg-[#F3EAE5]
+                               flex items-center
+                               justify-center">
+
+                        <i data-lucide="map-pin"
+                           class="w-6 h-6">
+                        </i>
+
+                    </div>
+
+                </div>
+
+
+                <p class="mt-5 text-xs text-gray-500">
+
+                    {{ request.user.state }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- ORDER OVERVIEW -->
+<!-- ========================================================= -->
+
+<section>
+
+    <div class="max-w-[1450px] mx-auto
+                px-5 lg:px-10
+                py-8">
+
+
+        <div class="flex flex-col
+                    md:flex-row
+                    md:items-end
+                    md:justify-between
+                    gap-4 mb-7">
+
+            <div>
+
+                <p
+                    class="text-xs uppercase
+                           tracking-[3px]
+                           text-gray-500
+                           font-semibold">
+
+                    Procurement
+
+                </p>
+
+                <h2
+                    class="serif text-3xl md:text-4xl
+                           mt-2">
+
+                    Market Order Overview
+
+                </h2>
+
+                <p class="text-gray-500 mt-2">
+
+                    Monitor your market procurement orders.
+
+                </p>
+
+            </div>
+
+
+            <a href="{% url 'my_orders' %}"
+               class="inline-flex items-center gap-2
+                      text-sm font-semibold
+                      hover:underline">
+
+                View all orders
+
+                <i data-lucide="arrow-up-right"
+                   class="w-4 h-4">
+                </i>
+
+            </a>
+
+        </div>
+
+
+
+        <div class="grid grid-cols-1
+                    sm:grid-cols-2
+                    xl:grid-cols-4
+                    gap-5">
+
+
+            <!-- PENDING -->
+
+            <div
+                class="dashboard-card
+                       bg-white
+                       rounded-[28px]
+                       p-6
+                       border border-black/5">
+
+                <div
+                    class="w-11 h-11 rounded-2xl
+                           bg-[#F3EFE3]
+                           flex items-center
+                           justify-center">
+
+                    <i data-lucide="clock-3"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+                <p class="text-sm text-gray-500 mt-5">
+
+                    Pending
+
+                </p>
+
+                <h3
+                    class="text-4xl font-bold mt-2">
+
+                    {{ pending_orders }}
+
+                </h3>
+
+                <p class="text-xs text-gray-400 mt-2">
+
+                    Awaiting confirmation
+
+                </p>
+
+            </div>
+
+
+
+            <!-- CONFIRMED -->
+
+            <div
+                class="dashboard-card
+                       bg-white
+                       rounded-[28px]
+                       p-6
+                       border border-black/5">
+
+                <div
+                    class="w-11 h-11 rounded-2xl
+                           bg-[#E7F1E8]
+                           flex items-center
+                           justify-center">
+
+                    <i data-lucide="circle-check"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+                <p class="text-sm text-gray-500 mt-5">
+
+                    Confirmed
+
+                </p>
+
+                <h3
+                    class="text-4xl font-bold mt-2">
+
+                    {{ confirmed_orders }}
+
+                </h3>
+
+                <p class="text-xs text-gray-400 mt-2">
+
+                    Orders confirmed
+
+                </p>
+
+            </div>
+
+
+
+            <!-- COMPLETED -->
+
+            <div
+                class="dashboard-card
+                       bg-white
+                       rounded-[28px]
+                       p-6
+                       border border-black/5">
+
+                <div
+                    class="w-11 h-11 rounded-2xl
+                           bg-[#E8EDF2]
+                           flex items-center
+                           justify-center">
+
+                    <i data-lucide="party-popper"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+                <p class="text-sm text-gray-500 mt-5">
+
+                    Completed
+
+                </p>
+
+                <h3
+                    class="text-4xl font-bold mt-2">
+
+                    {{ completed_orders }}
+
+                </h3>
+
+                <p class="text-xs text-gray-400 mt-2">
+
+                    Successfully completed
+
+                </p>
+
+            </div>
+
+
+
+            <!-- CANCELLED -->
+
+            <div
+                class="dashboard-card
+                       bg-white
+                       rounded-[28px]
+                       p-6
+                       border border-black/5">
+
+                <div
+                    class="w-11 h-11 rounded-2xl
+                           bg-[#F6E8E8]
+                           flex items-center
+                           justify-center">
+
+                    <i data-lucide="circle-x"
+                       class="w-5 h-5 text-red-600">
+                    </i>
+
+                </div>
+
+                <p class="text-sm text-gray-500 mt-5">
+
+                    Cancelled
+
+                </p>
+
+                <h3
+                    class="text-4xl font-bold mt-2">
+
+                    {{ cancelled_orders }}
+
+                </h3>
+
+                <p class="text-xs text-gray-400 mt-2">
+
+                    Cancelled orders
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- QUICK ACTIONS -->
+<!-- ========================================================= -->
+
+<section>
+
+    <div class="max-w-[1450px] mx-auto
+                px-5 lg:px-10
+                py-10">
+
+
+        <div
+            class="bg-white
+                   rounded-[32px]
+                   border border-black/5
+                   p-7 md:p-10">
+
+
+            <div class="mb-8">
+
+                <p
+                    class="text-xs uppercase
+                           tracking-[3px]
+                           text-gray-500
+                           font-semibold">
+
+                    Dhanya Tools
+
+                </p>
+
+                <h2
+                    class="serif text-3xl mt-2">
+
+                    Quick Actions
+
+                </h2>
+
+            </div>
+
+
+            <div class="grid grid-cols-1
+                        md:grid-cols-3
+                        gap-4">
+
+
+                <!-- PRODUCTS -->
+
+                <a href="{% url 'browse_products' %}"
+                   class="group p-5
+                          rounded-2xl
+                          bg-[#F7F8F4]
+                          hover:bg-[#EAF1E9]
+                          transition">
+
+                    <div
+                        class="w-11 h-11
+                               rounded-xl
+                               bg-[#1A2E22]
+                               text-white
+                               flex items-center
+                               justify-center">
+
+                        <i data-lucide="shopping-basket"
+                           class="w-5 h-5">
+                        </i>
+
+                    </div>
+
+                    <h3
+                        class="font-semibold mt-5">
+
+                        Browse Products
+
+                    </h3>
+
+                    <p
+                        class="text-sm text-gray-500 mt-1">
+
+                        Find fresh products from producers.
+
+                    </p>
+
+                    <div
+                        class="mt-4 flex items-center gap-2
+                               text-sm font-semibold">
+
+                        Explore
+
+                        <i data-lucide="arrow-right"
+                           class="w-4 h-4
+                                  group-hover:translate-x-1
+                                  transition">
+                        </i>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- ORDERS -->
+
+                <a href="{% url 'my_orders' %}"
+                   class="group p-5
+                          rounded-2xl
+                          bg-[#F7F8F4]
+                          hover:bg-[#EAF1E9]
+                          transition">
+
+                    <div
+                        class="w-11 h-11
+                               rounded-xl
+                               bg-[#1A2E22]
+                               text-white
+                               flex items-center
+                               justify-center">
+
+                        <i data-lucide="clipboard-list"
+                           class="w-5 h-5">
+                        </i>
+
+                    </div>
+
+                    <h3
+                        class="font-semibold mt-5">
+
+                        Manage Orders
+
+                    </h3>
+
+                    <p
+                        class="text-sm text-gray-500 mt-1">
+
+                        Track your procurement orders.
+
+                    </p>
+
+                    <div
+                        class="mt-4 flex items-center gap-2
+                               text-sm font-semibold">
+
+                        View orders
+
+                        <i data-lucide="arrow-right"
+                           class="w-4 h-4
+                                  group-hover:translate-x-1
+                                  transition">
+                        </i>
+
+                    </div>
+
+                </a>
+
+
+
+                <!-- PROFILE -->
+
+                <a href="{% url 'profile' %}"
+                   class="group p-5
+                          rounded-2xl
+                          bg-[#F7F8F4]
+                          hover:bg-[#EAF1E9]
+                          transition">
+
+                    <div
+                        class="w-11 h-11
+                               rounded-xl
+                               bg-[#1A2E22]
+                               text-white
+                               flex items-center
+                               justify-center">
+
+                        <i data-lucide="user-round"
+                           class="w-5 h-5">
+                        </i>
+
+                    </div>
+
+                    <h3
+                        class="font-semibold mt-5">
+
+                        My Profile
+
+                    </h3>
+
+                    <p
+                        class="text-sm text-gray-500 mt-1">
+
+                        Manage your Dhanya account.
+
+                    </p>
+
+                    <div
+                        class="mt-4 flex items-center gap-2
+                               text-sm font-semibold">
+
+                        Open profile
+
+                        <i data-lucide="arrow-right"
+                           class="w-4 h-4
+                                  group-hover:translate-x-1
+                                  transition">
+                        </i>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="bg-white rounded-2xl border border-gray-200 overflow-hidden mt-7">
+
+    <!-- HEADER -->
+    <div class="p-5 border-b border-gray-200 flex items-center justify-between gap-4">
+
+        <div>
+            <h3 class="text-xl font-bold">
+                Platform Orders Overview
+            </h3>
+
+            <p class="text-sm text-gray-500 mt-1">
+                Recent transactions across all producers and consumers
+            </p>
+        </div>
+
+        <a href="{% url 'market_orders' %}"
+           class="text-sm font-semibold text-[#1F6B45] hover:underline shrink-0">
+            View All Orders
+        </a>
+
+    </div>
+
+
+    <!-- TABLE -->
+    <div class="overflow-x-auto">
+
+        <table class="w-full min-w-[750px]">
+
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="text-left px-5 py-3 text-sm font-semibold">
+                        Product
+                    </th>
+
+                    <th class="text-left px-5 py-3 text-sm font-semibold">
+                        Customer
+                    </th>
+
+                    <th class="text-left px-5 py-3 text-sm font-semibold">
+                        Producer
+                    </th>
+
+                    <th class="text-left px-5 py-3 text-sm font-semibold">
+                        Qty
+                    </th>
+
+                    <th class="text-left px-5 py-3 text-sm font-semibold">
+                        Total
+                    </th>
+
+                    <th class="text-left px-5 py-3 text-sm font-semibold">
+                        Status
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-100">
+
+                {% for order in recent_orders %}
+
+                <tr class="hover:bg-gray-50">
+
+                    <!-- PRODUCT -->
+                    <td class="px-5 py-4 font-medium">
+                        {{ order.product.name }}
+                    </td>
+
+                    <!-- CUSTOMER -->
+                    <td class="px-5 py-4">
+                        {{ order.customer.full_name|default:order.customer.email }}
+                    </td>
+
+                    <!-- PRODUCER -->
+                    <td class="px-5 py-4">
+                        {{ order.product.producer.full_name|default:order.product.producer.email }}
+                    </td>
+
+                    <!-- QUANTITY -->
+                    <td class="px-5 py-4">
+                        {{ order.quantity }} {{ order.product.unit }}
+                    </td>
+
+                    <!-- TOTAL -->
+                    <td class="px-5 py-4 font-semibold">
+                        ₹{{ order.total_price }}
+                    </td>
+
+                    <!-- STATUS -->
+                    <td class="px-5 py-4">
+
+                        {% if order.status == "pending" %}
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
+                            Pending
+                        </span>
+
+                        {% elif order.status == "confirmed" %}
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                            Confirmed
+                        </span>
+
+                        {% elif order.status == "completed" %}
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                            Completed
+                        </span>
+
+                        {% elif order.status == "cancelled" %}
+                        <span class="px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                            Cancelled
+                        </span>
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="6" class="px-5 py-10 text-center text-gray-500">
+                        No transactions recorded on the marketplace yet.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+    
+
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="bg-slate-900 border-t border-white/10 py-8 text-white">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-5">
+
+        <!-- Copyright Text -->
+        <p class="text-xs text-gray-400">
+            © 2026 Dhanya. All rights reserved.
+        </p>
+
+        <!-- Social Links Container -->
+        <div class="flex items-center gap-3">
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/profile.php?id=61593881797144" target="_blank" rel="noopener noreferrer" title="Facebook"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+
+            <!-- Mail -->
+            <a href="mailto:dhanyasub25@gmail.com" title="Send Email"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#EA4335] hover:border-[#EA4335] transition duration-200 group">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@DhanyaSSV" target="_blank" rel="noopener noreferrer" title="YouTube"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FF0000] hover:border-[#FF0000] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/dhanya_products/" target="_blank" rel="noopener noreferrer" title="Instagram"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#E4405F] hover:border-[#E4405F] transition duration-200 group">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</main>
+
+
+
+<!-- ========================================================= -->
+<!-- ICON INITIALIZATION -->
+<!-- ========================================================= -->
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+
+</body>
+
+</html>

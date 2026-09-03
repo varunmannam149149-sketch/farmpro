@@ -1,0 +1,582 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Product | Dhanya</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+</head>
+
+
+<body class="bg-[#F7F8F4] text-[#1A2E22]">
+
+
+<div class="min-h-screen py-10 px-5">
+
+    <div class="max-w-3xl mx-auto">
+
+
+        <!-- HEADER -->
+
+        <div class="mb-8">
+
+            <a href="{% url 'producer_dashboard' %}"
+               class="inline-flex items-center gap-2
+                      text-sm text-gray-500
+                      hover:text-[#1A2E22]">
+
+                <i data-lucide="arrow-left"
+                   class="w-4 h-4"></i>
+
+                Back to Dashboard
+
+            </a>
+
+
+            <h1 class="text-4xl
+                       font-bold
+                       mt-6">
+
+                Add Product
+
+            </h1>
+
+
+            <p class="text-gray-500 mt-2">
+
+                Add your agricultural product
+                to the Dhanya marketplace.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- FORM -->
+
+        <form method="POST"
+              enctype="multipart/form-data"
+              class="bg-white
+                     rounded-[30px]
+                     p-6 md:p-10
+                     border border-black/5
+                     shadow-sm">
+
+            {% csrf_token %}
+
+
+            <!-- PRODUCT NAME -->
+
+            <div class="mb-6">
+
+                <label class="block
+                              text-sm
+                              font-semibold
+                              mb-2">
+
+                    Product Name
+
+                </label>
+
+
+                {{ form.name }}
+
+                {% if form.name.errors %}
+
+                    <p class="text-red-500 text-sm mt-2">
+
+                        {{ form.name.errors }}
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- CATEGORY -->
+
+            <div class="mb-6">
+
+                <label class="block
+                              text-sm
+                              font-semibold
+                              mb-2">
+
+                    Category
+
+                </label>
+
+
+                {{ form.category }}
+
+                {% if form.category.errors %}
+
+                    <p class="text-red-500 text-sm mt-2">
+
+                        {{ form.category.errors }}
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- PRODUCT IMAGE -->
+            <!-- ================================================= -->
+
+            <div class="mb-8">
+
+                <div class="flex
+                            items-center
+                            gap-3
+                            mb-5">
+
+                    <div class="w-10 h-10
+                                rounded-full
+                                bg-[#E7E8E1]
+                                flex
+                                items-center
+                                justify-center">
+
+                        <i data-lucide="image"
+                           class="w-5 h-5"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2 class="font-semibold text-lg">
+
+                            Product Image
+
+                        </h2>
+
+
+                        <p class="text-sm text-gray-500">
+
+                            Add a clear image of your product.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- IMAGE UPLOAD -->
+
+                <label for="id_image"
+                       class="flex
+                              flex-col
+                              items-center
+                              justify-center
+                              border-2
+                              border-dashed
+                              border-[#DDE1D9]
+                              rounded-3xl
+                              p-10
+                              cursor-pointer
+                              hover:bg-[#FAFBF8]
+                              transition">
+
+
+                    <!-- PREVIEW -->
+
+                    <div id="imagePreviewContainer"
+                         class="hidden
+                                w-full
+                                max-w-sm
+                                mb-5">
+
+                        <img id="imagePreview"
+                             src=""
+                             alt="Product Preview"
+                             class="w-full
+                                    h-56
+                                    object-cover
+                                    rounded-2xl">
+
+                    </div>
+
+
+
+                    <div id="uploadIcon"
+                         class="w-16 h-16
+                                rounded-full
+                                bg-[#E7E8E1]
+                                flex
+                                items-center
+                                justify-center">
+
+                        <i data-lucide="upload"
+                           class="w-8 h-8
+                                  text-gray-400"></i>
+
+                    </div>
+
+
+                    <p id="uploadText"
+                       class="font-semibold mt-4">
+
+                        Upload product image
+
+                    </p>
+
+
+                    <p class="text-sm
+                              text-gray-400
+                              mt-1">
+
+                        PNG, JPG or JPEG
+
+                    </p>
+
+
+                    {{ form.image }}
+
+                </label>
+
+
+                {% if form.image.errors %}
+
+                    <p class="text-red-500
+                              text-sm
+                              mt-2">
+
+                        {{ form.image.errors }}
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- PRICE -->
+
+            <div class="mb-6">
+
+                <label class="block
+                              text-sm
+                              font-semibold
+                              mb-2">
+
+                    Price
+
+                </label>
+
+
+                {{ form.price }}
+
+                {% if form.price.errors %}
+
+                    <p class="text-red-500 text-sm mt-2">
+
+                        {{ form.price.errors }}
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- QUANTITY -->
+
+            <div class="mb-6">
+
+                <label class="block
+                              text-sm
+                              font-semibold
+                              mb-2">
+
+                    Quantity
+
+                </label>
+
+
+                {{ form.quantity }}
+
+                {% if form.quantity.errors %}
+
+                    <p class="text-red-500 text-sm mt-2">
+
+                        {{ form.quantity.errors }}
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- UNIT -->
+
+            <div class="mb-6">
+
+                <label class="block
+                              text-sm
+                              font-semibold
+                              mb-2">
+
+                    Unit
+
+                </label>
+
+
+                {{ form.unit }}
+
+                {% if form.unit.errors %}
+
+                    <p class="text-red-500 text-sm mt-2">
+
+                        {{ form.unit.errors }}
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- LOCATION -->
+
+            <div class="mb-8">
+
+                <label class="block
+                              text-sm
+                              font-semibold
+                              mb-2">
+
+                    Location
+
+                </label>
+
+
+                {{ form.location }}
+
+                {% if form.location.errors %}
+
+                    <p class="text-red-500 text-sm mt-2">
+
+                        {{ form.location.errors }}
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="flex
+                        flex-col
+                        sm:flex-row
+                        gap-3">
+
+
+                <a href="{% url 'producer_products' %}"
+                   class="flex-1
+                          text-center
+                          py-3.5
+                          rounded-full
+                          border
+                          border-black/10
+                          font-semibold
+                          hover:bg-gray-50">
+
+                    Cancel
+
+                </a>
+
+
+                <button type="submit"
+                        class="flex-1
+                               bg-[#1A2E22]
+                               text-white
+                               py-3.5
+                               rounded-full
+                               font-semibold
+                               hover:bg-[#243D2E]
+                               transition">
+
+                    Add Product
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+    </div>
+    
+
+</div>
+
+<footer class="bg-slate-900 border-t border-white/10 py-8 text-white">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-5">
+
+        <!-- Copyright Text -->
+        <p class="text-xs text-gray-400">
+            © 2026 Dhanya. All rights reserved.
+        </p>
+
+        <!-- Social Links Container -->
+        <div class="flex items-center gap-3">
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/profile.php?id=61593881797144" target="_blank" rel="noopener noreferrer" title="Facebook"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+
+            <!-- Mail -->
+            <a href="mailto:dhanyasub25@gmail.com" title="Send Email"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#EA4335] hover:border-[#EA4335] transition duration-200 group">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@DhanyaSSV" target="_blank" rel="noopener noreferrer" title="YouTube"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FF0000] hover:border-[#FF0000] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/dhanya_products/" target="_blank" rel="noopener noreferrer" title="Instagram"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#E4405F] hover:border-[#E4405F] transition duration-200 group">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+    lucide.createIcons();
+
+
+    /* =========================================================
+       IMAGE PREVIEW
+    ========================================================= */
+
+    const imageInput =
+        document.getElementById("id_image");
+
+    const imagePreview =
+        document.getElementById("imagePreview");
+
+    const imagePreviewContainer =
+        document.getElementById(
+            "imagePreviewContainer"
+        );
+
+    const uploadIcon =
+        document.getElementById("uploadIcon");
+
+    const uploadText =
+        document.getElementById("uploadText");
+
+
+    if (imageInput) {
+
+        imageInput.addEventListener(
+            "change",
+            function () {
+
+                const file =
+                    this.files[0];
+
+
+                if (file) {
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            imagePreview.src =
+                                event.target.result;
+
+                            imagePreviewContainer
+                                .classList
+                                .remove("hidden");
+
+                            uploadIcon
+                                .classList
+                                .add("hidden");
+
+                            uploadText.textContent =
+                                file.name;
+
+                        };
+
+
+                    reader.readAsDataURL(file);
+
+                }
+
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

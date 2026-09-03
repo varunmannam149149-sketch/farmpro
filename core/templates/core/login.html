@@ -1,0 +1,489 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Dhanya</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "DM Sans", sans-serif;
+            background: #F7F7F2;
+            color: #1A2E22;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+        .login-image {
+            background-image:
+                linear-gradient(
+                    to bottom,
+                    rgba(20, 42, 30, 0.05),
+                    rgba(20, 42, 30, 0.65)
+                ),
+                url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=90");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .input-field {
+            transition: all 0.25s ease;
+        }
+
+        .input-field:focus {
+            border-color: #6B8068;
+            box-shadow: 0 0 0 4px rgba(107, 128, 104, 0.10);
+            outline: none;
+        }
+
+        .login-button {
+            transition: all 0.25s ease;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(26, 46, 34, 0.18);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="min-h-screen flex items-center justify-center px-5 py-10">
+
+
+    <!-- MAIN CONTAINER -->
+
+    <div
+        class="w-full max-w-[1200px] min-h-[680px] bg-white rounded-[32px] overflow-hidden shadow-[0_25px_80px_rgba(26,46,34,0.10)] grid grid-cols-1 lg:grid-cols-2">
+
+
+        <!-- =====================================================
+             LEFT SIDE — IMAGE
+        ====================================================== -->
+
+        <div class="login-image hidden lg:flex relative min-h-[680px]">
+
+
+            <div class="absolute inset-0 p-10 flex flex-col justify-between">
+
+
+                <!-- LOGO -->
+
+                <a href="{% url 'home' %}" class="flex items-center gap-3 shrink-0">
+    <div class="flex items-center justify-center">
+        <img src="{% static 'core/images/logo.png' %}" alt="Dhanya Logo" class="w-10 h-10 object-contain">
+    </div>
+    <div>
+        <div class="serif text-2xl font-semibold">Dhanya</div>
+        <div class="hidden sm:block text-[9px] uppercase tracking-[3px] text-gray-500">
+            Farm • Market • Community
+        </div>
+    </div>
+</a>
+
+
+                <!-- IMAGE MESSAGE -->
+
+                <div class="text-white max-w-md">
+
+
+                    <div class="flex items-center gap-3 mb-6">
+
+                        <span class="w-10 h-px bg-white/60"></span>
+
+                        <span
+                            class="text-xs uppercase tracking-[4px] text-white/70">
+
+                            Welcome back
+
+                        </span>
+
+                    </div>
+
+
+                    <h2 class="serif text-5xl leading-[1.05]">
+
+                        Good food starts
+
+                        <span class="italic">
+                            with good connections.
+                        </span>
+
+                    </h2>
+
+
+                    <p class="mt-6 text-white/70 leading-7 max-w-sm">
+
+                        Connect with producers, markets and
+                        consumers through the Dhanya community.
+
+                    </p>
+
+
+                </div>
+
+
+                <!-- BOTTOM TAG -->
+
+                <div>
+
+                    <div
+                        class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-5 py-3 text-sm text-white">
+
+                        <span class="w-2 h-2 rounded-full bg-[#B9D5A8]"></span>
+
+                        Fresh connections. Better agriculture.
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             RIGHT SIDE — LOGIN
+        ====================================================== -->
+
+        <div class="flex items-center justify-center p-7 sm:p-12 lg:p-16">
+
+
+            <div class="w-full max-w-md">
+
+
+                <!-- MOBILE LOGO -->
+
+                <div class="lg:hidden mb-10">
+
+                    <a href="{% url 'home' %}"
+                        class="flex items-center gap-3">
+
+                        <div
+                            class="w-11 h-11 rounded-full bg-[#E8EEE5] flex items-center justify-center">
+
+                            <span class="text-xl">
+                                🌾
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <div class="font-semibold text-lg text-[#1A2E22]">
+                                Dhanya
+                            </div>
+
+                            <div class="text-xs text-[#7A837A]">
+                                Farm · Market · Community
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+
+                <!-- HEADER -->
+
+                <div class="mb-10">
+
+
+                    <div class="flex items-center gap-3 mb-5">
+
+                        <span class="w-10 h-px bg-[#6B8068]"></span>
+
+                        <span
+                            class="text-xs uppercase tracking-[4px] text-[#6B8068] font-semibold">
+
+                            Account Access
+
+                        </span>
+
+                    </div>
+
+
+                    <h1
+                        class="serif text-4xl sm:text-5xl text-[#1A2E22] leading-tight">
+
+                        Welcome
+
+                        <span class="italic">
+                            back.
+                        </span>
+
+                    </h1>
+
+
+                    <p class="mt-4 text-[#737B73] leading-7">
+
+                        Sign in to continue to your Dhanya account.
+
+                    </p>
+
+                </div>
+
+
+                <!-- MESSAGES -->
+
+                {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div
+                            class="mb-5 flex items-start gap-3 rounded-2xl bg-[#FFF0F0] border border-[#F4D3D3] px-4 py-4 text-sm text-[#B3261E]">
+
+                            <i
+                                data-lucide="circle-alert"
+                                class="w-5 h-5 flex-shrink-0 mt-0.5">
+                            </i>
+
+                            <span>
+                                {{ message }}
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                <!-- LOGIN FORM -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- EMAIL -->
+
+                    <div class="mb-6">
+
+                        <label
+                            for="email"
+                            class="block text-sm font-semibold text-[#1A2E22] mb-2">
+
+                            Email address
+
+                        </label>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="mail"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+                            </i>
+
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                required
+                                autocomplete="email"
+                                class="input-field w-full pl-12 pr-4 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+                        
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="mb-7">
+
+                        <div class="flex items-center justify-between mb-2">
+
+                            <label
+                                for="password"
+                                class="block text-sm font-semibold text-[#1A2E22]">
+
+                                Password
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="relative">
+
+                            <i
+                                data-lucide="lock"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9AA196]">
+                            </i>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                required
+                                autocomplete="current-password"
+                                class="input-field w-full pl-12 pr-12 py-4 rounded-2xl border border-[#DDE1D9] bg-[#FAFBF8] text-[#1A2E22] placeholder-[#A4AAA2] text-sm">
+
+
+                            <!-- PASSWORD TOGGLE -->
+
+                            <button
+                                type="button"
+                                onclick="togglePassword()"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-[#8C958B] hover:text-[#1A2E22]">
+
+                                <i
+                                    id="passwordIcon"
+                                    data-lucide="eye"
+                                    class="w-5 h-5">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-button w-full bg-[#1A2E22] text-white py-4 rounded-full font-semibold text-sm flex items-center justify-center gap-3">
+
+                        Sign in to Dhanya
+
+                        <i
+                            data-lucide="arrow-right"
+                            class="w-4 h-4">
+                        </i>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- REGISTER -->
+
+                <div class="mt-8 pt-7 border-t border-[#E6E8E2] text-center">
+
+                    <p class="text-sm text-[#737B73]">
+
+                        Don't have a Dhanya account?
+
+                        <a
+                            href="{% url 'register' %}"
+                            class="font-semibold text-[#1A2E22] hover:underline">
+
+                            Create your account
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+
+                <!-- BACK TO HOME -->
+
+                <div class="mt-6 text-center">
+
+                    <a
+                        href="{% url 'home' %}"
+                        class="inline-flex items-center gap-2 text-xs text-[#8A928A] hover:text-[#1A2E22] transition">
+
+                        <i
+                            data-lucide="arrow-left"
+                            class="w-3.5 h-3.5">
+                        </i>
+
+                        Back to Dhanya
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    lucide.createIcons();
+
+
+    function togglePassword() {
+
+        const password = document.getElementById("password");
+        const icon = document.getElementById("passwordIcon");
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            icon.setAttribute("data-lucide", "eye-off");
+
+        } else {
+
+            password.type = "password";
+
+            icon.setAttribute("data-lucide", "eye");
+
+        }
+
+        lucide.createIcons();
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

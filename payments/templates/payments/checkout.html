@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Pay for Order | Dhanya</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="bg-[#F7F8F4] text-[#1A2E22]">
+
+
+<!-- ========================================================= -->
+<!-- NAVBAR -->
+<!-- ========================================================= -->
+
+<header class="border-b border-black/5 bg-[#F7F8F4]">
+
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+
+        <div class="h-[76px] flex items-center justify-between">
+
+
+            <!-- LOGO -->
+
+            <a href="{% url 'home' %}"
+               class="flex items-center gap-3">
+
+                <div class="w-10 h-10
+                            rounded-full
+                            bg-[#1A2E22]
+                            text-white
+                            flex
+                            items-center
+                            justify-center">
+
+                    <i data-lucide="sprout"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="serif
+                                text-2xl
+                                font-semibold">
+
+                        Dhanya
+
+                    </div>
+
+
+                    <div class="text-[9px]
+                                uppercase
+                                tracking-[3px]
+                                text-gray-500">
+
+                        Farm • Market • Community
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- BACK TO ORDERS -->
+
+            <a href="{% url 'my_orders' %}"
+               class="inline-flex
+                      items-center
+                      gap-2
+                      text-sm
+                      font-semibold
+                      text-gray-600
+                      hover:text-[#1A2E22]">
+
+                <i data-lucide="arrow-left"
+                   class="w-4 h-4">
+                </i>
+
+                My Orders
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ========================================================= -->
+<!-- MAIN -->
+<!-- ========================================================= -->
+
+<main class="py-12 md:py-16">
+
+    <div class="max-w-5xl mx-auto px-5 lg:px-8">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="text-center mb-10">
+
+            <p class="text-xs
+                      uppercase
+                      tracking-[3px]
+                      text-gray-400
+                      font-semibold">
+
+                Secure UPI Payment
+
+            </p>
+
+
+            <h1 class="serif
+                       text-4xl
+                       md:text-5xl
+                       mt-3">
+
+                Complete Your Payment
+
+            </h1>
+
+
+            <p class="text-gray-500
+                      mt-3
+                      max-w-xl
+                      mx-auto">
+
+                Scan the QR code using Google Pay,
+                PhonePe, BHIM or another compatible
+                UPI application.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- PAYMENT CARD -->
+        <!-- ================================================= -->
+
+        <div class="grid
+                    lg:grid-cols-2
+                    gap-7
+                    items-start">
+
+
+            <!-- ================================================= -->
+            <!-- LEFT - ORDER DETAILS -->
+            <!-- ================================================= -->
+
+            <div class="bg-white
+                        border
+                        border-black/5
+                        rounded-[28px]
+                        p-7">
+
+
+                <p class="text-xs
+                          uppercase
+                          tracking-[2px]
+                          text-gray-400
+                          font-semibold">
+
+                    Order Details
+
+                </p>
+
+
+                <h2 class="serif
+                           text-3xl
+                           mt-3">
+
+                    {{ order.product.name }}
+
+                </h2>
+
+
+                <div class="mt-7 space-y-5">
+
+
+                    <!-- ORDER ID -->
+
+                    <div class="flex
+                                justify-between
+                                items-center
+                                border-b
+                                border-black/5
+                                pb-4">
+
+                        <span class="text-sm
+                                     text-gray-500">
+
+                            Order ID
+
+                        </span>
+
+
+                        <span class="font-semibold">
+
+                            #{{ order.id }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="flex
+                                justify-between
+                                items-center
+                                border-b
+                                border-black/5
+                                pb-4">
+
+                        <span class="text-sm
+                                     text-gray-500">
+
+                            Quantity
+
+                        </span>
+
+
+                        <span class="font-semibold">
+
+                            {{ order.quantity }}
+
+                            {{ order.product.unit }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- PRODUCER -->
+
+                    <div class="flex
+                                justify-between
+                                items-center
+                                border-b
+                                border-black/5
+                                pb-4">
+
+                        <span class="text-sm
+                                     text-gray-500">
+
+                            Producer
+
+                        </span>
+
+
+                        <span class="font-semibold">
+
+                            {{ producer.full_name }}
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- TOTAL -->
+
+                    <div class="flex
+                                justify-between
+                                items-center
+                                pt-2">
+
+                        <span class="text-gray-500">
+
+                            Total Amount
+
+                        </span>
+
+
+                        <span class="text-2xl
+                                     font-bold">
+
+                            ₹{{ payment.amount }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PRODUCER UPI -->
+
+                <div class="mt-7
+                            bg-[#F7F8F4]
+                            rounded-2xl
+                            p-5">
+
+
+                    <p class="text-xs
+                              uppercase
+                              tracking-wider
+                              text-gray-400">
+
+                        Paying To
+
+                    </p>
+
+
+                    <p class="font-semibold
+                              text-lg
+                              mt-2">
+
+                        {{ producer.full_name }}
+
+                    </p>
+
+
+                    <div class="flex
+                                items-center
+                                gap-2
+                                mt-2">
+
+                        <i data-lucide="at-sign"
+                           class="w-4 h-4">
+                        </i>
+
+
+                        <span class="text-sm
+                                     font-medium">
+
+                            {{ payment.producer_upi_id }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- INFORMATION -->
+
+                <div class="mt-5
+                            bg-blue-50
+                            border
+                            border-blue-100
+                            rounded-2xl
+                            p-5">
+
+
+                    <div class="flex
+                                gap-3">
+
+                        <i data-lucide="info"
+                           class="w-5
+                                  h-5
+                                  text-blue-600
+                                  shrink-0">
+                        </i>
+
+
+                        <p class="text-sm
+                                  leading-6
+                                  text-blue-700">
+
+                            The money will be transferred
+                            directly to the producer's
+                            UPI account.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- RIGHT - QR CODE -->
+            <!-- ================================================= -->
+
+            <div class="bg-white
+                        border
+                        border-black/5
+                        rounded-[28px]
+                        p-7
+                        text-center">
+
+
+                <p class="text-xs
+                          uppercase
+                          tracking-[2px]
+                          text-gray-400
+                          font-semibold">
+
+                    Scan & Pay
+
+                </p>
+
+
+                <h2 class="serif
+                           text-3xl
+                           mt-3">
+
+                    Scan QR Code
+
+                </h2>
+
+
+                <p class="text-gray-500
+                          text-sm
+                          mt-2">
+
+                    Open your UPI app and scan below.
+
+                </p>
+
+
+
+                <!-- QR -->
+
+                {% if payment.qr_code %}
+
+                    <div class="mt-7
+                                w-72
+                                h-72
+                                mx-auto
+                                bg-white
+                                rounded-2xl
+                                border
+                                border-black/10
+                                p-4
+                                flex
+                                items-center
+                                justify-center">
+
+                        <img src="{{ payment.qr_code.url }}"
+                             alt="UPI Payment QR Code"
+                             class="w-full
+                                    h-full
+                                    object-contain">
+
+                    </div>
+
+                {% else %}
+
+                    <div class="mt-7
+                                w-72
+                                h-72
+                                mx-auto
+                                rounded-2xl
+                                bg-gray-100
+                                flex
+                                items-center
+                                justify-center">
+
+                        <div>
+
+                            <i data-lucide="qr-code"
+                               class="w-12
+                                      h-12
+                                      text-gray-400
+                                      mx-auto">
+                            </i>
+
+
+                            <p class="text-gray-400
+                                      text-sm
+                                      mt-3">
+
+                                QR Code unavailable
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+
+                <!-- AMOUNT -->
+
+                <div class="mt-7">
+
+                    <p class="text-sm
+                              text-gray-500">
+
+                        Amount to Pay
+
+                    </p>
+
+
+                    <p class="text-4xl
+                              font-bold
+                              mt-1">
+
+                        ₹{{ payment.amount }}
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- UPI -->
+
+                <div class="mt-5
+                            bg-[#F7F8F4]
+                            rounded-full
+                            px-5
+                            py-3
+                            inline-flex
+                            items-center
+                            gap-2">
+
+                    <i data-lucide="wallet"
+                       class="w-4 h-4">
+                    </i>
+
+
+                    <span class="text-sm
+                                 font-semibold">
+
+                        {{ payment.producer_upi_id }}
+
+                    </span>
+
+                </div>
+
+
+
+                <!-- PAYMENT INSTRUCTIONS -->
+
+                <div class="mt-7
+                            text-left
+                            bg-amber-50
+                            border
+                            border-amber-100
+                            rounded-2xl
+                            p-5">
+
+
+                    <p class="font-semibold
+                              text-amber-700">
+
+                        After payment
+
+                    </p>
+
+
+                    <p class="text-sm
+                              text-amber-600
+                              mt-2
+                              leading-6">
+
+                        The producer will verify that
+                        the money has arrived in their
+                        UPI account and then mark your
+                        order as completed.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- BACK BUTTON -->
+
+                <a href="{% url 'my_orders' %}"
+                   class="mt-6
+                          w-full
+                          inline-flex
+                          items-center
+                          justify-center
+                          gap-2
+                          border
+                          border-black/10
+                          px-6
+                          py-3.5
+                          rounded-full
+                          font-semibold
+                          text-sm
+                          hover:bg-gray-50
+                          transition">
+
+                    <i data-lucide="arrow-left"
+                       class="w-4 h-4">
+                    </i>
+
+                    Back to My Orders
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="border-t
+               border-black/5
+               py-8
+               mt-10">
+
+    <div class="max-w-6xl
+                mx-auto
+                px-5
+                text-center">
+
+        <p class="text-xs
+                  text-gray-400">
+
+            Dhanya • Farm • Market • Community
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+
+</body>
+
+</html>

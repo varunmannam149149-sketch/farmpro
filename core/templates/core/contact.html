@@ -1,0 +1,1981 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Dhanya | Farm • Market • Community</title>
+
+
+    <!-- ========================================================= -->
+    <!-- TAILWIND CSS -->
+    <!-- ========================================================= -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <!-- ========================================================= -->
+    <!-- LUCIDE ICONS -->
+    <!-- ========================================================= -->
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+
+    <!-- ========================================================= -->
+    <!-- GOOGLE FONTS -->
+    <!-- ========================================================= -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <!-- ========================================================= -->
+    <!-- CUSTOM CSS -->
+    <!-- ========================================================= -->
+
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: 0.25s ease;
+        }
+
+        .nav-link:hover {
+            color: #1A2E22;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 2px;
+            background: #1A2E22;
+            transition: 0.25s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .soft-grid {
+
+            background-image:
+                linear-gradient(
+                    rgba(26, 46, 34, 0.035) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(26, 46, 34, 0.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 35px 35px;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="bg-[#F7F8F4] text-[#1A2E22]">
+
+
+<!-- ========================================================= -->
+<!-- NAVBAR -->
+<!-- ========================================================= -->
+
+<header class="fixed top-0 left-0 right-0 z-50">
+
+    <nav
+        class="bg-[#F7F8F4]/95
+               backdrop-blur
+               border-b
+               border-black/5">
+
+        <div
+            class="max-w-[1450px]
+                   mx-auto
+                   px-5
+                   lg:px-10">
+
+            <div
+                class="h-[76px]
+                       flex
+                       items-center
+                       justify-between">
+
+
+                <!-- ================================================= -->
+                <!-- LOGO -->
+                <!-- ================================================= -->
+
+              <a href="{% url 'home' %}" class="flex items-center gap-3 shrink-0">
+    <div class="flex items-center justify-center">
+        <img src="{% static 'core/images/logo.png' %}" alt="Dhanya Logo" class="w-10 h-10 object-contain">
+    </div>
+    <div>
+        <div class="serif text-2xl font-semibold">Dhanya</div>
+        <div class="hidden sm:block text-[9px] uppercase tracking-[3px] text-gray-500">
+            Farm • Market • Community
+        </div>
+    </div>
+</a>
+
+
+                <!-- ================================================= -->
+                <!-- DESKTOP NAV -->
+                <!-- ================================================= -->
+
+                <div
+                    class="hidden lg:flex
+                           items-center
+                           gap-8
+                           text-sm
+                           font-medium">
+
+
+                    <a href="{% url 'home' %}"
+                       class="nav-link">
+
+                        Home
+
+                    </a>
+
+
+                    <a href="{% url 'browse_products' %}"
+                       class="nav-link">
+
+                        Products
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#categories"
+                       class="nav-link">
+
+                        Categories
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#how-it-works"
+                       class="nav-link">
+
+                        How It Works
+
+                    </a>
+
+
+                    <a href="{% url 'about' %}"
+                       class="nav-link">
+
+                        About
+
+                    </a>
+
+
+                    <a href="{% url 'contact' %}"
+                       class="nav-link font-semibold">
+
+                        Contact
+
+                    </a>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- RIGHT -->
+                <!-- ================================================= -->
+
+                <div
+                    class="hidden md:flex
+                           items-center
+                           gap-2">
+
+
+                    {% if request.user.is_authenticated %}
+
+                        <a href="{% url 'profile' %}"
+                           title="Profile"
+                           class="w-10 h-10
+                                  rounded-full
+                                  hover:bg-black/5
+                                  flex items-center
+                                  justify-center
+                                  transition">
+
+                            <i data-lucide="user"
+                               class="w-5 h-5">
+                            </i>
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{% url 'login' %}"
+                           class="ml-2
+                                  bg-[#1A2E22]
+                                  text-white
+                                  px-5 py-2.5
+                                  rounded-full
+                                  text-sm
+                                  font-semibold
+                                  hover:bg-[#243D2E]
+                                  transition">
+
+                            Login
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- MOBILE BUTTON -->
+                <!-- ================================================= -->
+
+                <button
+                    id="menuBtn"
+                    type="button"
+                    class="lg:hidden
+                           w-10 h-10
+                           bg-[#1A2E22]
+                           text-white
+                           rounded-full
+                           flex items-center
+                           justify-center">
+
+                    <i data-lucide="menu"
+                       id="menuIcon"
+                       class="w-5 h-5">
+                    </i>
+
+                </button>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- MOBILE MENU -->
+            <!-- ================================================= -->
+
+            <div
+                id="mobileMenu"
+                class="hidden lg:hidden">
+
+                <div
+                    class="pb-5
+                           pt-2
+                           space-y-1">
+
+
+                    <a href="{% url 'home' %}"
+                       class="block
+                              p-3
+                              rounded-xl
+                              hover:bg-black/5">
+
+                        Home
+
+                    </a>
+
+
+                    <a href="{% url 'browse_products' %}"
+                       class="block
+                              p-3
+                              rounded-xl
+                              hover:bg-black/5">
+
+                        Products
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#categories"
+                       class="block
+                              p-3
+                              rounded-xl
+                              hover:bg-black/5">
+
+                        Categories
+
+                    </a>
+
+
+                    <a href="{% url 'home' %}#how-it-works"
+                       class="block
+                              p-3
+                              rounded-xl
+                              hover:bg-black/5">
+
+                        How It Works
+
+                    </a>
+
+
+                    <a href="{% url 'about' %}"
+                       class="block
+                              p-3
+                              rounded-xl
+                              hover:bg-black/5">
+
+                        About
+
+                    </a>
+
+
+                    <a href="{% url 'contact' %}"
+                       class="block
+                              p-3
+                              rounded-xl
+                              bg-[#1A2E22]
+                              text-white">
+
+                        Contact
+
+                    </a>
+
+
+                    {% if request.user.is_authenticated %}
+
+                        <a href="{% url 'profile' %}"
+                           class="block
+                                  p-3
+                                  rounded-xl
+                                  hover:bg-black/5">
+
+                            My Profile
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{% url 'login' %}"
+                           class="block
+                                  p-3
+                                  rounded-xl
+                                  bg-[#1A2E22]
+                                  text-white">
+
+                            Login
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<section
+    class="soft-grid
+           pt-32
+           pb-20
+           lg:pt-40
+           lg:pb-24">
+
+
+    <div
+        class="max-w-[1450px]
+               mx-auto
+               px-5
+               lg:px-10">
+
+
+        <div
+            class="max-w-4xl
+                   mx-auto
+                   text-center">
+
+
+            <div
+                class="inline-flex
+                       items-center
+                       gap-2
+                       px-4
+                       py-2
+                       rounded-full
+                       bg-[#E7E8E1]
+                       text-xs
+                       font-semibold
+                       uppercase
+                       tracking-[2px]">
+
+                <i data-lucide="message-circle"
+                   class="w-4 h-4">
+                </i>
+
+                Contact Dhanya
+
+            </div>
+
+
+            <h1
+                class="serif
+                       text-5xl
+                       md:text-6xl
+                       lg:text-7xl
+                       leading-[1.05]
+                       mt-7">
+
+                Let's grow
+                something
+                <span class="text-[#6B806C]">
+                    together.
+                </span>
+
+            </h1>
+
+
+            <p
+                class="max-w-2xl
+                       mx-auto
+                       text-gray-500
+                       text-base
+                       md:text-lg
+                       leading-8
+                       mt-7">
+
+                Have a question, idea or partnership opportunity?
+                We'd love to hear from you.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- CONTACT CONTENT -->
+<!-- ========================================================= -->
+
+<section class="pb-20 lg:pb-28">
+
+    <div
+        class="max-w-[1250px]
+               mx-auto
+               px-5
+               lg:px-10">
+
+
+        <div
+            class="grid
+                   lg:grid-cols-[0.8fr_1.2fr]
+                   gap-7">
+
+
+            <!-- ================================================= -->
+            <!-- LEFT CONTACT INFORMATION -->
+            <!-- ================================================= -->
+
+            <div
+                class="bg-[#1A2E22]
+                       text-white
+                       rounded-[35px]
+                       p-8
+                       md:p-10">
+
+
+                <p
+                    class="text-xs
+                           uppercase
+                           tracking-[3px]
+                           text-white/50
+                           font-semibold">
+
+                    Get in touch
+
+                </p>
+
+
+                <h2
+                    class="serif
+                           text-4xl
+                           mt-4">
+
+                    We'd love to
+                    hear from you.
+
+                </h2>
+
+
+                <p
+                    class="text-white/60
+                           leading-7
+                           mt-5">
+
+                    Whether you're a producer looking to
+                    reach new buyers, a market searching
+                    for reliable products, or a consumer
+                    with a question, Dhanya is here.
+
+                </p>
+
+
+                <!-- EMAIL -->
+
+                <div
+                    class="flex
+                           gap-4
+                           mt-10">
+
+
+                    <div
+                        class="w-12
+                               h-12
+                               shrink-0
+                               rounded-2xl
+                               bg-white/10
+                               flex
+                               items-center
+                               justify-center">
+
+                        <i data-lucide="mail"
+                           class="w-5 h-5">
+                        </i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="text-sm
+                                   text-white/50">
+
+                            Email
+
+                        </p>
+
+
+                        <p
+                            class="font-semibold
+                                   mt-1">
+
+                            hello@Dhanya.in
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div
+                    class="flex
+                           gap-4
+                           mt-7">
+
+
+                    <div
+                        class="w-12
+                               h-12
+                               shrink-0
+                               rounded-2xl
+                               bg-white/10
+                               flex
+                               items-center
+                               justify-center">
+
+                        <i data-lucide="map-pin"
+                           class="w-5 h-5">
+                        </i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="text-sm
+                                   text-white/50">
+
+                            Location
+
+                        </p>
+
+
+                        <p
+                            class="font-semibold
+                                   mt-1">
+
+                            Andhra Pradesh, India
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMMUNITY -->
+
+                <div
+                    class="flex
+                           gap-4
+                           mt-7">
+
+
+                    <div
+                        class="w-12
+                               h-12
+                               shrink-0
+                               rounded-2xl
+                               bg-white/10
+                               flex
+                               items-center
+                               justify-center">
+
+                        <i data-lucide="users"
+                           class="w-5 h-5">
+                        </i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="text-sm
+                                   text-white/50">
+
+                            Community
+
+                        </p>
+
+
+                        <p
+                            class="font-semibold
+                                   mt-1">
+
+                            Farm • Market • Community
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SOCIAL -->
+
+                <div
+                    class="border-t
+                           border-white/10
+                           mt-10
+                           pt-7">
+
+
+                    <p
+                        class="text-sm
+                               text-white/50">
+
+                        Follow Dhanya
+
+                    </p>
+
+
+                   <div class="flex items-center gap-3">
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/profile.php?id=61593881797144" target="_blank" rel="noopener noreferrer" title="Facebook"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+
+            <!-- Mail -->
+            <a href="mailto:dhanyasub25@gmail.com" title="Send Email"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#EA4335] hover:border-[#EA4335] transition duration-200 group">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@DhanyaSSV" target="_blank" rel="noopener noreferrer" title="YouTube"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FF0000] hover:border-[#FF0000] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/dhanya_products/" target="_blank" rel="noopener noreferrer" title="Instagram"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#E4405F] hover:border-[#E4405F] transition duration-200 group">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+
+        </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- CONTACT FORM -->
+            <!-- ================================================= -->
+
+            <div
+                class="bg-white
+                       border
+                       border-black/5
+                       rounded-[35px]
+                       p-8
+                       md:p-10">
+
+
+                <div>
+
+                    <p
+                        class="text-xs
+                               uppercase
+                               tracking-[3px]
+                               text-gray-500
+                               font-semibold">
+
+                        Send us a message
+
+                    </p>
+
+
+                    <h2
+                        class="serif
+                               text-4xl
+                               mt-4">
+
+                        How can we help?
+
+                    </h2>
+
+
+                    <p
+                        class="text-gray-500
+                               leading-7
+                               mt-3">
+
+                        Fill out the form and our team
+                        will get back to you.
+
+                    </p>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form action="{% url 'contact' %}" method="POST" class="mt-8">
+    {% csrf_token %}
+
+
+                    <!-- NAME + EMAIL -->
+
+                    <div
+                        class="grid
+                               md:grid-cols-2
+                               gap-5">
+
+
+                        <div>
+
+                            <label
+                                class="block
+                                       text-sm
+                                       font-semibold
+                                       mb-2">
+
+                                Your name
+
+                            </label>
+
+
+                            <input
+                                type="text"
+                                name="name"
+                                required
+                                placeholder="Enter your name"
+                                class="w-full
+                                       px-5
+                                       py-4
+                                       rounded-2xl
+                                       border
+                                       border-black/10
+                                       bg-[#FAFBF8]
+                                       outline-none
+                                       focus:border-[#1A2E22]
+                                       transition">
+
+                        </div>
+
+
+                        <div>
+
+                            <label
+                                class="block
+                                       text-sm
+                                       font-semibold
+                                       mb-2">
+
+                                Email address
+
+                            </label>
+
+
+                            <input
+                                type="email"
+                                name="email"
+                                required
+                                placeholder="you@example.com"
+                                class="w-full
+                                       px-5
+                                       py-4
+                                       rounded-2xl
+                                       border
+                                       border-black/10
+                                       bg-[#FAFBF8]
+                                       outline-none
+                                       focus:border-[#1A2E22]
+                                       transition">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACCOUNT TYPE -->
+
+                    <div class="mt-5">
+
+                        <label
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   mb-2">
+
+                            I am contacting as
+
+                        </label>
+
+
+                        <select
+                            name="user_type"
+                            class="w-full
+                                   px-5
+                                   py-4
+                                   rounded-2xl
+                                   border
+                                   border-black/10
+                                   bg-[#FAFBF8]
+                                   outline-none
+                                   focus:border-[#1A2E22]">
+
+
+                            <option value="producer">
+                                Producer
+                            </option>
+
+
+                            <option value="market">
+                                Market
+                            </option>
+
+
+                            <option value="consumer">
+                                Consumer
+                            </option>
+
+
+                            <option value="partner">
+                                Business / Partner
+                            </option>
+
+
+                            <option value="other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SUBJECT -->
+
+                    <div class="mt-5">
+
+                        <label
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   mb-2">
+
+                            Subject
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            name="subject"
+                            required
+                            placeholder="What can we help you with?"
+                            class="w-full
+                                   px-5
+                                   py-4
+                                   rounded-2xl
+                                   border
+                                   border-black/10
+                                   bg-[#FAFBF8]
+                                   outline-none
+                                   focus:border-[#1A2E22]
+                                   transition">
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="mt-5">
+
+                        <label
+                            class="block
+                                   text-sm
+                                   font-semibold
+                                   mb-2">
+
+                            Message
+
+                        </label>
+
+
+                        <textarea
+                            name="message"
+                            rows="6"
+                            required
+                            placeholder="Tell us what's on your mind..."
+                            class="w-full
+                                   px-5
+                                   py-4
+                                   rounded-2xl
+                                   border
+                                   border-black/10
+                                   bg-[#FAFBF8]
+                                   outline-none
+                                   resize-none
+                                   focus:border-[#1A2E22]
+                                   transition"></textarea>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="w-full
+                               mt-6
+                               bg-[#1A2E22]
+                               text-white
+                               py-4
+                               rounded-full
+                               font-semibold
+                               text-sm
+                               flex
+                               items-center
+                               justify-center
+                               gap-3
+                               hover:bg-[#243D2E]
+                               transition">
+
+
+                        Send Message
+
+
+                        <i data-lucide="arrow-right"
+                           class="w-4 h-4">
+                        </i>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- WHY CONTACT US -->
+<!-- ========================================================= -->
+
+<section
+    class="py-20
+           lg:py-28
+           bg-white">
+
+
+    <div
+        class="max-w-[1250px]
+               mx-auto
+               px-5
+               lg:px-10">
+
+
+        <div
+            class="text-center
+                   max-w-3xl
+                   mx-auto">
+
+
+            <p
+                class="text-xs
+                       uppercase
+                       tracking-[3px]
+                       text-gray-500
+                       font-semibold">
+
+                We're Here For You
+
+            </p>
+
+
+            <h2
+                class="serif
+                       text-4xl
+                       md:text-5xl
+                       mt-4">
+
+                Whatever you're building,
+                let's talk.
+
+            </h2>
+
+        </div>
+
+
+        <div
+            class="grid
+                   md:grid-cols-3
+                   gap-5
+                   mt-12">
+
+
+            <!-- PRODUCERS -->
+
+            <div
+                class="contact-card
+                       bg-[#F7F8F4]
+                       border
+                       border-black/5
+                       rounded-[28px]
+                       p-7">
+
+
+                <div
+                    class="w-12
+                           h-12
+                           rounded-2xl
+                           bg-[#E7E8E1]
+                           flex
+                           items-center
+                           justify-center">
+
+                    <i data-lucide="wheat"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+
+                <h3
+                    class="serif
+                           text-2xl
+                           mt-6">
+
+                    Producers
+
+                </h3>
+
+
+                <p
+                    class="text-gray-500
+                           text-sm
+                           leading-7
+                           mt-3">
+
+                    Want to showcase your agricultural
+                    products and reach more buyers?
+
+                </p>
+
+
+                <a href="{% url 'register' %}"
+                   class="inline-flex
+                          items-center
+                          gap-2
+                          text-sm
+                          font-semibold
+                          mt-5">
+
+                    Join as Producer
+
+                    <i data-lucide="arrow-up-right"
+                       class="w-4 h-4">
+                    </i>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- MARKETS -->
+
+            <div
+                class="contact-card
+                       bg-[#F7F8F4]
+                       border
+                       border-black/5
+                       rounded-[28px]
+                       p-7">
+
+
+                <div
+                    class="w-12
+                           h-12
+                           rounded-2xl
+                           bg-[#E7E8E1]
+                           flex
+                           items-center
+                           justify-center">
+
+                    <i data-lucide="store"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+
+                <h3
+                    class="serif
+                           text-2xl
+                           mt-6">
+
+                    Markets
+
+                </h3>
+
+
+                <p
+                    class="text-gray-500
+                           text-sm
+                           leading-7
+                           mt-3">
+
+                    Looking for reliable agricultural
+                    products for your business?
+
+                </p>
+
+
+                <a href="{% url 'register' %}"
+                   class="inline-flex
+                          items-center
+                          gap-2
+                          text-sm
+                          font-semibold
+                          mt-5">
+
+                    Join as Market
+
+                    <i data-lucide="arrow-up-right"
+                       class="w-4 h-4">
+                    </i>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- CONSUMERS -->
+
+            <div
+                class="contact-card
+                       bg-[#F7F8F4]
+                       border
+                       border-black/5
+                       rounded-[28px]
+                       p-7">
+
+
+                <div
+                    class="w-12
+                           h-12
+                           rounded-2xl
+                           bg-[#E7E8E1]
+                           flex
+                           items-center
+                           justify-center">
+
+                    <i data-lucide="shopping-basket"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+
+                <h3
+                    class="serif
+                           text-2xl
+                           mt-6">
+
+                    Consumers
+
+                </h3>
+
+
+                <p
+                    class="text-gray-500
+                           text-sm
+                           leading-7
+                           mt-3">
+
+                    Have questions about products,
+                    orders or your Dhanya account?
+
+                </p>
+
+
+                <a href="{% url 'browse_products' %}"
+                   class="inline-flex
+                          items-center
+                          gap-2
+                          text-sm
+                          font-semibold
+                          mt-5">
+
+                    Explore Products
+
+                    <i data-lucide="arrow-up-right"
+                       class="w-4 h-4">
+                    </i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- FAQ -->
+<!-- ========================================================= -->
+
+<section
+    class="py-20
+           lg:py-28">
+
+
+    <div
+        class="max-w-4xl
+               mx-auto
+               px-5">
+
+
+        <div class="text-center">
+
+            <p
+                class="text-xs
+                       uppercase
+                       tracking-[3px]
+                       text-gray-500
+                       font-semibold">
+
+                FAQ
+
+            </p>
+
+
+            <h2
+                class="serif
+                       text-4xl
+                       md:text-5xl
+                       mt-4">
+
+                Common questions.
+
+            </h2>
+
+        </div>
+
+
+        <div
+            class="space-y-4
+                   mt-12">
+
+
+            <details
+                class="bg-white
+                       border
+                       border-black/5
+                       rounded-2xl
+                       p-6">
+
+
+                <summary
+                    class="font-semibold
+                           cursor-pointer
+                           flex
+                           items-center
+                           justify-between">
+
+                    What is Dhanya?
+
+                    <i data-lucide="plus"
+                       class="w-5 h-5">
+                    </i>
+
+                </summary>
+
+
+                <p
+                    class="text-gray-500
+                           leading-7
+                           mt-4">
+
+                    Dhanya is an agricultural marketplace
+                    connecting producers, markets and
+                    consumers through one digital platform.
+
+                </p>
+
+            </details>
+
+
+
+            <details
+                class="bg-white
+                       border
+                       border-black/5
+                       rounded-2xl
+                       p-6">
+
+
+                <summary
+                    class="font-semibold
+                           cursor-pointer
+                           flex
+                           items-center
+                           justify-between">
+
+                    Who can join Dhanya?
+
+                    <i data-lucide="plus"
+                       class="w-5 h-5">
+                    </i>
+
+                </summary>
+
+
+                <p
+                    class="text-gray-500
+                           leading-7
+                           mt-4">
+
+                    Producers, markets and consumers can
+                    create accounts and participate in
+                    the Dhanya ecosystem.
+
+                </p>
+
+            </details>
+
+
+
+            <details
+                class="bg-white
+                       border
+                       border-black/5
+                       rounded-2xl
+                       p-6">
+
+
+                <summary
+                    class="font-semibold
+                           cursor-pointer
+                           flex
+                           items-center
+                           justify-between">
+
+                    Can I sell agricultural products?
+
+                    <i data-lucide="plus"
+                       class="w-5 h-5">
+                    </i>
+
+                </summary>
+
+
+                <p
+                    class="text-gray-500
+                           leading-7
+                           mt-4">
+
+                    Producers can register on Dhanya and
+                    manage their products through their
+                    producer dashboard.
+
+                </p>
+
+            </details>
+
+
+
+            <details
+                class="bg-white
+                       border
+                       border-black/5
+                       rounded-2xl
+                       p-6">
+
+
+                <summary
+                    class="font-semibold
+                           cursor-pointer
+                           flex
+                           items-center
+                           justify-between">
+
+                    How can I become a Dhanya partner?
+
+                    <i data-lucide="plus"
+                       class="w-5 h-5">
+                    </i>
+
+                </summary>
+
+
+                <p
+                    class="text-gray-500
+                           leading-7
+                           mt-4">
+
+                    Send us a message using the contact form
+                    above and tell us about your partnership
+                    idea.
+
+                </p>
+
+            </details>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- NEWSLETTER -->
+<!-- ========================================================= -->
+
+<section class="py-20 lg:py-28">
+
+    <div
+        class="max-w-4xl
+               mx-auto
+               px-5
+               text-center">
+
+
+        <div
+            class="bg-white
+                   border
+                   border-black/10
+                   rounded-[35px]
+                   p-8
+                   sm:p-12
+                   lg:p-16">
+
+
+            <div
+                class="w-14
+                       h-14
+                       bg-[#E7E8E1]
+                       rounded-full
+                       mx-auto
+                       flex
+                       items-center
+                       justify-center">
+
+                <i data-lucide="mail"
+                   class="w-6 h-6">
+                </i>
+
+            </div>
+
+
+            <h2
+                class="serif
+                       text-4xl
+                       lg:text-5xl
+                       mt-7">
+
+                Stay connected with Dhanya.
+
+            </h2>
+
+
+            <p
+                class="text-gray-500
+                       max-w-lg
+                       mx-auto
+                       mt-4
+                       leading-7">
+
+                Get updates about new products,
+                producers and opportunities coming
+                to the Dhanya marketplace.
+
+            </p>
+
+
+            <form action="{% url 'subscribe' %}" method="POST" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto mt-8">
+    {% csrf_token %}
+    <input
+        type="email"
+        name="email"
+        required
+        placeholder="Enter your email address"
+        class="flex-1 px-5 py-4 rounded-full border border-black/10 outline-none focus:border-[#1A2E22]">
+
+    <button
+        type="submit"
+        class="bg-[#1A2E22] text-white px-7 py-4 rounded-full font-semibold text-sm transition hover:bg-[#111f17]">
+        Subscribe
+    </button>
+</form>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer
+    class="border-t
+           border-black/5
+           bg-[#F7F8F4]">
+
+
+    <div
+        class="max-w-[1450px]
+               mx-auto
+               px-5
+               lg:px-10
+               py-12">
+
+
+        <div
+            class="grid
+                   md:grid-cols-4
+                   gap-10">
+
+
+            <!-- BRAND -->
+
+            <div class="md:col-span-2">
+
+                <a href="{% url 'home' %}"
+                   class="flex items-center gap-3">
+
+
+                    <div
+                        class="w-10
+                               h-10
+                               bg-[#1A2E22]
+                               text-white
+                               rounded-full
+                               flex
+                               items-center
+                               justify-center">
+
+                        <i data-lucide="sprout"
+                           class="w-5 h-5">
+                        </i>
+
+                    </div>
+
+
+                    <span
+                        class="serif
+                               text-2xl
+                               font-semibold">
+
+                        Dhanya
+
+                    </span>
+
+                </a>
+
+
+                <p
+                    class="text-sm
+                           text-gray-500
+                           leading-7
+                           max-w-md
+                           mt-5">
+
+                    Connecting farms, markets and communities
+                    through a better agricultural marketplace.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- EXPLORE -->
+
+            <div>
+
+                <h4 class="font-semibold">
+
+                    Explore
+
+                </h4>
+
+
+                <div
+                    class="space-y-3
+                           text-sm
+                           text-gray-500
+                           mt-5">
+
+
+                    <a href="{% url 'home' %}"
+                       class="block
+                              hover:text-[#1A2E22]">
+
+                        Home
+
+                    </a>
+
+
+                    <a href="{% url 'browse_products' %}"
+                       class="block
+                              hover:text-[#1A2E22]">
+
+                        Products
+
+                    </a>
+
+
+                    <a href="{% url 'about' %}"
+                       class="block
+                              hover:text-[#1A2E22]">
+
+                        About
+
+                    </a>
+
+
+                    <a href="{% url 'contact' %}"
+                       class="block
+                              hover:text-[#1A2E22]">
+
+                        Contact
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACCOUNT -->
+
+            <div>
+
+                <h4 class="font-semibold">
+
+                    Account
+
+                </h4>
+
+
+                <div
+                    class="space-y-3
+                           text-sm
+                           text-gray-500
+                           mt-5">
+
+
+                    {% if request.user.is_authenticated %}
+
+                        <a href="{% url 'profile' %}"
+                           class="block
+                                  hover:text-[#1A2E22]">
+
+                            Profile
+
+                        </a>
+
+
+                        <a href="{% url 'my_orders' %}"
+                           class="block
+                                  hover:text-[#1A2E22]">
+
+                            My Orders
+
+                        </a>
+
+                    {% else %}
+
+                        <a href="{% url 'login' %}"
+                           class="block
+                                  hover:text-[#1A2E22]">
+
+                            Login
+
+                        </a>
+
+
+                        <a href="{% url 'register' %}"
+                           class="block
+                                  hover:text-[#1A2E22]">
+
+                            Register
+
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- COPYRIGHT -->
+
+     <div class="border-t border-white/10">
+
+        <div
+            class="max-w-[1450px] mx-auto px-5 lg:px-10 py-7 flex flex-col lg:flex-row justify-between gap-5">
+
+            <p class="text-xs text-white/30">
+                © 2026 Dhanya. All rights reserved.
+            </p>
+
+           <div class="flex gap-3">
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/profile.php?id=61593881797144" target="_blank" rel="noopener noreferrer" title="Facebook"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+    </a>
+
+    <!-- Mail -->
+    <a href="mailto:dhanyasub25@gmail.com" title="Send Email"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#EA4335] hover:border-[#EA4335] transition duration-200 group">
+        <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+    </a>
+
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@DhanyaSSV" target="_blank" rel="noopener noreferrer" title="YouTube"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FF0000] hover:border-[#FF0000] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/dhanya_products/" target="_blank" rel="noopener noreferrer" title="Instagram"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#E4405F] hover:border-[#E4405F] transition duration-200 group">
+        <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+        </svg>
+    </a>
+
+    <!-- LinkedIn -->
+    <a href="home.html" target="_blank" rel="noopener noreferrer" title="LinkedIn"
+        class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition duration-200 group">
+        <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+    </a>
+
+</div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+    lucide.createIcons();
+
+
+    const menuBtn =
+        document.getElementById("menuBtn");
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+    const menuIcon =
+        document.getElementById("menuIcon");
+
+
+    if (menuBtn && mobileMenu) {
+
+        menuBtn.addEventListener(
+            "click",
+            function () {
+
+                mobileMenu.classList.toggle("hidden");
+
+
+                if (
+                    mobileMenu.classList.contains("hidden")
+                ) {
+
+                    menuIcon.setAttribute(
+                        "data-lucide",
+                        "menu"
+                    );
+
+                }
+
+                else {
+
+                    menuIcon.setAttribute(
+                        "data-lucide",
+                        "x"
+                    );
+
+                }
+
+
+                lucide.createIcons();
+
+            }
+        );
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

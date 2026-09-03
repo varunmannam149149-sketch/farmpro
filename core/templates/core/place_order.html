@@ -1,0 +1,1166 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Place Order | Dhanya</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        body {
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+
+        /* ===================================================== */
+        /* IMAGE VIEWER */
+        /* ===================================================== */
+
+        .image-viewer {
+            position: relative;
+            width: 100%;
+            height: 360px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        #mainProductImage {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 20px;
+
+            transform: scale(1);
+
+            transition: transform 0.2s ease;
+
+            cursor: zoom-in;
+
+            user-select: none;
+
+            -webkit-user-drag: none;
+        }
+
+
+        #mainProductImage.zoomed {
+            cursor: zoom-out;
+        }
+
+
+        /* ===================================================== */
+        /* ZOOM BUTTONS */
+        /* ===================================================== */
+
+        .zoom-button {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 999px;
+
+            background: white;
+
+            color: #1A2E22;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+
+            transition: all 0.2s ease;
+
+            cursor: pointer;
+        }
+
+
+        .zoom-button:hover {
+            transform: scale(1.08);
+            background: #F7F8F4;
+        }
+
+
+        /* ===================================================== */
+        /* THUMBNAILS */
+        /* ===================================================== */
+
+        .product-thumbnail {
+            width: 64px;
+            height: 64px;
+
+            flex-shrink: 0;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            border: 2px solid transparent;
+
+            cursor: pointer;
+
+            transition: all 0.2s ease;
+        }
+
+
+        .product-thumbnail:hover {
+            transform: translateY(-2px);
+        }
+
+
+        .product-thumbnail.active {
+            border-color: white;
+        }
+
+
+        .product-thumbnail img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* ===================================================== */
+        /* MOBILE */
+        /* ===================================================== */
+
+        @media (max-width: 640px) {
+
+            .image-viewer {
+                height: 300px;
+            }
+
+            #mainProductImage {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="bg-[#F7F8F4] text-[#1A2E22]">
+
+
+<!-- ========================================================= -->
+<!-- NAVBAR -->
+<!-- ========================================================= -->
+
+<header class="border-b border-black/5
+               bg-[#F7F8F4]">
+
+    <div class="max-w-7xl mx-auto
+                px-5 lg:px-8">
+
+        <div class="min-h-[76px]
+                    flex items-center
+                    justify-between
+                    gap-4">
+
+
+            <!-- LOGO -->
+
+            <a href="{% url 'home' %}"
+               class="flex items-center gap-3 shrink-0">
+
+                <div class="w-10 h-10
+                            rounded-full
+                            bg-[#1A2E22]
+                            text-white
+                            flex items-center
+                            justify-center">
+
+                    <i data-lucide="sprout"
+                       class="w-5 h-5">
+                    </i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="serif text-2xl font-semibold">
+                        Dhanya
+                    </div>
+
+                    <div class="hidden sm:block
+                                text-[9px]
+                                uppercase
+                                tracking-[3px]
+                                text-gray-500">
+
+                        Farm • Market • Community
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="hidden md:flex
+                        items-center gap-7
+                        text-sm font-medium">
+
+                <a href="{% url 'home' %}"
+                   class="hover:text-[#1A2E22]">
+
+                    Home
+
+                </a>
+
+
+                <a href="{% url 'browse_products' %}"
+                   class="font-semibold">
+
+                    Products
+
+                </a>
+
+
+                <a href="{% url 'my_orders' %}"
+                   class="hover:text-[#1A2E22]">
+
+                    My Orders
+
+                </a>
+
+
+                <a href="{% url 'profile' %}"
+                   class="hover:text-[#1A2E22]">
+
+                    Profile
+
+                </a>
+
+            </nav>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ========================================================= -->
+<!-- MAIN -->
+<!-- ========================================================= -->
+
+<main class="py-12 md:py-16">
+
+    <div class="max-w-5xl
+                mx-auto
+                px-5 lg:px-8">
+
+
+        <!-- ================================================= -->
+        <!-- HEADER -->
+        <!-- ================================================= -->
+
+        <div class="mb-8">
+
+            <a href="{% url 'browse_products' %}"
+               class="inline-flex
+                      items-center
+                      gap-2
+                      text-sm
+                      text-gray-500
+                      hover:text-[#1A2E22]">
+
+                <i data-lucide="arrow-left"
+                   class="w-4 h-4">
+                </i>
+
+                Back to Products
+
+            </a>
+
+
+            <h1 class="serif
+                       text-4xl
+                       md:text-5xl
+                       mt-6">
+
+                Place your order
+
+            </h1>
+
+
+            <p class="text-gray-500 mt-3">
+
+                Get fresh agricultural products directly
+                through Dhanya.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- GRID -->
+        <!-- ================================================= -->
+
+        <div class="grid
+                    grid-cols-1
+                    lg:grid-cols-5
+                    gap-7">
+
+
+            <!-- ================================================= -->
+            <!-- PRODUCT -->
+            <!-- ================================================= -->
+
+            <div class="lg:col-span-2">
+
+
+                <div class="bg-[#1A2E22]
+                            text-white
+                            rounded-[30px]
+                            p-7
+                            sticky
+                            top-8">
+
+
+                    <!-- ================================================= -->
+                    <!-- IMAGE VIEWER -->
+                    <!-- ================================================= -->
+
+                    <div class="image-viewer">
+
+
+                        <!-- IMAGE -->
+
+                        {% if product.image %}
+
+                        <img
+                            id="mainProductImage"
+                            src="{{ product.image.url }}"
+                            alt="{{ product.name }}"
+                            draggable="false">
+
+                        {% else %}
+
+                        <div class="flex
+                                    flex-col
+                                    items-center
+                                    justify-center
+                                    text-white/50">
+
+                            <i data-lucide="image-off"
+                               class="w-16 h-16">
+                            </i>
+
+                            <p class="text-sm mt-3">
+
+                                No image available
+
+                            </p>
+
+                        </div>
+
+                        {% endif %}
+
+
+
+                        <!-- ================================================= -->
+                        <!-- PREVIOUS -->
+                        <!-- ================================================= -->
+
+                        <button
+                            type="button"
+                            onclick="previousImage()"
+                            class="absolute
+                                   left-3
+                                   top-1/2
+                                   -translate-y-1/2
+                                   w-10 h-10
+                                   rounded-full
+                                   bg-black/40
+                                   flex
+                                   items-center
+                                   justify-center
+                                   hover:bg-black/60
+                                   transition">
+
+                            <i data-lucide="chevron-left"
+                               class="w-5 h-5">
+                            </i>
+
+                        </button>
+
+
+
+                        <!-- ================================================= -->
+                        <!-- NEXT -->
+                        <!-- ================================================= -->
+
+                        <button
+                            type="button"
+                            onclick="nextImage()"
+                            class="absolute
+                                   right-3
+                                   top-1/2
+                                   -translate-y-1/2
+                                   w-10 h-10
+                                   rounded-full
+                                   bg-black/40
+                                   flex
+                                   items-center
+                                   justify-center
+                                   hover:bg-black/60
+                                   transition">
+
+                            <i data-lucide="chevron-right"
+                               class="w-5 h-5">
+                            </i>
+
+                        </button>
+
+
+
+                        <!-- ================================================= -->
+                        <!-- ZOOM CONTROLS -->
+                        <!-- ================================================= -->
+
+                        <div class="absolute
+                                    bottom-3
+                                    right-3
+                                    flex
+                                    items-center
+                                    gap-2">
+
+
+                            <!-- ZOOM OUT -->
+
+                            <button
+                                type="button"
+                                onclick="zoomOut()"
+                                class="zoom-button"
+                                aria-label="Zoom out">
+
+                                <i data-lucide="minus"
+                                   class="w-5 h-5">
+                                </i>
+
+                            </button>
+
+
+                            <!-- RESET -->
+
+                            <button
+                                type="button"
+                                onclick="resetZoom()"
+                                class="zoom-button"
+                                aria-label="Reset zoom">
+
+                                <i data-lucide="maximize"
+                                   class="w-5 h-5">
+                                </i>
+
+                            </button>
+
+
+                            <!-- ZOOM IN -->
+
+                            <button
+                                type="button"
+                                onclick="zoomIn()"
+                                class="zoom-button"
+                                aria-label="Zoom in">
+
+                                <i data-lucide="plus"
+                                   class="w-5 h-5">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ================================================= -->
+                    <!-- ZOOM INFORMATION -->
+                    <!-- ================================================= -->
+
+                    <div class="flex
+                                items-center
+                                justify-between
+                                mt-3
+                                text-xs
+                                text-white/50">
+
+                        <span>
+
+                            Use + / − to zoom
+
+                        </span>
+
+                        <span id="zoomPercentage">
+
+                            100%
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- ================================================= -->
+                    <!-- PRODUCT INFO -->
+                    <!-- ================================================= -->
+
+                    <p class="text-xs
+                              uppercase
+                              tracking-[3px]
+                              text-white/50
+                              mt-8">
+
+                        Selected Product
+
+                    </p>
+
+
+                    <h2 class="serif
+                               text-3xl
+                               mt-2">
+
+                        {{ product.name }}
+
+                    </h2>
+
+
+                    <div class="mt-6
+                                space-y-4">
+
+
+                        <!-- PRICE -->
+
+                        <div class="flex
+                                    justify-between
+                                    border-b
+                                    border-white/10
+                                    pb-4">
+
+                            <span class="text-white/60">
+
+                                Price
+
+                            </span>
+
+                            <strong>
+
+                                ₹{{ product.price }}
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- AVAILABLE -->
+
+                        <div class="flex
+                                    justify-between
+                                    border-b
+                                    border-white/10
+                                    pb-4">
+
+                            <span class="text-white/60">
+
+                                Available
+
+                            </span>
+
+                            <strong>
+
+                                {{ product.quantity }}
+
+                                {% if product.unit %}
+                                    {{ product.unit }}
+                                {% endif %}
+
+                            </strong>
+
+                        </div>
+
+
+                        <!-- LOCATION -->
+
+                        <div class="flex
+                                    justify-between
+                                    gap-4">
+
+                            <span class="text-white/60">
+
+                                Location
+
+                            </span>
+
+                            <strong class="text-right">
+
+                                {{ product.location }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- INFO -->
+
+                    <div class="mt-8
+                                rounded-2xl
+                                bg-white/10
+                                p-4">
+
+                        <div class="flex gap-3">
+
+                            <i data-lucide="shield-check"
+                               class="w-5 h-5 shrink-0">
+                            </i>
+
+                            <p class="text-sm
+                                      text-white/70
+                                      leading-6">
+
+                                Your order will be sent directly
+                                to the producer for confirmation.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- ORDER FORM -->
+            <!-- ================================================= -->
+
+            <div class="lg:col-span-3">
+
+                <div class="bg-white
+                            border border-black/5
+                            rounded-[30px]
+                            p-7 md:p-9">
+
+
+                    <div class="mb-7">
+
+                        <p class="text-xs
+                                  uppercase
+                                  tracking-[3px]
+                                  text-gray-400
+                                  font-semibold">
+
+                            Order Details
+
+                        </p>
+
+
+                        <h2 class="serif
+                                   text-2xl
+                                   mt-2">
+
+                            How much do you need?
+
+                        </h2>
+
+                    </div>
+
+
+
+                    <!-- ERRORS -->
+
+                    {% if form.errors %}
+
+                    <div class="mb-6
+                                bg-red-50
+                                border border-red-100
+                                rounded-2xl
+                                p-4
+                                text-sm
+                                text-red-600">
+
+                        {{ form.errors }}
+
+                    </div>
+
+                    {% endif %}
+
+
+
+                    <!-- FORM -->
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+
+                        <!-- QUANTITY -->
+
+                        <div class="mb-7">
+
+                            <label class="block
+                                          text-sm
+                                          font-semibold
+                                          mb-2">
+
+                                Quantity
+
+                            </label>
+
+
+                            {{ form.quantity }}
+
+
+                            <p class="text-xs
+                                      text-gray-400
+                                      mt-2">
+
+                                Available:
+                                {{ product.quantity }}
+
+                                {% if product.unit %}
+                                    {{ product.unit }}
+                                {% endif %}
+
+                            </p>
+
+                        </div>
+
+
+
+                        <!-- TOTAL -->
+
+                        <div class="bg-[#F7F8F4]
+                                    rounded-2xl
+                                    p-5
+                                    mb-7">
+
+                            <div class="flex
+                                        justify-between
+                                        items-center
+                                        gap-4">
+
+
+                                <div>
+
+                                    <p class="text-sm
+                                              text-gray-500">
+
+                                        Product price
+
+                                    </p>
+
+                                    <p class="font-semibold
+                                              mt-1">
+
+                                        ₹{{ product.price }}
+
+                                    </p>
+
+                                </div>
+
+
+                                <i data-lucide="plus"
+                                   class="w-5 h-5
+                                          text-gray-300">
+                                </i>
+
+
+                                <div class="text-right">
+
+                                    <p class="text-sm
+                                              text-gray-500">
+
+                                        Quantity
+
+                                    </p>
+
+                                    <p class="font-semibold
+                                              mt-1">
+
+                                        Selected above
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- SUBMIT -->
+
+                        <button
+                            type="submit"
+                            class="w-full
+                                   bg-[#1A2E22]
+                                   text-white
+                                   py-4
+                                   rounded-full
+                                   font-semibold
+                                   flex
+                                   items-center
+                                   justify-center
+                                   gap-3
+                                   hover:bg-[#243D2E]
+                                   transition">
+
+
+                            Place Dhanya Order
+
+
+                            <i data-lucide="arrow-right"
+                               class="w-5 h-5">
+                            </i>
+
+                        </button>
+
+
+                        <p class="text-center
+                                  text-xs
+                                  text-gray-400
+                                  mt-4">
+
+                            By placing this order, you agree
+                            to Dhanya's marketplace terms.
+
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<footer class="bg-slate-900 border-t border-white/10 py-8 text-white">
+
+    <div class="max-w-[1450px] mx-auto px-5 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-5">
+
+        <!-- Copyright Text -->
+        <p class="text-xs text-gray-400">
+            © 2026 Dhanya. All rights reserved.
+        </p>
+
+        <!-- Social Links Container -->
+        <div class="flex items-center gap-3">
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/profile.php?id=61593881797144" target="_blank" rel="noopener noreferrer" title="Facebook"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+
+            <!-- Mail -->
+            <a href="mailto:dhanyasub25@gmail.com" title="Send Email"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#EA4335] hover:border-[#EA4335] transition duration-200 group">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@DhanyaSSV" target="_blank" rel="noopener noreferrer" title="YouTube"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#FF0000] hover:border-[#FF0000] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/dhanya_products/" target="_blank" rel="noopener noreferrer" title="Instagram"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#E4405F] hover:border-[#E4405F] transition duration-200 group">
+                <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+            </a>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" title="LinkedIn"
+                class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#0A66C2] hover:border-[#0A66C2] transition duration-200 group">
+                <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- ========================================================= -->
+<!-- IMAGE ZOOM SCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+    let zoomLevel = 1;
+
+    const mainImage =
+        document.getElementById("mainProductImage");
+
+    const zoomPercentage =
+        document.getElementById("zoomPercentage");
+
+
+    /* ========================================================= */
+    /* UPDATE ZOOM */
+    /* ========================================================= */
+
+    function updateZoom() {
+
+        if (!mainImage) {
+            return;
+        }
+
+
+        mainImage.style.transform =
+            "scale(" + zoomLevel + ")";
+
+
+        zoomPercentage.textContent =
+            Math.round(zoomLevel * 100) + "%";
+
+
+        if (zoomLevel > 1) {
+
+            mainImage.classList.add("zoomed");
+
+        } else {
+
+            mainImage.classList.remove("zoomed");
+
+        }
+
+    }
+
+
+    /* ========================================================= */
+    /* ZOOM IN */
+    /* ========================================================= */
+
+    function zoomIn() {
+
+        if (!mainImage) {
+            return;
+        }
+
+
+        zoomLevel += 0.25;
+
+
+        if (zoomLevel > 3) {
+
+            zoomLevel = 3;
+
+        }
+
+
+        updateZoom();
+
+    }
+
+
+    /* ========================================================= */
+    /* ZOOM OUT */
+    /* ========================================================= */
+
+    function zoomOut() {
+
+        if (!mainImage) {
+            return;
+        }
+
+
+        zoomLevel -= 0.25;
+
+
+        if (zoomLevel < 1) {
+
+            zoomLevel = 1;
+
+        }
+
+
+        updateZoom();
+
+    }
+
+
+    /* ========================================================= */
+    /* RESET */
+    /* ========================================================= */
+
+    function resetZoom() {
+
+        zoomLevel = 1;
+
+        updateZoom();
+
+    }
+
+
+    /* ========================================================= */
+    /* DOUBLE CLICK */
+    /* ========================================================= */
+
+    if (mainImage) {
+
+        mainImage.addEventListener(
+            "dblclick",
+            function() {
+
+                if (zoomLevel === 1) {
+
+                    zoomLevel = 2;
+
+                } else {
+
+                    zoomLevel = 1;
+
+                }
+
+                updateZoom();
+
+            }
+        );
+
+
+        /* ===================================================== */
+        /* MOUSE WHEEL */
+        /* ===================================================== */
+
+        mainImage.addEventListener(
+            "wheel",
+            function(event) {
+
+                event.preventDefault();
+
+
+                if (event.deltaY < 0) {
+
+                    zoomIn();
+
+                } else {
+
+                    zoomOut();
+
+                }
+
+            },
+            {
+                passive: false
+            }
+        );
+
+    }
+
+
+    /* ========================================================= */
+    /* IMAGE NAVIGATION */
+    /* ========================================================= */
+
+    function nextImage() {
+
+        /*
+         * Multiple-image support will be connected here
+         * after ProductImage is added to your Django model.
+         */
+
+        zoomLevel = 1;
+
+        updateZoom();
+
+    }
+
+
+    function previousImage() {
+
+        /*
+         * Multiple-image support will be connected here
+         * after ProductImage is added to your Django model.
+         */
+
+        zoomLevel = 1;
+
+        updateZoom();
+
+    }
+
+
+    /* ========================================================= */
+    /* LUCIDE */
+    /* ========================================================= */
+
+    lucide.createIcons();
+
+</script>
+
+
+</body>
+
+</html>
