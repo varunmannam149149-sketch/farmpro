@@ -27,6 +27,6 @@ urlpatterns = [
         views.payment_failed,
         name="failed"
     ),
-
+    
     path('subscribe/', views.subscribe_view, name='subscribe'),
 ]
